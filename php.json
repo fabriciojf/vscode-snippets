@@ -1,0 +1,156 @@
+{
+	// Place your snippets for php here. Each snippet is defined under a snippet name and has a prefix, body and
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"redirect": {
+		"prefix": "cake-redirect",
+		"body": [
+			"\\$this->redirect(array(",
+			"    'plugin' => false,",
+			"    'admin' => true,",
+			"    'controller' => '',",
+			"    'action' => ''",
+			"));"
+		],
+		"description": "Cake Redirect"
+	},
+	"link": {
+		"prefix": "cake-link",
+		"body": [
+			"echo \\$this->Html->link('', array(",
+			"    'plugin' => false,",
+			"    'admin' => true,",
+			"    'controller' => '',",
+			"    'action' => ''",
+			"));"
+		],
+		"description": "Cake Link"
+	},
+	"linkclass": {
+		"prefix": "cake-link-class",
+		"body": [
+			"echo \\$this->Html->link('', array(",
+			"    'plugin' => false,",
+			"    'admin' => true,",
+			"    'controller' => '',",
+			"    'action' => ''",
+			"), array(",
+			"    'class' => ''",
+			"));"
+		],
+		"description": "Cake Link"
+	},
+	"completelink": {
+		"prefix": "cake-link-cp",
+		"body": [
+			"<?php",
+			"echo \\$this->Html->link('', array(",
+			"    'plugin' => false,",
+			"    'admin' => true,",
+			"    'controller' => '',",
+			"    'action' => ''",
+			"));",
+			"?>"
+		],
+		"description": "Cake Link With php tag"
+	},
+	"flashok": {
+		"prefix": "cake-flash-ok",
+		"body": [
+			"\\$this->Session->setFlash(__('Settings updated successfully'), 'default', array('class' => 'success'));"
+		],
+		"description": "Cake Success Flash"
+	},
+	"flasherror": {
+		"prefix": "cake-flash-error",
+		"body": [
+			"\\$this->Session->setFlash(__('Error, please try again!'), 'default', array('class' => 'error'));"
+		],
+		"description": "Cake Success Flash"
+	},
+	"ajaxaction": {
+		"prefix": "cake-ajaxaction",
+		"body": [
+			"/**",
+			" * admin_ajax_add",
+			" */",
+		    "public function admin_ajax_fc()",
+			"{",
+			"    \\$this->autoRender = false;",
+			"    if (\\$this->request->is('ajax')) {",
+			"",
+			"        \\$query = \\$this->request->query;",
+            "        \\$this->Pausa->create();",
+			"        \\$this->request->data['Pausa']['name'] = \\$query['p_name'];",
+			"        \\$lastid = '';",
+			"",
+			"        if (\\$this->Pausa->save(\\$this->request->data)) {",
+			"            \\$lastid = \\$this->Pausa->id;",
+			"        }",
+			"",
+			"        return json_encode(array(",
+			"            'id' => \\$lastid,",
+			"        ));",
+			"    }",
+			"}"
+		],
+		"description": "Cake Success Flash"
+	},
+	"before": {
+		"prefix": "cake-before",
+		"body": [
+			"/**",
+			" * beforeFilter.",
+			" * @return void",
+			" */",
+			"public function beforeFilter()",
+			"{",
+			"    parent::beforeFilter();",
+			"    \\$this->Auth->allow(",
+			"        //'action',",
+			"    );",
+			"}"
+		],
+		"description": "Cake Before Action"
+	},
+	"require": {
+		"prefix": "cake-require",
+		"body": [
+			"// \\$allSettings = var inside settings.php",
+			"require(APP . 'Config' . DS . 'settings.php');",
+			"foreach (\\$allSettings as $set) {",
+			"    debug(\\$set);",
+			"}"
+		],
+		"description": "Cake require"
+	},
+	"components": {
+		"prefix": "cake-components",
+		"body": [
+			"public \\$components = array(",
+            "    'Highcharts.Highcharts',",
+            ");"
+		],
+		"description": "Cake Components"
+	},
+	"highcharts": {
+		"prefix": "cake-highcharts",
+		"body": [
+			"App::uses('HighchartsAppController', 'Highcharts.Controller');",
+			"\\$this->Highcharts = \\$this->Components->load('Highcharts.Highcharts');",
+			"\\$this->Highcharts->initialize(\\$this);"
+		],
+		"description": "Cake Highcharts"
+	},
+
+}
