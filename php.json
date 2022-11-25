@@ -82,20 +82,22 @@
 		"prefix": "cake-ajaxaction",
 		"body": [
 			"/**",
-			" * admin_ajax_add",
+			" * ",
 			" */",
-		    "public function admin_ajax_fc()",
+			"public function admin_ajax_()",
 			"{",
 			"    \\$this->autoRender = false;",
 			"    if (\\$this->request->is('ajax')) {",
 			"",
 			"        \\$query = \\$this->request->query;",
-            "        \\$this->Pausa->create();",
-			"        \\$this->request->data['Pausa']['name'] = \\$query['p_name'];",
+			"",
+			"        \\$this->loadModel('Model');",
+			"        \\$this->Model->create();",
+			"        \\$this->request->data['Model']['name'] = \\$query['p_name'];",
 			"        \\$lastid = '';",
 			"",
-			"        if (\\$this->Pausa->save(\\$this->request->data)) {",
-			"            \\$lastid = \\$this->Pausa->id;",
+			"        if (\\$this->Model->save(\\$this->request->data)) {",
+			"            \\$lastid = \\$this->Model->id;",
 			"        }",
 			"",
 			"        return json_encode(array(",
@@ -138,8 +140,8 @@
 		"prefix": "cake-components",
 		"body": [
 			"public \\$components = array(",
-            "    'Highcharts.Highcharts',",
-            ");"
+			"    'Highcharts.Highcharts',",
+			");"
 		],
 		"description": "Cake Components"
 	},
@@ -152,5 +154,21 @@
 		],
 		"description": "Cake Highcharts"
 	},
-
+	"cakethrow": {
+		"prefix": "cake-throw",
+		"body": [
+			"\\$this->Model->id = \\$id;",
+			"if (!\\$this->Model->exists()) {",
+			"    throw new NotFoundException(sprintf(__('Invalid %s'), __('')));",
+			"}"
+		],
+		"description": "Cake Throw"
+	},
+	"modelusetable": {
+		"prefix": "cake-model-usetable",
+		"body": [
+			"public \\$useTable = '';"
+		],
+		"description": "Cake Use Table"
+	}
 }
