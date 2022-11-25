@@ -23,20 +23,20 @@
 			"    let _url = '<?= Router::url(array(",
 			"                    'plugin' => false,",
 			"                    'admin' => true,",
-			"                    'controller' => 'widget',",
-			"                    'action' => 'wgopen_tickets',",
+			"                    'controller' => 'yourController',",
+			"                    'action' => 'your_action',",
 			"                ), false); ?>';",
 			"    $.ajax({",
 			"        url: _url,",
 			"        cache: false,",
 			"        data: {",
-			"            'customerId': '1'",
+			"            'yourParam': 'your_value'",
 			"        },",
 			"        success: function(data) {",
-			"            console.log('data');",
+			"            console.log('data', data);",
 			"        },",
 			"        error: function(err) {",
-			"            console.log('error');",
+			"            console.log('error', err);",
 			"        }",
 			"    });",
 			"}",
@@ -56,6 +56,18 @@
 		],
 		"description": "Ajax Window"
 	},
+	"AjaxAppend": {
+		"prefix": [
+			"ajax-append",
+			"javascript-append",
+			"js-append"
+		],
+		"body": [
+			".append($('<>').addClass('')",
+			")"
+		],
+		"description": "Ajax Window"
+	},
 	"AjaxClass": {
 		"prefix": [
 			"ajax-class",
@@ -63,8 +75,8 @@
 			"js-class"
 		],
 		"body": [
-			"var className;"
-			"var cClassName = function() {"
+			"var className;",
+			"var cClassName = function() {",
 			"    this.init = init;",
 			"",
 			"    function init() {",
@@ -74,7 +86,7 @@
 			"",
 			"$('window').ready(function() {",
 			"    className = new cClassName();",
-			"    className.init();"
+			"    className.init();",
 			"});"
 		],
 		"description": "Ajax Window"
