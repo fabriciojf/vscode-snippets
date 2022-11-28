@@ -39,5 +39,134 @@
 		],
 		"description": "Cake Links Html->link"
 	},
-
+	"script": {
+		"prefix": [
+			"ajax-script",
+			"js-script",
+		],
+		"body": [
+			"<script type=\"text/javascript\">",
+			"",
+			"</script>",
+		],
+		"description": "Javascript"
+	},
+	"AjaxCake": {
+		"prefix": [
+			"ajax-cake",
+			"js-cake",
+			"javascript-cake",
+		],
+		"body": [
+			"function fcname() {",
+			"    let _url = '<?= Router::url(array(",
+			"                    'plugin' => false,",
+			"                    'admin' => true,",
+			"                    'controller' => 'yourController',",
+			"                    'action' => 'your_action',",
+			"                ), false); ?>';",
+			"    $.ajax({",
+			"        url: _url,",
+			"        cache: false,",
+			"        data: {",
+			"            'yourParam': 'your_value'",
+			"        },",
+			"        success: function(data) {",
+			"            console.log('data', data);",
+			"        },",
+			"        error: function(err) {",
+			"            console.log('error', err);",
+			"        }",
+			"    });",
+			"}",
+		],
+		"description": "Ajax Cake"
+	},
+	"AjaxWindow": {
+		"prefix": [
+			"ajax-window",
+			"javascript-window",
+			"js-window"
+		],
+		"body": [
+			"$('window').ready(function() {",
+			"",
+			"});"
+		],
+		"description": "Ajax Window"
+	},
+	"AjaxAppend": {
+		"prefix": [
+			"ajax-append",
+			"javascript-append",
+			"js-append"
+		],
+		"body": [
+			".append($('<>').addClass('')",
+			")"
+		],
+		"description": "Ajax Window"
+	},
+	"AjaxClass": {
+		"prefix": [
+			"ajax-class",
+			"javascript-class",
+			"js-class"
+		],
+		"body": [
+			"var className;",
+			"var cClassName = function() {",
+			"    this.init = init;",
+			"",
+			"    function init() {",
+			"        console.log('Class Started');",
+			"    }",
+			"}",
+			"",
+			"$('window').ready(function() {",
+			"    className = new cClassName();",
+			"    className.init();",
+			"});"
+		],
+		"description": "Ajax Window"
+	},
+	"CakeAdd": {
+		"prefix": "cake-add",
+		"body": [
+			"<div class=\"tab-content\" style=\"width:800px\">",
+			"    <hr />",
+			"    <div class=\"tab-pane active\" id=\"tab_1\">",
+			"        <?php",
+			"            echo \\$this->Form->create('Model');",
+			"            echo \\$this->Form->input('id');",
+			"        ?>",
+			"        <div class=\"form-group row\">",
+			"            <label for=\"static\" class=\"col-sm-4 col-form-label text-right\"><?= __('Name') ?></label>",
+			"            <div class=\"col-sm-8\">",
+			"                <?= \\$this->Form->input('name', array(",
+			"                    'class' => 'form-control',",
+			"                    'label' => false",
+			"                )); ?>",
+			"            </div>",
+			"        </div>",
+			"    </div>",
+			"</div>"
+		],
+		"description": "Cake Add"
+	},
+	"CakeInput": {
+		"prefix": "cake-input",
+		"body": [
+			"<div class=\"form-group row\">",
+			"    <label for=\"static\" class=\"col-sm-4 col-form-label text-right\"><?= __('Name') ?></label>",
+			"    <div class=\"col-sm-8\">",
+			"        <?= \\$this->Form->input('name', array(",
+			"            'class' => 'form-control',",
+			"            'label' => false",
+			"        )); ?>",
+			"    </div>",
+			"</div>",
+		],
+		"description": "Cake Input"
+	}
 }
