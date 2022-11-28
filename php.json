@@ -170,5 +170,62 @@
 			"public \\$useTable = '';"
 		],
 		"description": "Cake Use Table"
+	},
+	"saveorupdate": {
+		"prefix": "cake-save-or-update",
+		"body": [
+			"if (\\$object != null) {",
+			"    \\$this->MODEL->id = \\$object['MODEL']['id'];",
+			"    \\$this->MODEL->saveField('created', date('YYYY-mm-dd HH:ii:ss'));",
+			"} else {",
+			"    \\$this->MODEL->create();",
+			"    \\$this->MODEL->save(array(",
+			"        'created' => date('YYYY-mm-dd HH:ii:ss'),",
+			"    ));",
+			"}",
+			"",
+			"\\$this->MODEL->read(false, \\$this->MODEL->id)",
+		],
+		"description": "Cake Save Or Update"
+	},
+	"newcontroller": {
+		"prefix": "cake-controller",
+		"body": [
+			"",
+			"App::uses('AppController', 'Controller');",
+			"class MODELController extends AppController",
+			"{",
+			"    public function beforeFilter()",
+			"    {",
+			"       parent::beforeFilter();",
+			"    }",
+			"",
+			"    public function admin_index()",
+			"    {",
+			"        \\$this->layout = 'admin_add';",
+			"        \\$this->MODEL->recursive = 0;",
+			"        \\$this->FilterResults->addFilters(array(",
+			"                'filter_name' => array(",
+			"                    'MODEL.name' => array(",
+			"                        'operator' => 'like',",
+			"                    )",
+			"                ),",
+			"            ));",
+			"",
+			"        \\$conditions = array();",
+			"        if (\\$this->FilterResults->getConditions()) {",
+			"            \\$conditions = array_merge(\\$this->FilterResults->getConditions(), \\$conditions);",
+			"        }",
+			"",
+			"        \\$this->FilterResults->setPaginate('order', array(",
+			"            'MODEL.name' => 'ASC',",
+			"        ));",
+			"        \\$this->FilterResults->setPaginate('conditions', \\$conditions);",
+			"        \\$this->FilterResults->setPaginate('limit', 10);",
+			"        \\$this->set('MODELs', \\$this->paginate());",
+			"    }",
+			"}"
+		],
+		"description": "Cake Use Table"
 	}
 }
