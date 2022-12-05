@@ -188,6 +188,26 @@
 		],
 		"description": "Cake Save Or Update"
 	},
+	"modelvalidate": {
+		"prefix": "cake-model-validate",
+		"body": [
+			"\\$this->MODEL->id = \\$id;",
+			"if (!\\$this->MODEL->exists()) {",
+			"    throw new NotFoundException(sprintf(__('Invalid %s'), __('MODEL')));",
+			"}",
+		],
+		"description": "Verifica se o objeto existe no banco de dados"
+	},
+	"layout": {
+		"prefix": "cake-layout",
+		"body": [
+			"\\$this->layout = 'admin_add';",
+			"\\$this->layout = 'admin_agent';",
+			"\\$this->layout = 'admin_settings';",
+			"\\$this->layout = 'admin_report';",
+		],
+		"description": "Tipos de layouts contendo menus laterais específicos"
+	},
 	"newcontroller": {
 		"prefix": "cake-controller",
 		"body": [
@@ -222,10 +242,77 @@
 			"        ));",
 			"        \\$this->FilterResults->setPaginate('conditions', \\$conditions);",
 			"        \\$this->FilterResults->setPaginate('limit', 10);",
-			"        \\$this->set('MODELs', \\$this->paginate());",
+			"        \\$this->set('MODEL', \\$this->paginate());",
 			"    }",
 			"}"
 		],
 		"description": "Cake Use Table"
+	},
+	"filter_list": {
+		"prefix": "cake-filter-find",
+		"body": [
+			"'filter_FIELD' => array(",
+			"    'MODEL.FIELD' => array(",
+			"        'operator' => '=',",
+			"        'select' => \\$this->FilterResults->select('',",
+			"            \\$this->MODEL->find('list', array(",
+			"                'fields' => array(",
+			"                    'MODEL.id',",
+			"                    'MODEL.name'",
+			"                ),",
+			"                'group' => 'MODEL.name')))",
+			"     )",
+			"),"
+		],
+		"description": "Filter type Find"
+	},
+	"filter_select": {
+		"prefix": "cake-filter-select",
+		"body": [
+			"'filter_FIELD' => array(",
+			"    'MODEL.FIELD' => array(",
+			"        'operator' => '=',",
+			"        'select' => \\$this->FilterResults->select('FIELD', array(",
+			"            0 => 'OP1',",
+			"            1 => 'OP2',",
+			"            3 => 'OP3',",
+			"        ))",
+			"    )",
+			"),"
+		],
+		"description": "Filter type select"
+	},
+	"filter_array": {
+		"prefix": "cake-filter-array",
+		"body": [
+			"'filter_FIELD' => array(",
+			"    'MODEL.FIELD' => array(",
+			"        'select' => array(",
+			"            '' => 'Qualquer MODEL',",
+			"            'op1' => 'Op1',",
+			"            'op2' => 'Op2',",
+			"            'op3' => 'Op3',",
+			"        ),",
+			"        'operator' => 'like'",
+			"    )",
+			"),"
+		],
+		"description": "Filter type array"
+	},
+	"filter_between": {
+		"prefix": "cake-filter-between",
+		"body": [
+			"'filter_from' => array(",
+			"    'MODEL.FIELD' => array(",
+			"        'operator' => '>='",
+			"    )",
+			"),",
+			"'filter_to' => array(",
+			"    'MODEL.FIELD' => array(",
+			"        'operator' => '<='",
+			"    )",
+			"),"
+		],
+		"description": "Filter type array"
 	}
 }
