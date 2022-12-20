@@ -24,7 +24,7 @@
 	// 	],
 	// 	"description": "Cake Link"
 	// }
-	"cake-link": {
+	"CakeLink": {
 		"prefix": "cake-link",
 		"body": [
 			"<?= \\$this->Html->link('<i class=\"\"></i> ' . __('Add'), array(",
@@ -39,10 +39,11 @@
 		],
 		"description": "Cake Links Html->link"
 	},
-	"script": {
+	"AjaxScript": {
 		"prefix": [
 			"ajax-script",
 			"js-script",
+			"cake-script",
 		],
 		"body": [
 			"<script type=\"text/javascript\">",
@@ -51,87 +52,8 @@
 		],
 		"description": "Javascript"
 	},
-	"AjaxCake": {
-		"prefix": [
-			"ajax-cake",
-			"js-cake",
-			"javascript-cake",
-		],
-		"body": [
-			"function fcname() {",
-			"    let _url = '<?= Router::url(array(",
-			"                    'plugin' => false,",
-			"                    'admin' => true,",
-			"                    'controller' => 'yourController',",
-			"                    'action' => 'your_action',",
-			"                ), false); ?>';",
-			"    $.ajax({",
-			"        url: _url,",
-			"        cache: false,",
-			"        data: {",
-			"            'yourParam': 'your_value'",
-			"        },",
-			"        success: function(data) {",
-			"            console.log('data', data);",
-			"        },",
-			"        error: function(err) {",
-			"            console.log('error', err);",
-			"        }",
-			"    });",
-			"}",
-		],
-		"description": "Ajax Cake"
-	},
-	"AjaxWindow": {
-		"prefix": [
-			"ajax-window",
-			"javascript-window",
-			"js-window"
-		],
-		"body": [
-			"$('window').ready(function() {",
-			"",
-			"});"
-		],
-		"description": "Ajax Window"
-	},
-	"AjaxAppend": {
-		"prefix": [
-			"ajax-append",
-			"javascript-append",
-			"js-append"
-		],
-		"body": [
-			".append($('<>').addClass('')",
-			")"
-		],
-		"description": "Ajax Window"
-	},
-	"AjaxClass": {
-		"prefix": [
-			"ajax-class",
-			"javascript-class",
-			"js-class"
-		],
-		"body": [
-			"var className;",
-			"var cClassName = function() {",
-			"    this.init = init;",
-			"",
-			"    function init() {",
-			"        console.log('Class Started');",
-			"    }",
-			"}",
-			"",
-			"$('window').ready(function() {",
-			"    className = new cClassName();",
-			"    className.init();",
-			"});"
-		],
-		"description": "Ajax Window"
-	},
-	"CakeAdd": {
-		"prefix": "cake-add",
+	"CakeForm": {
+		"prefix": "cake-form",
 		"body": [
 			"<div class=\"tab-content\" style=\"width:800px\">",
 			"    <hr />",
@@ -152,7 +74,7 @@
 			"    </div>",
 			"</div>"
 		],
-		"description": "Cake Add"
+		"description": "Cake Form Model"
 	},
 	"CakeInput": {
 		"prefix": "cake-input",
@@ -319,6 +241,115 @@
 			"</div>"
 		],
 		"description": "Modelo de layout para pagina de listagem (index.ctp)"
+	},
+	"CakeTopButton": {
+		"prefix": "cake-top-button",
+		"body": [
+			"<div class=\"box-buttons-top\">",
+			"    <?= \\$this->Html->link('<i class=\"zmdi zmdi-format-list-bulleted top-button-icon\"></i>' . __('List'), array(",
+			"        'plugin' => false,",
+			"        'admin' => true,",
+			"        'controller' => 'CONTROLLER',",
+			"        'action' => 'index'",
+			"    ), array(",
+			"        'class' => 'top-button',",
+			"        'escape' => false",
+			"    )); ?>",
+			"    <?= \\$this->Html->link('<i class=\"zmdi zmdi-plus top-button-icon\"></i>' . __('Add'), array(",
+			"        'plugin' => false,",
+			"        'admin' => true,",
+			"        'controller' => 'CONTROLLER',",
+			"        'action' => 'add'",
+			"    ), array(",
+			"        'class' => 'top-button',",
+			"        'escape' => false",
+			"    )); ?>",
+			"</div>"
+		],
+		"description": "Cake Date Import"
+	},
+	"CakeForeach": {
+		"prefix": "cake-foreach",
+		"body": [
+			"<?php foreach( as ) : ?>",
+			"    <tr>",
+			"        <td></td>",
+			"    </tr>",
+			"<?php endforeach; ?>",
+		],
+		"description": "Cake Foreach"
+	},
+	"CakeModal": {
+		"prefix": "cake-modal",
+		"body": [
+			"<?php",
+			"    echo \\$this->Html->link('<i class=\"ion ion-plus\"></i>', '#', array(",
+			"        'data-toggle' => 'modal',",
+			"        'data-target' => '#MODAL_NAME',",
+			"        'data-backdrop' => 'static',",
+			"        'escape' => false,",
+			"    ));",
+			"?>",
+			"<button class=\"btn btn-default\" type=\"button\" data-toggle=\"modal\" data-target=\"#MODAL_NAME\"><i class=\"ion ion-plus-round\"></i></button>",
+			"<div class=\"modal fade\" id=\"MODAL_NAME\">",
+			"    <div class=\"modal-dialog modal-dialog-centered modal-lg\">",
+			"        <div class=\"modal-content\">",
+			"            <?= \\$this->Form->create('MODEL', array('id' => 'MODEL_id')); ?>",
+			"            <div class=\"modal-header\">",
+			"                <h5 class=\"modal-title\"><i class=\"zmdi zmdi-comment-edit mr-1\"></i>Adicionar MODEL</h5>",
+			"                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Fechar\">",
+			"                    <span aria-hidden=\"true\">&times;</span>",
+			"                </button>",
+			"            </div>",
+			"            <div class=\"modal-body text-center\">",
+			"                <?php",
+			"                echo \\$this->Form->hidden('id');",
+			"                ?>",
+			"                <div class=\"form-group row\">",
+			"                    <label for=\"staticTitle\" class=\"col-sm-3 col-form-label text-right\"><?= __('Title') ?></label>",
+			"                    <div class=\"col-sm-9\">",
+			"                        <?= \\$this->Form->input('name', array('id' => 'tk_name', 'label' => false, 'class' => 'form-control')); ?>",
+			"                    </div>",
+			"                </div>",
+			"            </div>",
+			"            <div class=\"modal-footer\">",
+			"                <?= \\$this->Form->end(array('label' => 'Salvar Dados', 'class' => 'btn btn-primary btn-sm')) ?>",
+			"                <button type=\"button\" class=\"btn btn-secondary btn-sm\" data-dismiss=\"modal\">Cancelar</button>",
+			"            </div>",
+			"        </div>",
+			"    </div>",
+			"</div>",
+		],
+		"description": "Cake Modal"
+	},
+	"CakeSelectInput": {
+		"prefix": "cake-select",
+		"body": [
+			"<?= \\$this->Form->input('a_status', array(",
+			"                'type' => 'select',",
+			"                'id' => 'SELECT_ID',",
+			"                'options' => \\$items,",
+			"                'class' => 'form-control',",
+			"                'label' => false",
+			"            )); ?>",
+		],
+		"description": "Cake Select Input"
+	},
+	"tableResponsive": {
+		"prefix": "cake-responsive-table",
+		"body": [
+			"<div class=\"table-responsive\">",
+			"    <table class=\"table table-striped table-hover\">",
+			"        <tr>",
+			"            <th class=\"text-center\"><?= \\$this->Paginator->sort('FIELD', 'LABEL'); ?></th>",
+			"        </tr>",
+			"        <tr>",
+			"            <td class=\"text-center\"><?= h(\\$OBJECT['MODEL']['FIELD']); ?></td>",
+			"        </tr>",
+			"    </table>",
+			"</div>",
+			"<?= \\$this->element('paginator'); ?>"
+		],
+		"description": "Responsive table pattern"
 	}
-
 }
