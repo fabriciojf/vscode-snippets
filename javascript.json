@@ -90,5 +90,17 @@
 			"});"
 		],
 		"description": "Ajax Window"
+	},
+	"AjaxSelectedCombo": {
+		"prefix": [
+			"ajax-selected-combo",
+			"js-selected-combo",
+			"cake-selected-combo"
+		],
+		"body": [
+			"let id = \\$('#SELECT_ID :selected').val(),",
+			"    label = \\$('#SELECT_ID :selected').text();"
+		],
+		"description": "Ajax Selected Combo"
 	}
 }
