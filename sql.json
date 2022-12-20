@@ -12,12 +12,33 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
+	"simpleif": {
+		"prefix": "sql-if",
+		"body": [
+			"IF (jsondata->>'media' is not null) THEN",
+			"    NEW.channel = jsondata->>'media';",
+		        "END IF;",
+		],
+		"description": "SQL Simple IF"
+	},
+	"simplecase": {
+		"prefix": "sql-case",
+		"body": [
+			"SELECT CASE WHEN (jsondata->>'media') IS NULL THEN",
+			"    'aaaa'",
+			"ELSE",
+			"    jsondata->>'media'",
+			"END",
+			"FROM chassi_contacts"
+		],
+		"description": "SQL Simple Case"
+	},
 	"createtable": {
 		"prefix": "sql-newtable",
 		"body": [
 			"CREATE TABLE NAME (",
-    		"  id serial,",
-    		"  CONSTRAINT pk_NAME PRIMARY KEY (id),",
+    		        "  id serial,",
+    		        "  CONSTRAINT pk_NAME PRIMARY KEY (id),",
 			"  UNIQUE(FIELD)",
 			");",
 		],
@@ -32,7 +53,7 @@
 			"    RETURNS trigger",
 			"    LANGUAGE 'plpgsql'",
 			"    COST 100",
-			"AS $BODY$",
+			"AS \\$BODY\\$",
 			"BEGIN",
 			"",
 			"  if ((new.status != 'online') AND (old.status = 'online')) then",
@@ -42,19 +63,36 @@
 			"",
 			"  return new;",
 			"END;",
-			"$BODY$;",
+			"\\$BODY\\$;",
 		],
 		"description": "SQL New Table"
 	},
 	"trigger": {
 		"prefix": "sql-trigger",
 		"body": [
-			"DROP TRIGGER IF EXISTS tg_NAME ON TABLE;",
+			"DROP FUNCTION IF EXISTS procedure_NAME();",
+			"CREATE FUNCTION procedure_NAME()",
+			"    RETURNS trigger",
+			"    LANGUAGE 'plpgsql'",
+			"    COST 100",
+			"AS \\$BODY\\$",
+			"BEGIN",
+			"",
+			"  IF ((NEW.status != 'online') AND (OLD.status = 'online')) THEN",
+			"    NEW.end_contact = now();",
+			"    NEW.total_time = NEW.end_contact - OLD.created;",
+			"  END IF;",
+			"",
+			"  RETURN NEW;",
+			"END;",
+			"\\$BODY\\$;",
+			"",
+			"DROP TRIGGER IF EXISTS tg_NAME ON table_NAME;",
 			"CREATE TRIGGER tg_NAME",
-    		"  BEFORE UPDATE",
-    		"  ON TABLE",
-    		"  FOR EACH ROW",
-    		"  EXECUTE PROCEDURE PROCEDURENAME();",
+    		        "  BEFORE INSERT OR UPDATE",
+    		        "  ON table_NAME",
+    		        "  FOR EACH ROW",
+    		        "  EXECUTE PROCEDURE procedure_NAME();",
 		],
 		"description": "SQL New Table"
 	},
@@ -67,15 +105,26 @@
 			"  RETURNS boolean",
 			"  LANGUAGE 'plpgsql'",
 			"  COST 100",
-			"AS $BODY$",
+			"AS \\$BODY\\$",
 			"BEGIN",
 			"",
 			"  DELETE FROM chats;",
 			"",
 			"  RETURN true;",
 			"END;",
-			"$BODY$;"
+			"\\$BODY\\$;"
 		],
 		"description": "SQL function"
+	},
+	"json-select": {
+		"prefix": "sql-jsonb-simple-select",
+		"body": [
+			"SELECT jsondata->>'media', jsondata->'sys'->>'ani' FROM chassi_contacts;",
+			"SELECT * FROM chassi_contacts WHERE jsondata->>'media' IN ('message', 'voice');",
+			"SELECT * FROM chassi_contacts WHERE jsondata @> '{\"media\": [\"message\"]}';",
+			"SELECT * FROM chassi_contacts WHERE jsondata @> '{\"sys\": {\"ani\": \"103\"]}';",
+			"UPDATE users SET jsondata = jsondata || '{\"media\": \"voice\"}';"
+		],
+		"description": "SQL Jsonb SimpleSelect"
 	}
 }
