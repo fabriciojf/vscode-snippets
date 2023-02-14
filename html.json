@@ -282,14 +282,6 @@
 	"CakeModal": {
 		"prefix": "cake-modal",
 		"body": [
-			"<?php",
-			"    echo \\$this->Html->link('<i class=\"ion ion-plus\"></i>', '#', array(",
-			"        'data-toggle' => 'modal',",
-			"        'data-target' => '#MODAL_NAME',",
-			"        'data-backdrop' => 'static',",
-			"        'escape' => false,",
-			"    ));",
-			"?>",
 			"<button class=\"btn btn-default\" type=\"button\" data-toggle=\"modal\" data-target=\"#MODAL_NAME\"><i class=\"ion ion-plus-round\"></i></button>",
 			"<div class=\"modal fade\" id=\"MODAL_NAME\">",
 			"    <div class=\"modal-dialog modal-dialog-centered modal-lg\">",
@@ -319,6 +311,13 @@
 			"        </div>",
 			"    </div>",
 			"</div>",
+			"<?= \\$this->Html->link('<i class=\"ion ion-plus\"></i>', '#', array(",
+			"        'data-toggle' => 'modal',",
+			"        'data-target' => '#MODAL_NAME',",
+			"        'data-backdrop' => 'static',",
+			"        'escape' => false,",
+			"    ));",
+			"?>",
 		],
 		"description": "Cake Modal"
 	},
@@ -351,5 +350,22 @@
 			"<?= \\$this->element('paginator'); ?>"
 		],
 		"description": "Responsive table pattern"
+	},
+	"buttonShowModal": {
+		"prefix": "cake-button-showmodal",
+		"body": [
+			"<button class=\"btn btn-default\" type=\"button\" data-toggle=\"modal\" data-target=\"#MODAL_NAME\"><i class=\"ion ion-plus-round\"></i></button>",
+		],
+		"description": "Cake Button Show Modal"
+	},
+	"cakeButton": {
+		"prefix": "cake-button",
+		"body": [
+			"<?= \\$this->Form->button('LABEL_VALUE', array(",
+			"    'onclick' => '',",
+			"    'class' => 'btn btn-sm btn-primary',",
+			")); ?>"
+		],
+		"description": "Cake Button"
 	}
 }
