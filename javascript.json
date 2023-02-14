@@ -1,106 +1,255 @@
 {
-	// Place your snippets for javascript here. Each snippet is defined under a snippet name and has a prefix, body and
-	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
-	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
-	// same ids are connected.
-	// Example:
-	// "Print to console": {
-	// 	"prefix": "log",
-	// 	"body": [
-	// 		"console.log('$1');",
-	// 		"$2"
-	// 	],
-	// 	"description": "Log output to console"
-	// }
-	"AjaxCake": {
-		"prefix": [
-			"ajax-cake",
-			"js-cake",
-			"javascript-cake",
-		],
-		"body": [
-			"function fcname() {",
-			"    let _url = '<?= Router::url(array(",
-			"                    'plugin' => false,",
-			"                    'admin' => true,",
-			"                    'controller' => 'yourController',",
-			"                    'action' => 'your_action',",
-			"                ), false); ?>';",
-			"    $.ajax({",
-			"        url: _url,",
-			"        cache: false,",
-			"        data: {",
-			"            'yourParam': 'your_value'",
-			"        },",
-			"        success: function(data) {",
-			"            console.log('data', data);",
-			"        },",
-			"        error: function(err) {",
-			"            console.log('error', err);",
-			"        }",
-			"    });",
-			"}",
-		],
-		"description": "Ajax Cake"
-	},
-	"AjaxWindow": {
-		"prefix": [
-			"ajax-window",
-			"javascript-window",
-			"js-window"
-		],
-		"body": [
-			"$('window').ready(function() {",
-			"",
-			"});"
-		],
-		"description": "Ajax Window"
-	},
-	"AjaxAppend": {
-		"prefix": [
-			"ajax-append",
-			"javascript-append",
-			"js-append"
-		],
-		"body": [
-			".append($('<>').addClass('')",
-			")"
-		],
-		"description": "Ajax Window"
-	},
-	"AjaxClass": {
-		"prefix": [
-			"ajax-class",
-			"javascript-class",
-			"js-class"
-		],
-		"body": [
-			"var className;",
-			"var cClassName = function() {",
-			"    this.init = init;",
-			"",
-			"    function init() {",
-			"        console.log('Class Started');",
-			"    }",
-			"}",
-			"",
-			"$('window').ready(function() {",
-			"    className = new cClassName();",
-			"    className.init();",
-			"});"
-		],
-		"description": "Ajax Window"
-	},
-	"AjaxSelectedCombo": {
-		"prefix": [
-			"ajax-selected-combo",
-			"js-selected-combo",
-			"cake-selected-combo"
-		],
-		"body": [
-			"let id = \\$('#SELECT_ID :selected').val(),",
-			"    label = \\$('#SELECT_ID :selected').text();"
-		],
-		"description": "Ajax Selected Combo"
-	}
+    // Place your snippets for javascript here. Each snippet is defined under a snippet name and has a prefix, body and
+    // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+    // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+    // same ids are connected.
+    // Example:
+    // "Print to console": {
+    //     "prefix": "log",
+    //     "body": [
+    //         "console.log('$1');",
+    //         "$2"
+    //     ],
+    //     "description": "Log output to console"
+    // }
+    "AjaxCake": {
+        "prefix": [
+            "ajax-cake",
+            "js-cake",
+            "javascript-cake",
+        ],
+        "body": [
+            "function fcname() {",
+            "    let _url = '<?= Router::url(array(",
+            "                    'plugin' => false,",
+            "                    'admin' => true,",
+            "                    'controller' => 'yourController',",
+            "                    'action' => 'your_action',",
+            "                ), false); ?>';",
+            "    $.ajax({",
+            "        // type: 'POST', || 'GET', ",
+            "        // dataType: 'json,' || 'xml', || 'jsonp', || 'script' ",
+            "        url: _url,",
+            "        cache: false,",
+            "        data: {",
+            "            'yourParam': 'your_value'",
+            "        },",
+            "        success: function(data) {",
+            "            console.log('data', data);",
+            "        },",
+            "        error: function(err) {",
+            "            console.log('error', err);",
+            "        }",
+            "    });",
+            "}",
+        ],
+        "description": "Ajax Cake"
+    },
+    "AjaxWindow": {
+        "prefix": [
+            "ajax-window",
+            "javascript-window",
+            "js-window"
+        ],
+        "body": [
+            "$('window').ready(function() {",
+            "",
+            "});"
+        ],
+        "description": "Ajax Window"
+    },
+    "AjaxAppend": {
+        "prefix": [
+            "ajax-append",
+            "javascript-append",
+            "js-append"
+        ],
+        "body": [
+            ".append($('<>').addClass('')",
+            ")"
+        ],
+        "description": "Ajax Window"
+    },
+    "AjaxClass": {
+        "prefix": [
+            "ajax-class",
+            "javascript-class",
+            "js-class"
+        ],
+        "body": [
+            "var className;",
+            "var cClassName = function() {",
+            "    this.init = init;",
+            "",
+            "    function init() {",
+            "        console.log('Class Started');",
+            "    }",
+            "}",
+            "",
+            "$('window').ready(function() {",
+            "    className = new cClassName();",
+            "    className.init();",
+            "});"
+        ],
+        "description": "Ajax Window"
+    },
+    "AjaxSelectedCombo": {
+        "prefix": [
+            "ajax-selected-combo",
+            "js-selected-combo",
+            "cake-selected-combo"
+        ],
+        "body": [
+            "let id = \\$('#SELECT_ID :selected').val(),",
+            "    label = \\$('#SELECT_ID :selected').text();"
+        ],
+        "description": "Ajax Selected Combo"
+    },
+    "NodeClass": {
+        "prefix": [
+            "node-class"
+        ],
+        "body": [
+            "const config = require('./config/config');",
+            "",
+            "function CLASSNAME() {",
+            "    mongoClient.connect(config.mongo.connectionString, function (err, db) {",
+            "        if (err) throw err;",
+            "        mongodb = db.db(\"chassi\");",
+            "    });",
+            "}",
+            "",
+            "CLASSNAME.prototype = {",
+            "    start: function() {}",
+            "}",
+            "",
+            "module.exports = new CLASSNAME();";
+        ],
+        "description": "Node Class"
+    },
+    "NodePgPromisse": {
+        "prefix": [
+            "node-pg-promisse"
+        ],
+        "body": [
+            "const query = {",
+            "    name: 'set_unique_name',",
+            "    text: \" SELECT \" +",
+            "          \"   FROM users \" +",
+            "          \"  WHERE name like $1 \" +",
+            "          \"     OR email like $2 \" +",
+            "          \" OFFSET 1 \" +",
+            "          \"  LIMIT 1 \",",
+            "    values: [`%\\${name}%`, `%\\${email}%`]",
+            "}",
+            "db.query(query)",
+            "    .then(data => { console.log(data.rows); })",
+            "    .catch(err => { console.log(err); });",
+        ],
+        "description": "Node Pg Promisse"
+    },
+    "NodePgCallback": {
+        "prefix": [
+            "node-pg-callback"
+        ],
+        "body": [
+            "const query = {",
+            "    name: 'set_unique_name',",
+            "    text: \" SELECT * \" +",
+            "          \"   FROM users \" +",
+            "          \"  WHERE name like $1 \" +",
+            "          \"     OR email like $2 \" +",
+            "          \" OFFSET 1 \" +",
+            "          \"  LIMIT 1 \",",
+            "    values: [`%\\${name}%`, `%\\${email}%`],",
+            "    rowMode: 'array',",
+            "}",
+            "db.query(query, (err, res) => {",
+            "    if (err) {",
+            "        console.log(err.stack);",
+            "    } else {",
+            "        callback(res.rows);",
+            "    }",
+            "});",
+        ],
+        "description": "Node Pg Callback"
+    },
+    "AjaxModal": {
+        "prefix": [
+            "ajax-modal"
+        ],
+        "body": [
+            "$('#MODALID').modal('show');",
+            "$('#MODALID').modal('hide');"
+        ],
+        "description": "Ajax Modal"
+    },
+    "AjaxFormatDateTime": {
+        "prefix": [
+            "ajax-format-datetime",
+        ],
+        "body": [
+            "moment(new Date()).format('DD/MM/YYYY HH:mm:ss')",
+        ],
+        "description": "Ajax Format Date Time"
+    },
+    "AjaxMomentDateTime": {
+        "prefix": [
+            "ajax-moment-datetime-examples",
+        ],
+        "body": [
+            "Format Dates",
+            "moment().format('MMMM Do YYYY, h:mm:ss a'); // February 8th 2023, 9:06:40 am",
+            "moment().format('DD/MM/YYYY hh:mm:ss ');    // 01/02/2023 14:00:10",
+            "moment().format('dddd [escaped]');          // Wednesday escaped",
+            "moment().format();                          // 2023-02-08T09:13:20-03:00",
+            "",
+            "Relative Time",
+            "moment('20111031', 'YYYYMMDD').fromNow();  // 11 years ago",
+            "moment().startOf('day').fromNow();         // 9 hours ago (day, hour, etc)",
+            "moment().endOf('day').fromNow();           // in 15 hours",
+            "",
+            "Calendar Time",
+            "moment().calendar();                       // Today at 9:07 AM",
+            "moment().subtract(10, 'days').calendar();  // 01/29/2023",
+            "moment().add(1, 'days').calendar();        // Tomorrow at 9:07 AM",
+        ],
+        "description": "Ajax Moment Format Date Time Examples"
+    },
+    "AjaxArrayAppendPush": {
+        "prefix": [
+            "ajax-array-append-push",
+        ],
+        "body": [
+            "let items = [];",
+            "for (const child of children) {",
+            "    items.push(child.id);",
+            "}"
+        ],
+        "description": "Append items into array"
+    },
+    "AjaxArrayFor": {
+        "prefix": [
+            "ajax-array-for",
+        ],
+        "body": [
+            "for (const child of children) {",
+            "    console.log(child)",
+            "}",
+            "",
+            "children.forEach(function(element, i) {",
+            "    console.log(element)",
+            "});"
+        ],
+        "description": "Ajax Format Date Time"
+    },
+    "AjaxStringReplace": {
+        "prefix": [
+            "ajax-string-replace",
+        ],
+        "body": [
+            "yourText.replace('this', 'for this')"
+        ],
+        "description": "Ajax Format Date Time"
+    },
 }
