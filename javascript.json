@@ -1,22 +1,9 @@
 {
-    // Place your snippets for javascript here. Each snippet is defined under a snippet name and has a prefix, body and
-    // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
-    // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
-    // same ids are connected.
-    // Example:
-    // "Print to console": {
-    //     "prefix": "log",
-    //     "body": [
-    //         "console.log('$1');",
-    //         "$2"
-    //     ],
-    //     "description": "Log output to console"
-    // }
     "AjaxCake": {
         "prefix": [
             "ajax-cake",
             "js-cake",
-            "javascript-cake",
+            "javascript-cake"
         ],
         "body": [
             "function fcname() {",
@@ -41,7 +28,7 @@
             "            console.log('error', err);",
             "        }",
             "    });",
-            "}",
+            "}"
         ],
         "description": "Ajax Cake"
     },
@@ -107,7 +94,8 @@
     },
     "NodeClass": {
         "prefix": [
-            "node-class"
+            "node-class",
+            "node-class-model"
         ],
         "body": [
             "const config = require('./config/config');",
@@ -117,13 +105,17 @@
             "        if (err) throw err;",
             "        mongodb = db.db(\"chassi\");",
             "    });",
+            "    classVarName = 'Class Variable';",
             "}",
             "",
             "CLASSNAME.prototype = {",
-            "    start: function() {}",
+            "    start: function(req, res, callback) {",
+            "        console.log(classVarName);",
+            "        return res.json({status: \"success\"});",
+            "    }",
             "}",
             "",
-            "module.exports = new CLASSNAME();";
+            "module.exports = new CLASSNAME();"
         ],
         "description": "Node Class"
     },
@@ -144,7 +136,7 @@
             "}",
             "db.query(query)",
             "    .then(data => { console.log(data.rows); })",
-            "    .catch(err => { console.log(err); });",
+            "    .catch(err => { console.log(err); });"
         ],
         "description": "Node Pg Promisse"
     },
@@ -170,7 +162,7 @@
             "    } else {",
             "        callback(res.rows);",
             "    }",
-            "});",
+            "});"
         ],
         "description": "Node Pg Callback"
     },
@@ -186,16 +178,16 @@
     },
     "AjaxFormatDateTime": {
         "prefix": [
-            "ajax-format-datetime",
+            "ajax-format-datetime"
         ],
         "body": [
-            "moment(new Date()).format('DD/MM/YYYY HH:mm:ss')",
+            "moment(new Date()).format('DD/MM/YYYY HH:mm:ss')"
         ],
         "description": "Ajax Format Date Time"
     },
     "AjaxMomentDateTime": {
         "prefix": [
-            "ajax-moment-datetime-examples",
+            "ajax-moment-datetime-examples"
         ],
         "body": [
             "Format Dates",
@@ -212,13 +204,13 @@
             "Calendar Time",
             "moment().calendar();                       // Today at 9:07 AM",
             "moment().subtract(10, 'days').calendar();  // 01/29/2023",
-            "moment().add(1, 'days').calendar();        // Tomorrow at 9:07 AM",
+            "moment().add(1, 'days').calendar();        // Tomorrow at 9:07 AM"
         ],
         "description": "Ajax Moment Format Date Time Examples"
     },
     "AjaxArrayAppendPush": {
         "prefix": [
-            "ajax-array-append-push",
+            "ajax-array-append-push"
         ],
         "body": [
             "let items = [];",
@@ -230,7 +222,7 @@
     },
     "AjaxArrayFor": {
         "prefix": [
-            "ajax-array-for",
+            "ajax-array-for"
         ],
         "body": [
             "for (const child of children) {",
@@ -245,11 +237,75 @@
     },
     "AjaxStringReplace": {
         "prefix": [
-            "ajax-string-replace",
+            "ajax-string-replace"
         ],
         "body": [
             "yourText.replace('this', 'for this')"
         ],
         "description": "Ajax Format Date Time"
     },
+    "NodePortPattern": {
+        "prefix": [
+            "node-port-pattern"
+        ],
+        "body": [
+            "const port = process.env.PORT || config.port"
+        ],
+        "description": "Node Port Pattern"
+    },
+    "NodeToolClass": {
+        "prefix": [
+            "node-tools-template"
+        ],
+        "body": [
+            "const hmh = require('hmh');",
+            "",
+            "function formatDate(date) {",
+            "    const year = date.getFullYear();",
+            "    const month = String(date.getMonth() + 1).padStart(2, '0');",
+            "    const day = String(date.getDate()).padStart(2, '0');",
+            "    return `\\${day}/\\${month}/\\${year}`;",
+            "}",
+            "",
+            "module.exports = {",
+            "    formatDate",
+            "};"
+        ],
+        "description": "Node tools template"
+    },
+    "NodeClassDatabase": {
+        "prefix": [
+            "node-class-database"
+        ],
+        "body": [
+            "const db = require('./pg_connection');",
+            "",
+            "class ChatDb {",
+            "    constructor() { }",
+            "",
+            "    /**",
+            "     * Busca um usuário pelo username",
+            "     * @param {*} req request",
+            "     * @param {*} callback função de callback",
+            "     */",
+            "    async find(req, callback) {",
+            "        const username = req.params.username.trim();",
+            "        try {",
+            "            const { rows } = await db.query(`",
+            "                SELECT *",
+            "                FROM users u",
+            "                WHERE u.name like $1",
+            "            `, [username]);",
+            "            callback(rows);",
+            "        } catch (err) {",
+            "            console.log(err);",
+            "            callback({ error: 'SQL Error!!' });",
+            "        }",
+            "    }",
+            "};",
+            "",
+            "module.exports = new ChatDb();"
+        ],
+        "description": "Node Database Class template"
+    }
 }

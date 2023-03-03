@@ -1,17 +1,4 @@
 {
-    // Place your snippets for php here. Each snippet is defined under a snippet name and has a prefix, body and
-    // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
-    // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
-    // same ids are connected.
-    // Example:
-    // "Print to console": {
-    //     "prefix": "log",
-    //     "body": [
-    //         "console.log('$1');",
-    //         "$2"
-    //     ],
-    //     "description": "Log output to console"
-    // }
     "redirect": {
         "prefix": "cake-redirect",
         "body": [
@@ -81,10 +68,7 @@
     "ajaxaction": {
         "prefix": "cake-ajaxaction",
         "body": [
-            "/**",
-            " * ",
-            " */",
-            "public function admin_ajax_()",
+            "public function admin_()",
             "{",
             "    \\$this->autoRender = false;",
             "    if (\\$this->request->is('ajax')) {",
@@ -179,7 +163,7 @@
             "    ));",
             "}",
             "",
-            "\\$this->MODEL->read(false, \\$this->MODEL->id)",
+            "\\$this->MODEL->read(false, \\$this->MODEL->id)"
         ],
         "description": "Cake Save Or Update"
     },
@@ -189,7 +173,7 @@
             "\\$this->MODEL->id = \\$id;",
             "if (!\\$this->MODEL->exists()) {",
             "    throw new NotFoundException(sprintf(__('Invalid %s'), __('MODEL')));",
-            "}",
+            "}"
         ],
         "description": "Verifica se o objeto existe no banco de dados"
     },
@@ -199,7 +183,7 @@
             "\\$this->layout = 'admin_add';",
             "\\$this->layout = 'admin_agent';",
             "\\$this->layout = 'admin_settings';",
-            "\\$this->layout = 'admin_report';",
+            "\\$this->layout = 'admin_report';"
         ],
         "description": "Tipos de layouts contendo menus laterais específicos"
     },
@@ -315,19 +299,14 @@
         "body": [
             "\\$this->autoRender = false;",
             "\\$MODEL = \\$this->MODEL->read(null, \\$id);",
-            "return json_encode(\\$MODEL);",
+            "return json_encode(\\$MODEL);"
         ],
         "description": "Return Json Page"
     },
     "titleForLayout": {
         "prefix": "cake-title-for-layout",
         "body": [
-            "public function beforeFilter()",
-            "{",
-            "    parent::beforeFilter();",
-            "    \\$this->set('title_for_layout', __(''));",
-            "    //\\$this->Auth->allow('action',);",
-            "}"
+            "\\$this->set('title_for_layout', __(''));"
         ],
         "description": "Return Title for Layout"
     },
@@ -340,8 +319,64 @@
             "}",
             "// OR",
             "\\$this->MODEL->id = \\$id;",
-            "\\$this->MODEL->saveField('FIELD', 'VALUE');",
+            "\\$this->MODEL->saveField('FIELD', 'VALUE');"
         ],
         "description": "Cake Set, save field"
+    },
+    "cakeDate": {
+        "prefix": "cake-date-format",
+        "body": [
+            "\\$dt = '2025-05-05 11:11:00';",
+            "\\$date = date_create(\\$dt);",
+            "debug(date_format(\\$date, \"Y/m/d H:i:s\"));"
+        ],
+        "description": "Cake date format"
+    },
+    "cakeJoinFilterResult": {
+        "prefix": "cake-join-filter-results",
+        "body": [
+            "\\$this->FilterResults->setPaginate('joins', array(",
+            "    array(",
+            "        'alias' => 'ChassiContact',",
+            "        'table' => 'chassi_contacts',",
+            "        'type' => 'LEFT',",
+            "        'conditions' => '\"TabTreeTrack\".\"cid\" = \"ChassiContact\".\"cid\"'",
+            "    ),",
+            "    array(",
+            "        'alias' => 'User',",
+            "        'table' => 'users',",
+            "        'type' => 'LEFT',",
+            "        'conditions' => '\"ChassiContact\".\"user_id\" = \"User\".\"id\"'",
+            "    )",
+            "));",
+            "\\$this->FilterResults->setPaginate('fields', array(",
+            "    \"TabTreeTrack.id\",",
+            "    \"TabTreeTrack.cid\",",
+            "    \"ChassiContact.media\",",
+            "    \"ChassiContact.channel\",",
+            "    \"User.name\",",
+            "    \"User.extension\",",
+            "));"
+        ],
+        "description": "Cake Join Filter Results"
+    },
+    "cakeConditionOrAnd": {
+        "prefix": "cake-condition-or-and",
+        "body": [
+            "",
+            "'conditions' => array(",
+            "    'OR' => array(",
+            "        array( // or (user_id and user_to_id)",
+            "            'Chat.user_id' => $this->Auth->user('id'),",
+            "            'Chat.user_to_id' => $userToId,",
+            "        ),",
+            "        array( // or (user_id and user_to_id)",
+            "            'Chat.user_id' => $userToId,",
+            "            'Chat.user_to_id' => $this->Auth->user('id'),",
+            "        )",
+            "    )",
+            "),"
+        ],
+        "description": "Cake condition Or & And in the same query"
     }
 }

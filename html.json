@@ -1,29 +1,4 @@
 {
-	// Place your snippets for html here. Each snippet is defined under a snippet name and has a prefix, body and
-	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
-	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
-	// same ids are connected.
-	// Example:
-	// "Print to console": {
-	// 	"prefix": "log",
-	// 	"body": [
-	// 		"console.log('$1');",
-	// 		"$2"
-	// 	],
-	// 	"description": "Log output to console"
-	// }
-	// "link": {
-	// 	"prefix": "ck-link",
-	// 	"body": [
-	// 		"\\echo \\$this->Html->link('', array(",
-	// 		"'plugin' => false,",
-	// 		"'admin' => true,",
-	// 		"'controller' => '',",
-	// 		"'action' => ''",
-	// 		"));"
-	// 	],
-	// 	"description": "Cake Link"
-	// }
 	"CakeLink": {
 		"prefix": "cake-link",
 		"body": [
@@ -35,7 +10,7 @@
 			"), array(",
 			"    'escape' => false,",
 			"    'class' => '',",
-			")); ?>",
+			")); ?>"
 		],
 		"description": "Cake Links Html->link"
 	},
@@ -48,7 +23,7 @@
 		"body": [
 			"<script type=\"text/javascript\">",
 			"",
-			"</script>",
+			"</script>"
 		],
 		"description": "Javascript"
 	},
@@ -87,7 +62,7 @@
 			"            'label' => false",
 			"        )); ?>",
 			"    </div>",
-			"</div>",
+			"</div>"
 		],
 		"description": "Cake Input"
 	},
@@ -99,7 +74,7 @@
 			"    'admin' => true,",
 			"    'controller' => 'CONTROLLER',",
 			"    'action' => 'ACTION'",
-			")), 10); ?>",
+			")), 10); ?>"
 		],
 		"description": "Cake Refresh Div"
 	},
@@ -139,7 +114,7 @@
 			"            )); ?>",
 			"        </div>",
 			"    </div>",
-			"</div>",
+			"</div>"
 		],
 		"description": "Cake Filter Date Between"
 	},
@@ -150,7 +125,7 @@
 			"<script type=\"text/javascript\" src=\"/portal/js/bootstrap4/bootstrap.min.js\"></script>",
 			"<script type=\"text/javascript\" src=\"/portal/js/bootstrap-datetimepicker.min.js\"></script>",
 			"<script type=\"text/javascript\" src=\"/portal/js/jquery/jquery-1.12.1.min.js\"></script>",
-			"<script type=\"text/javascript\" src=\"/portal/js/moment-with-locales.js\"></script>",
+			"<script type=\"text/javascript\" src=\"/portal/js/moment-with-locales.js\"></script>"
 		],
 		"description": "Cake Date Import"
 	},
@@ -275,7 +250,7 @@
 			"    <tr>",
 			"        <td></td>",
 			"    </tr>",
-			"<?php endforeach; ?>",
+			"<?php endforeach; ?>"
 		],
 		"description": "Cake Foreach"
 	},
@@ -317,7 +292,7 @@
 			"        'data-backdrop' => 'static',",
 			"        'escape' => false,",
 			"    ));",
-			"?>",
+			"?>"
 		],
 		"description": "Cake Modal"
 	},
@@ -330,7 +305,7 @@
 			"                'options' => \\$items,",
 			"                'class' => 'form-control',",
 			"                'label' => false",
-			"            )); ?>",
+			"            )); ?>"
 		],
 		"description": "Cake Select Input"
 	},
@@ -367,5 +342,43 @@
 			")); ?>"
 		],
 		"description": "Cake Button"
+	},
+	"basicImports": {
+		"prefix": [
+			"cake-basic-imports",
+			"js-basic-imports",
+			"ajax-basic-imports"
+		],
+		"body": [
+			"<!--",
+			"Run yarn add --modules-folder vendor/ PACKAGE",
+			" or front install PACKAGE",
+			"-->",
+			"<link rel=\"stylesheet\" href=\"vendor/bootstrap/dist/css/bootstrap.min.css\">",
+			"<script src=\"vendor/moment/min/moment.min.js\"></script>",
+			"<script src=\"vendor/jquery/dist/jquery.min.js\"></script>"
+		],
+		"description": "Cake Button"
+	},
+	"inputKeyEnter": {
+		"prefix": [
+			"cake-input-key-enter"
+		],
+		"body": [
+			"<?= \\$this->Form->input('FIELD', array(",
+			"    'id' => 'FIELDID',",
+			"    'class' => 'form-control',",
+			"    'label' => false,",
+			"    'onkeypress' => 'contactKeyEnter(event)'",
+			")); ?>",
+			"<input id=\"FIELDID\" class=\"form-control\" onkeypress=\"contactKeyEnter(event)\">",
+			"",
+			"function contactKeyEnter(event) {",
+			"    if ((\\$('#FIELDID').val().trim() !== '') && (event.key === \"Enter\")) {",
+			"        console.log('enter:', \\$('#FIELDID').val());",
+			"    }",
+			"}"
+		],
+		"description": "Cake Input Enter"
 	}
 }

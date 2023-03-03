@@ -1,23 +1,10 @@
 {
-    // Place your snippets for sql here. Each snippet is defined under a snippet name and has a prefix, body and
-    // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
-    // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
-    // same ids are connected.
-    // Example:
-    // "Print to console": {
-    //     "prefix": "log",
-    //     "body": [
-    //         "console.log('$1');",
-    //         "$2"
-    //     ],
-    //     "description": "Log output to console"
-    // }
     "simpleif": {
         "prefix": "sql-if",
         "body": [
             "IF (jsondata->>'media' is not null) THEN",
             "    NEW.channel = jsondata->>'media';",
-            "END IF;",
+            "END IF;"
         ],
         "description": "SQL Simple IF"
     },
@@ -37,10 +24,11 @@
         "prefix": "sql-newtable",
         "body": [
             "CREATE TABLE NAME (",
-            "  id serial,",
-            "  CONSTRAINT pk_NAME PRIMARY KEY (id),",
+            "  id serial PRIMARY KEY,",
+            "  created TIMESTAMP NOT NULL DEFAULT now(),",
+            "  updated TIMESTAMP NOT NULL DEFAULT now(),",
             "  UNIQUE(FIELD)",
-            ");",
+            ");"
         ],
         "description": "SQL New Table"
     },
@@ -63,7 +51,7 @@
             "",
             "  return new;",
             "END;",
-            "\\$BODY\\$;",
+            "\\$BODY\\$;"
         ],
         "description": "SQL New Table"
     },
@@ -92,12 +80,12 @@
             "  BEFORE INSERT OR UPDATE",
             "  ON table_NAME",
             "  FOR EACH ROW",
-            "  EXECUTE PROCEDURE procedure_NAME();",
+            "  EXECUTE PROCEDURE procedure_NAME();"
         ],
         "description": "SQL New Table"
     },
-    "function": {
-        "prefix": "sql-function",
+    "functionReturnBoolean": {
+        "prefix": "sql-function-return-boolean",
         "body": [
             "CREATE OR REPLACE FUNCTION fc_name(",
             "   p1 character varying,",
@@ -121,7 +109,37 @@
             "  RETURN true;",
             "END;",
             "\\$BODY\\$",
-            "LANGUAGE plpgsql VOLATILE;",
+            "LANGUAGE plpgsql VOLATILE;"
+        ],
+        "description": "SQL function"
+    },
+    "functionReturnTable": {
+        "prefix": "sql-function-return-table",
+        "body": [
+            "CREATE OR REPLACE FUNCTION fc_name(",
+            "   p1 integer",
+            ")",
+            "  RETURNS TABLE(r_id integer, r_name character varying)",
+            "AS \\$BODY\\$",
+            "DECLARE",
+            "  v1 record;",
+            "BEGIN",
+            "",
+            "  FOR v1 IN",
+            "     select d.id, d.name",
+            "       from dashlets d",
+            "      where d.id not in (select dashlet_id ",
+            "                    from user_dashlets",
+            "                    where user_id = p1)",
+            "  LOOP",
+            "    r_id   := v1.id;",
+            "    r_name := v1.name;",
+            "    RETURN NEXT;",
+            "  END LOOP;",
+            "  RETURN;",
+            "END;",
+            "\\$BODY\\$",
+            "LANGUAGE plpgsql VOLATILE;"
         ],
         "description": "SQL function"
     },
@@ -164,7 +182,7 @@
             "",
             "END;",
             "\\$BODY\\$",
-            "LANGUAGE plpgsql VOLATILE;",
+            "LANGUAGE plpgsql VOLATILE;"
         ],
         "description": "SQL Jsonb SimpleSelect"
     }
