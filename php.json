@@ -180,10 +180,9 @@
     "layout": {
         "prefix": "cake-layout",
         "body": [
-            "\\$this->layout = 'admin_add';",
-            "\\$this->layout = 'admin_agent';",
-            "\\$this->layout = 'admin_settings';",
-            "\\$this->layout = 'admin_report';"
+            "// see the folder app/View/Layouts",
+            "// admin_generic, admin_generic_light, admin_generic_fluid, admin_generic_no_scroll",
+            "\\$this->layout = 'admin_generic';"
         ],
         "description": "Tipos de layouts contendo menus laterais específicos"
     },
@@ -328,7 +327,9 @@
         "body": [
             "\\$dt = '2025-05-05 11:11:00';",
             "\\$date = date_create(\\$dt);",
-            "debug(date_format(\\$date, \"Y/m/d H:i:s\"));"
+            "debug(date_format(\\$date, \"Y/m/d H:i:s\"));",
+            "debug(date('Y-m-d H:i:s'));",
+            "debug(date(\\$date, \"Y-m-d H:i:s\"));"
         ],
         "description": "Cake date format"
     },
@@ -378,5 +379,205 @@
             "),"
         ],
         "description": "Cake condition Or & And in the same query"
+    },
+    "cakeDelete": {
+        "prefix": "cake-delete-field",
+        "body": [
+            "// delete(integer \\$id = null, boolean \\$cascade = true)",
+            "\\$this->Model->delete(\\$model_id);",
+            "// deleteAll(mixed \\$conditions, \\$cascade = true, \\$callbacks = false)",
+            "\\$this->Model->deleteAll(array(\"Model.id > 0\"), true);"
+        ],
+        "description": "Cake Delete Template"
+    },
+    "LayoutConfigurationsImport": {
+        "prefix": "cake-layout-configurations-import",
+        "body": [
+            "// see the folder app/Config/dnk_submenu > attribute highlights",
+            "// agent-panel, internal_chat, supervisor-dashboard, agent_dashboard, ",
+            "// reports, data-register, queues, settings",
+            "\\$this->set('highlight', '');",
+            "",
+            "// see the folder app/View/Elements/left_menu/",
+            "// data_register, empty, history, reports, settings, supervisor_dashboard,",
+            "// queues, agent_dashboard",
+            "\\$this->set('left_menu', '');",
+            "",
+            "// see the folder app/View/Layouts",
+            "// admin_generic, admin_generic_light, admin_generic_fluid, admin_generic_no_scroll",
+            "\\$this->layout = 'admin_generic';"
+        ],
+        "description": "Cake Update Template"
+    },
+    "cakeBaseUrl": {
+        "prefix": "cake-base-url",
+        "body": [
+            "Router::url('/', false);",
+            "Router::url(array('controller'=>'users','action'=>'index'), false);"
+        ],
+        "description": "Cake Base Url"
+    },
+    "cakeFormInputArray": {
+        "prefix": "cake-input-array",
+        "body": [
+            "<?php",
+            "    $index = 0;",
+            "    foreach ($salmos as $sl) :",
+            "?>",
+            "    <?= $this->Form->input(\"Music.{$index}.id\"); ?>",
+            "    <?= $this->Form->input(\"Music.{$index}.book_music_number\"); ?>",
+            "<?php endforeach; ?>"
+        ],
+        "description": "Cake Form Input Array"
+    },
+    "cakeWhenToDate": {
+        "prefix": [
+            "cake-when-to-date",
+            "cake-timestamp-convert-utc",
+            "cake-utc-convert",
+            "cake-timezone-convert"
+        ],
+        "body": [
+            "// Option 1",
+            "// 'UTC', 'America/Sao_Paulo', ...",
+            "date_default_timezone_set('America/Sao_Paulo');",
+            "\\$whenJs = 1678737927980;",
+            "\\$whenPhp = 1678737927;",
+            "\\$the_date = date('Y-m-d H:i:s', substr(\\$whenJs, 0, 10));",
+            "\\$the_date = date('Y-m-d H:i:s', \\$whenPhp);",
+            "",
+            "// Option 2",
+            "\\$value = '2023-04-13T11:52:42.366+0000';",
+            "\\$date = new DateTime(\\$value, new DateTimeZone('UTC'));",
+            "\\$date->setTimezone(new DateTimeZone('America/Sao_Paulo'));",
+            "\\$theDate = date_format(\\$date, 'Y-m-d H:i:s');"
+        ],
+        "description": "Cake When (int) to Date"
+    },
+    "cakeImportPhpClass": {
+        "prefix": [
+            "cake-import-php-class",
+            "cake-import-config"
+        ],
+        "body": [
+            "// Processando o objeto",
+            "require(APP . 'Config' . DS . 'FILE_NAME.php');",
+            "foreach (\\$OBJECT_NAME as \\$item) {",
+            "    debug(\\$item['KEY'])",
+            "}",
+            "",
+            "// Enviando o objeto para view",
+            "require(APP . 'Config' . DS . 'FILE_NAME.php');",
+            "\\$this->set('urls', CLASS_NAME::read('OBJECT_NAME')); // or",
+            "\\$this->set('urls', $OBJECT_NAME));"
+        ],
+        "description": "Cake Import PHP Class"
+    },
+    "cakeJoinModel": {
+        "prefix": "cake-join-model",
+        "body": [
+            "// Join with string key",
+            "public \\$hasOne = array(",
+            "    'OtherModel' => array(",
+            "        'className' => 'OtherModel',",
+            "        'foreignKey' => false,",
+            "        'conditions' => array('CurrentModel.cid = OtherModel.cid'),",
+            "        'fields' => array(",
+            "            'id',",
+            "            'otherField',",
+            "         )",
+            "    )",
+            ");",
+            "// Custom Join ",
+            "public \\$hasAndBelongsToMany = array(",
+            "    'OtherModel' => array(",
+            "        'className' => 'OtherModel',",
+            "        'joinTable' => 'other_table',",
+            "        'foreignKey' => 'field_id',",
+            "        'associationForeignKey' => 'field_id',",
+            "        'unique' => 'keepExisting',",
+            "        'fields' => array(",
+            "            'id',",
+            "            'otherField',",
+            "         )",
+            "    )",
+            ");"
+        ],
+        "description": "Cake Join Model Example"
+    },
+    "cakeHttpSocket": {
+        "prefix": [
+            "cake-http-socket-template"
+        ],
+        "body": [
+            "App::uses('HttpSocket', 'Network/Http');",
+            "\\$endpoint = \"{\\$this->emailApiHost}/api/email/message/{\\$emailKey}\";",
+            "try {",
+            "    \\$http = new HttpSocket();",
+            "    \\$request = array(",
+            "        'header' => array(",
+            "            'Content-Type' => 'application/json',",
+            "            //'x-access-token' => \\$login->token,",
+            "        ),",
+            "    );",
+            "    \\$data = $http->get(\\$endpoint, \\$request);",
+            "    \\$body = array(",
+            "        'body' => \\$data->body,",
+            "        'endpoint' => \\$endpoint,",
+            "    );",
+            "    return \\$body;",
+            "} catch (Exception \\$ex) {",
+            "    return json_encode(array());",
+            "}"
+        ],
+        "description": "Cake HTTP Socket Template"
+    },
+    "phpJsonOutput": {
+        "prefix": [
+            "php-json-output",
+            "cake-json-output",
+            "html-json-output"
+        ],
+        "body": [
+            "<?php",
+            "\\$json = '{",
+            "    \"nome\": \"João\",",
+            "    \"idade\": 30",
+            "}';",
+            "header('Content-Type: application/json');",
+            "echo \\$json;",
+            "exit;",
+            "?>"
+        ],
+        "description": "Cake HTTP Socket Template"
+    },
+    "crmShowSql": {
+        "prefix": [
+            "cake-show-sql",
+            "cake-dump-sql",
+            "cake-sql"
+        ],
+        "body": [
+            "\\$this->showSql('CrmContact');"
+        ],
+        "description": "Cake Show SQL"
+    },
+    "sqlQuery": {
+        "prefix": [
+            "cake-query",
+            "cake-query-update",
+            "cake-query-param"
+        ],
+        "body": [
+            "$this->User->query(",
+            "        'select * from model where param like ?',",
+            "        array('value%')",
+            "    );",
+            "$this->User->query(",
+            "        'select * from model where param1 like :p1 and param2 like :p2',",
+            "        array('p1' => 'value1%', 'p2' => 'value2%')",
+            "    );"
+        ],
+        "description": "Cake Query Params"
     }
 }

@@ -1,0 +1,69 @@
+{
+    "ps-case": {
+        "prefix": [
+            "ps1-case",
+            "shell-case",
+            "ps-case"
+        ],
+        "body": [
+            "switch (\\$args[0]) {",
+            "    \"term1\" {",
+            "        fprint \"description\"",
+            "    }",
+            "    {(\\$_ -eq \"term2\") -or (\\$_ -eq \"term3\")} {",
+            "        Set-Location \"C:\\Users\\fabri\\Documents\\Workspace\\backups\"",
+            "    }",
+            "    default {",
+            "    }",
+            "}"
+        ],
+        "description": "Get-ChildItem"
+    },
+    "ps-usage": {
+        "prefix": [
+            "ps1-usage",
+            "shell-usage",
+            "ps-usage"
+        ],
+        "body": [
+            "default {",
+            "    fprint \"\"",
+            "    fprint \"Usage: command [Action]\"",
+            "    fprint \"\"",
+            "    fprint \"Actions:\"",
+            "    fprint \"\"",
+            "    fdestak \"   action  \" \"description\"",
+            "}"
+        ],
+        "description": "Get-ChildItem"
+    },
+    "ps-command": {
+        "prefix": [
+            "ps1-command-custom",
+            "shell-command-custom",
+            "ps-command-custom"
+        ],
+        "body": [
+            "\\$c = $args[0]",
+            "switch (\\$c) {",
+            "    \"term1\" {",
+            "        Write-Host \\$c -ForegroundColor yellow",
+            "    }",
+            "    {(\\$_ -eq \"term2\") -or (\\$_ -eq \"term3\")} {",
+            "        Write-Host \\$c -ForegroundColor red",
+            "    }",
+            "    default {",
+            "        print \"\"",
+            "        print \"Usage: command [Action]\"        ",
+            "        print \"\"",
+            "        print \"Actions\"",
+            "        print \"\"",
+            "        fdestak \"   action [ param ]  \" \"description\"",
+            "        fdestak \"   action [ param ]  \" \"description\"",
+            "        print \"\"",
+            "    }",
+            "}"
+        ],
+        "description": "Custom Command"
+    }
+}

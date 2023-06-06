@@ -1,0 +1,57 @@
+{
+	"DockerColors": {
+		"prefix": [
+			"docker-colors",
+			"docker-bin-colors",
+			"docker-profile-colors"
+		],
+		"body": [
+			"# Colors configs baschrc",
+			"RUN echo \"LS_COLORS=\\$LS_COLORS:'di=0;35:' ; export LS_COLORS\" >> /root/.bashrc \\ ",
+			"# Bin configs .profile",
+			" && echo \"\" >> /root/.profile \\ ",
+			" && echo \"if [ -d \\\"\\\\_CIFRAO_HOME/bin\\\" ] ; then\" >> /root/.profile \\ ",
+			" && echo \"   PATH=\\\"\\\\_CIFRAO_HOME/bin:\\\\CIFRAOPATH\\\"\" >> /root/.profile \\ ",
+			" && echo \"fi\" >> /root/.profile"
+		],
+		"description": "Docker Colors"
+	},
+	"DockerCopy": {
+		"prefix": [
+			"docker-copy"
+		],
+		"body": [
+			"COPY ./bin/* /root/bin/",
+			"COPY exports /etc/exports"
+		],
+		"description": "Docker Copy File"
+	},
+	"DockerExposePort": {
+		"prefix": [
+			"docker-expose-port"
+		],
+		"body": [
+			"EXPOSE 2049/tcp"
+		],
+		"description": "Docker Expose Port"
+	},
+	"DockerWorkdir": {
+		"prefix": [
+			"docker-workdir"
+		],
+		"body": [
+			"WORKDIR /root"
+		],
+		"description": "Docker Workdir"
+	},
+	"DockerCmdEntrypoint": {
+		"prefix": [
+			"docker-cmd-entrypoint"
+		],
+		"body": [
+			"ENTRYPOINT [\"/usr/sbin/rpcbind\", \"-w\", \"-f\"]",
+			"CMD [\"/usr/sbin/exportfs\", \"-ar\"]"
+		],
+		"description": "Docker Command Entrypoint"
+	}
+}

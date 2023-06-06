@@ -32,6 +32,36 @@
         ],
         "description": "Ajax Cake"
     },
+    "AjaxGetPost": {
+        "prefix": [
+            "ajax-get-post",
+            "js-get-post"
+        ],
+        "body": [
+            "let _url = '<?= Router::url(array(",
+            "                'plugin' => false,",
+            "                'admin' => true,",
+            "                'controller' => 'yourController',",
+            "                'action' => 'your_action',",
+            "            ), false); ?>';",
+            "$.ajax({",
+            "    // type: 'POST', || 'GET', ",
+            "    // dataType: 'json,' || 'xml', || 'jsonp', || 'script' ",
+            "    url: _url,",
+            "    cache: false,",
+            "    data: {",
+            "        'yourParam': 'your_value'",
+            "    },",
+            "    success: function(data) {",
+            "        console.log('data', data);",
+            "    },",
+            "    error: function(err) {",
+            "        console.log('error', err);",
+            "    }",
+            "});"
+        ],
+        "description": "Ajax Get Post"
+    },
     "AjaxWindow": {
         "prefix": [
             "ajax-window",
@@ -176,32 +206,37 @@
         ],
         "description": "Ajax Modal"
     },
-    "AjaxFormatDateTime": {
+    "AjaxCreateDateTime": {
         "prefix": [
-            "ajax-format-datetime"
+            "ajax-create-datetime"
         ],
         "body": [
-            "moment(new Date()).format('DD/MM/YYYY HH:mm:ss')"
+            "moment(new Date()).format('DD/MM/YYYY HH:mm:ss')",
+            "moment(new Date(1678706562019)).format('DD/MM/YYYY HH:mm:ss')"
         ],
-        "description": "Ajax Format Date Time"
+        "description": "Ajax Create Date Time"
     },
     "AjaxMomentDateTime": {
         "prefix": [
             "ajax-moment-datetime-examples"
         ],
         "body": [
-            "Format Dates",
+            "// Date Create",
+            "moment(new Date()).format('DD/MM/YYYY HH:mm:ss')",
+            "moment(new Date(1678706562019)).format('DD/MM/YYYY HH:mm:ss')",
+            "",
+            "// Format Dates",
             "moment().format('MMMM Do YYYY, h:mm:ss a'); // February 8th 2023, 9:06:40 am",
             "moment().format('DD/MM/YYYY hh:mm:ss ');    // 01/02/2023 14:00:10",
             "moment().format('dddd [escaped]');          // Wednesday escaped",
             "moment().format();                          // 2023-02-08T09:13:20-03:00",
             "",
-            "Relative Time",
+            "// Relative Time",
             "moment('20111031', 'YYYYMMDD').fromNow();  // 11 years ago",
             "moment().startOf('day').fromNow();         // 9 hours ago (day, hour, etc)",
             "moment().endOf('day').fromNow();           // in 15 hours",
             "",
-            "Calendar Time",
+            "// Calendar Time",
             "moment().calendar();                       // Today at 9:07 AM",
             "moment().subtract(10, 'days').calendar();  // 01/29/2023",
             "moment().add(1, 'days').calendar();        // Tomorrow at 9:07 AM"
@@ -307,5 +342,43 @@
             "module.exports = new ChatDb();"
         ],
         "description": "Node Database Class template"
+    },
+    "NodeClassController": {
+        "prefix": [
+            "node-exports"
+        ],
+        "body": [
+            "module.exports = new Controller();",
+            "module.exports = {",
+            "    saveEvent,",
+            "    saveSlot",
+            "}"
+        ],
+        "description": "Node Exports Function template"
+    },
+    "JsWhenToDate": {
+        "prefix": [
+            "js-when-to-date",
+            "ajax-when-to-date"
+        ],
+        "body": [
+            "let time = 1678737927980,                       // 2023-03-13 20:05:27",
+            "    nowtime = new Date().getTime(),             // 1679073784226",
+            "    utc = new Date(time).toUTCString(),         // Mon, 13 Mar 2023 20:05:27 GMT",
+            "    local = new Date(time).toLocaleString();    // 13/03/2023, 17:05:27",
+            "// moment.js",
+            "console.log(moment(time).utc().format('YYYY-MM-DD HH:mm:ss'));                  // 2023-03-13 20:05:27",
+            "console.log(moment(nowtime).utcOffset('-03:00').format('YYYY-MM-DD HH:mm:ss')); // São Paulo: 2023-03-13 17:05:27"
+        ],
+        "description": "Javascript When (int) to Date"
+    },
+    "NodeUseStrict": {
+        "prefix": [
+            "node-use-strict"
+        ],
+        "body": [
+            "'use strict';"
+        ],
+        "description": "Node use strict"
     }
 }

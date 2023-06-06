@@ -1,4 +1,32 @@
 {
+    "bash-template": {
+        "prefix": "bash-template",
+        "body": [
+            "",
+            "case \\$1 in",
+            "    'start')",
+            "        destak 'Command' 'Description'",
+            "        print ''",
+            "        # command",
+            "    ;;",
+            "    'build') ;& 'run')",
+            "        destak 'Command' 'Description'",
+            "        print ''",
+            "        # command",
+            "    ;;",
+            "    *)",
+            "        print ''",
+            "        print 'Usage: command [action] [options]' white",
+            "        print ''",
+            "        print 'Actions:' white",
+            "        print ''",
+            "        destak '   action      ' 'Description'",
+            "        print ''",
+            "    ;;",
+            "esac"
+        ],
+        "description": "Bash Template"
+    },
     "bash-if": {
         "prefix": "bash-if",
         "body": [
@@ -27,14 +55,14 @@
         "prefix": "bash-case",
         "body": [
             "case \\$1 in",
-            "    \"\")",
-            "        echo \"\\empty\"",
+            "    '')",
+            "        echo '\\empty'",
             "    ;;",
-            "    \"v1\")",
-            "        echo \"\\v1\"",
+            "    'v1') ;& 'v2'",
+            "        echo 'v1-v2'",
             "    ;;",
             "    *)",
-            "        echo \"Informe o parametro\"",
+            "        echo 'Informe o parametro'",
             "    ;;",
             "esac"
         ],
@@ -44,10 +72,10 @@
         "prefix": "bash-function",
         "body": [
             "function print() {",
-            "    echo \"message: \\$1\"",
+            "    echo 'message: \\$1'",
             "}",
             "# calling",
-            "print \"teste\""
+            "print 'teste'"
         ],
         "description": "Bash Function"
     },

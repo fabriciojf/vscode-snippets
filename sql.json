@@ -149,7 +149,7 @@
             "SELECT jsondata->>'media', jsondata->'sys'->>'ani' FROM chassi_contacts;",
             "SELECT * FROM chassi_contacts WHERE jsondata->>'media' IN ('message', 'voice');",
             "SELECT * FROM chassi_contacts WHERE jsondata @> '{\"media\": [\"message\"]}';",
-            "SELECT * FROM chassi_contacts WHERE jsondata @> '{\"sys\": {\"ani\": \"103\"]}';",
+            "SELECT * FROM chassi_contacts WHERE jsondata @> '{\"sys\": {\"ani\": \"103\"}}';",
             "UPDATE users SET jsondata = jsondata || '{\"media\": \"voice\"}';"
         ],
         "description": "SQL Jsonb SimpleSelect"
@@ -185,5 +185,32 @@
             "LANGUAGE plpgsql VOLATILE;"
         ],
         "description": "SQL Jsonb SimpleSelect"
+    },
+    "sqlWhenToTimestamp": {
+        "prefix": [
+            "sql-when-to-timestamp",
+            "sql-gettime-to-timestamp"
+        ],
+        "body": [
+            "select to_timestamp(1679088922069/1000),",
+            "to_timestamp('1679088922069'::float/1000),",
+            "to_timestamp('1679088922069'::float/1000);",
+            "to_timestamp(new.portal_segment_end::float/1000) - to_timestamp(new.portal_segment_start::float/1000)"
+        ],
+        "description": "SQL Jsonb SimpleSelect"
+    },
+    "sqlOutputArray": {
+        "prefix": [
+            "sql-output-array",
+            "sql-select-to-array"
+        ],
+        "body": [
+            "SELECT",
+            "  string_agg(id::text, ',') AS ids,",
+            "  string_agg(name, ',') AS names,",
+            "  string_agg(email, ',') AS emails",
+            "FROM users;"
+        ],
+        "description": "SQL Agregação de Strings"
     }
 }
