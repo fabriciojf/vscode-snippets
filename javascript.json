@@ -380,5 +380,25 @@
             "'use strict';"
         ],
         "description": "Node use strict"
+    },
+    "NodeReqParams": {
+        "prefix": [
+            "node-req-params"
+        ],
+        "body": [
+            "//post:https://host/domain/:param?query=queryValue",
+            "function reqParams(req, res) {",
+            "    let params = req.params,",
+            "        body = req.body,",
+            "        query = req.query;",
+            "",
+            "    res.json({",
+            "        params: params,",
+            "        body: body,",
+            "        query: query",
+            "    });",
+            "}"
+        ],
+        "description": "Template de arquivo ecosystem.config.js"
     }
 }
