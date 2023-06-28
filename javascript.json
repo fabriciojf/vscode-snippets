@@ -35,7 +35,7 @@
     "AjaxGetPost": {
         "prefix": [
             "ajax-get-post",
-            "js-get-post"
+            "js-get-post",
         ],
         "body": [
             "let _url = '<?= Router::url(array(",
@@ -58,7 +58,7 @@
             "    error: function(err) {",
             "        console.log('error', err);",
             "    }",
-            "});"
+            "});",
         ],
         "description": "Ajax Get Post"
     },
@@ -145,7 +145,20 @@
             "    }",
             "}",
             "",
-            "module.exports = new CLASSNAME();"
+            "module.exports = new CLASSNAME();",
+            "",
+            "// Another Way",
+            "'use strict';",
+            "const config = require('./config/config');",
+            "",
+            "function FIRSTFUNCTION(param) {",
+            "    console.log(param);",
+            "}",
+            "",
+            "module.exports = {",
+            "    FIRSTFUNCTION: FIRSTFUNCTION",
+            "}",
+            ""
         ],
         "description": "Node Class"
     },
@@ -359,7 +372,7 @@
     "JsWhenToDate": {
         "prefix": [
             "js-when-to-date",
-            "ajax-when-to-date"
+            "ajax-when-to-date",
         ],
         "body": [
             "let time = 1678737927980,                       // 2023-03-13 20:05:27",
@@ -374,31 +387,97 @@
     },
     "NodeUseStrict": {
         "prefix": [
-            "node-use-strict"
+            "node-use-strict",
         ],
         "body": [
             "'use strict';"
         ],
         "description": "Node use strict"
     },
-    "NodeReqParams": {
+    "NodeDateTimeUtil": {
         "prefix": [
-            "node-req-params"
+            "node-date-time-util",
+            "node-date-time-util-template"
         ],
         "body": [
-            "//post:https://host/domain/:param?query=queryValue",
-            "function reqParams(req, res) {",
-            "    let params = req.params,",
-            "        body = req.body,",
-            "        query = req.query;",
+            "'use strict';",
             "",
-            "    res.json({",
-            "        params: params,",
-            "        body: body,",
-            "        query: query",
-            "    });",
+            "/**",
+            " * Formata uma data para o formato desejado passado como parametro format",
+            " *  sem a utilizacao de bibliotecas",
+            " * @param {*} date = Date()",
+            " * @param {*} format = utilize os caracteres 'dd mm yyyy HH MM SS'",
+            " *  ex: 'dd/mm/yyyy HH:MM:SS', 'yyyy-mm-dd HH:MM:00', etc",
+            " * @returns date formatada no padrao format",
+            " */",
+            "function formatDate(date, format) {",
+            "    var day = date.getDate(),",
+            "            month = date.getMonth() + 1,",
+            "        year = date.getFullYear(),",
+            "        hours = date.getHours(),",
+            "        minutes = date.getMinutes(),",
+            "        seconds = date.getSeconds(),",
+            "        formDate = format;",
+            "    formDate = formDate.replace('dd', day < 10 ? '0' + day : day);",
+            "    formDate = formDate.replace('mm', month < 10 ? '0' + month : month);",
+            "    formDate = formDate.replace('yyyy', year);",
+            "    formDate = formDate.replace('HH', hours < 10 ? '0' + hours : hours);",
+            "    formDate = formDate.replace('MM', minutes < 10 ? '0' + minutes : minutes);",
+            "    formDate = formDate.replace('SS', seconds < 10 ? '0' + seconds : seconds);",
+            "    return formDate;",
+            "}",
+            "",
+            "// module exports",
+            "module.exports = {",
+            "    formatDate: formatDate",
+            "};"
+        ],
+        "description": "Node Date Time Util"
+    },
+    "NodeStaticClass": {
+        "prefix": "fmt",
+        "body": [
+            "'use strict';",
+            "",
+            "const config = require('../config/config');",
+            "",
+            "class MyClass {",
+            "",
+            "\tstatic counter = 9988;",
+            "\tconstructor() {}",
+            "",
+            "\tstatic async _getString(mystring) {",
+            "\t\treturn await mystring;",
+            "\t}",
+            "",
+            "\tstatic async format(req, res) {",
+            "\t\tlet teste = await MyClass._getString(MyClass.counter);",
+            "\t\tlet aa = {",
+            "\t\t\tmessage: teste,",
+            "\t\t\tval1: MyClass.counter",
+            "\t\t};",
+            "",
+            "\t\tMyClass.counter++;",
+            "\t\taa['val2'] = MyClass.counter;",
+            "\t\tres.json(aa);",
+            "\t}",
+            "}",
+            "",
+            "module.exports = MyClass;"
+        ],
+        "description": "Formats data and sends a JSON response"
+    },
+    "NodeJsonPropertiesFor": {
+        "prefix": "node-json-properties-for",
+        "body": [
+            "let items = {name: 'jhon', age: 12, email: 'jhon@lenon.com'}",
+            "for (let key in items) {",
+            "\tif (items.hasOwnProperty(key)) {",
+            "\t\tconst value = items[key];",
+            "\t\tconsole.log(key, value);",
+            "\t}",
             "}"
         ],
-        "description": "Template de arquivo ecosystem.config.js"
+        "description": "Iterates over object properties and logs key-value pairs"
     }
 }
