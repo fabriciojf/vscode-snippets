@@ -18,7 +18,7 @@
 		"prefix": [
 			"ajax-script",
 			"js-script",
-			"cake-script"
+			"cake-script",
 		],
 		"body": [
 			"<script type=\"text/javascript\">",
@@ -334,7 +334,7 @@
 	"buttonShowModal": {
 		"prefix": "cake-button-showmodal",
 		"body": [
-			"<button class=\"btn btn-default\" type=\"button\" data-toggle=\"modal\" data-target=\"#MODAL_NAME\"><i class=\"ion ion-plus-round\"></i></button>"
+			"<button class=\"btn btn-default\" type=\"button\" data-toggle=\"modal\" data-target=\"#MODAL_NAME\"><i class=\"ion ion-plus-round\"></i></button>",
 		],
 		"description": "Cake Button Show Modal"
 	},

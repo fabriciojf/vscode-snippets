@@ -1,0 +1,15 @@
+{
+    "snip-model": {
+        "prefix": "snippet-model",
+        "body": [
+            "\"snippet\": {",
+			"    \"prefix\": \"snip-model\",",
+			"    \"body\": [",
+			"        \"\"",
+			"    ],",
+			"    \"description\": \"Snip Model\"",
+			"},"
+        ],
+        "description": "Snip Model"
+    }
+}

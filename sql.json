@@ -189,7 +189,7 @@
     "sqlWhenToTimestamp": {
         "prefix": [
             "sql-when-to-timestamp",
-            "sql-gettime-to-timestamp"
+            "sql-gettime-to-timestamp",
         ],
         "body": [
             "select to_timestamp(1679088922069/1000),",
@@ -202,7 +202,7 @@
     "sqlOutputArray": {
         "prefix": [
             "sql-output-array",
-            "sql-select-to-array"
+            "sql-select-to-array",
         ],
         "body": [
             "SELECT",
@@ -213,4 +213,6 @@
         ],
         "description": "SQL Agregação de Strings"
     }
+
+
 }

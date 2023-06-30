@@ -15,7 +15,7 @@
             "    }",
             "    default {",
             "    }",
-            "}"
+            "}",
         ],
         "description": "Get-ChildItem"
     },
@@ -33,7 +33,7 @@
             "    fprint \"Actions:\"",
             "    fprint \"\"",
             "    fdestak \"   action  \" \"description\"",
-            "}"
+            "}",
         ],
         "description": "Get-ChildItem"
     },
@@ -65,5 +65,5 @@
             "}"
         ],
         "description": "Custom Command"
-    }
+    },
 }

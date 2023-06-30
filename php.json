@@ -413,7 +413,7 @@
         "prefix": "cake-base-url",
         "body": [
             "Router::url('/', false);",
-            "Router::url(array('controller'=>'users','action'=>'index'), false);"
+            "Router::url(array('controller'=>'users','action'=>'index'), false);",
         ],
         "description": "Cake Base Url"
     },
@@ -457,7 +457,7 @@
     "cakeImportPhpClass": {
         "prefix": [
             "cake-import-php-class",
-            "cake-import-config"
+            "cake-import-config",
         ],
         "body": [
             "// Processando o objeto",
@@ -528,7 +528,7 @@
             "    return \\$body;",
             "} catch (Exception \\$ex) {",
             "    return json_encode(array());",
-            "}"
+            "}",
         ],
         "description": "Cake HTTP Socket Template"
     },
@@ -555,7 +555,7 @@
         "prefix": [
             "cake-show-sql",
             "cake-dump-sql",
-            "cake-sql"
+            "cake-sql",
         ],
         "body": [
             "\\$this->showSql('CrmContact');"
@@ -566,7 +566,7 @@
         "prefix": [
             "cake-query",
             "cake-query-update",
-            "cake-query-param"
+            "cake-query-param",
         ],
         "body": [
             "$this->User->query(",
@@ -579,5 +579,36 @@
             "    );"
         ],
         "description": "Cake Query Params"
-    }
+    },
+    "callelement": {
+        "prefix": [
+            "cake-element"
+        ],
+        "body": [
+            "// Crie a chamada ao elemento na view desejada",
+            "\\$this->element('sidemenu_whitelabel', array('highlight' => \\$highlight));",
+            "",
+            "// Dentro do elemento: portal/app/View/Elements/sidemenu_whitelabel.ctp",
+            "// echo $highlight;"
+        ],
+        "description": "Cake Elements Pattern"
+    },
+    "cakeElement": {
+        "prefix": [
+            "cake-bootstrap4-cdn",
+            "html-bootstrap4-cdn",
+            "bootstrap4-cdn",
+        ],
+        "body": [
+            "<!-- Latest compiled and minified CSS -->",
+            "<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css\">",
+            "<!-- jQuery library -->",
+            "<script src=\"https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js\"></script>",
+            "<!-- Popper JS -->",
+            "<script src=\"https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js\"></script>",
+            "<!-- Latest compiled JavaScript -->",
+            "<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js\"></script>"
+        ],
+        "description": "Bootstrap 4 CDN"
+    },
 }
