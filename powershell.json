@@ -15,7 +15,7 @@
             "    }",
             "    default {",
             "    }",
-            "}",
+            "}"
         ],
         "description": "Get-ChildItem"
     },
@@ -33,7 +33,7 @@
             "    fprint \"Actions:\"",
             "    fprint \"\"",
             "    fdestak \"   action  \" \"description\"",
-            "}",
+            "}"
         ],
         "description": "Get-ChildItem"
     },
@@ -66,4 +66,17 @@
         ],
         "description": "Custom Command"
     },
+    "VerificarNulo": {
+        "prefix": "verificarnulo",
+        "body": [
+            "function VerificarNulo($parametro) {",
+            "\tif ($parametro -eq $null) {",
+            "\t\tWrite-Host \"O parâmetro é nulo.\"",
+            "\t} else {",
+            "\t\tWrite-Host \"O parâmetro não é nulo.\"",
+            "\t}",
+            "}"
+        ],
+        "description": "Checks if a parameter is null"
+    }
 }

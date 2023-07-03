@@ -61,6 +61,17 @@
         ],
         "description": "Bash IF"
     },
+    "bash-if-simple": {
+        "prefix": "bash-if-simple",
+        "body": [
+            "if [ -z \"\\$2\" ]; then # is null",
+            "\techo \"O argumento é nulo.\"",
+            "elif [[ \"\\$2\" != *\".log\"* ]]; then # contains",
+            "\techo \"True\"",
+            "fi"
+        ],
+        "description": "Bash IF"
+    },
     "bash-case": {
         "prefix": "bash-case",
         "body": [
