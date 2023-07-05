@@ -108,6 +108,33 @@
             "    url=http://localhost:3130/chassi \\",
             "    media=message"
         ],
-      "description": "Bash Function"
+        "description": "Bash Function"
+    },
+    "Print array elements": {
+        "prefix": "bash-print-array",
+        "body": [
+            "meuArray=(5000, 1490, 1480, 1470, 1460, 1450)",
+            "",
+            "meuArray[0]=5001",
+            "",
+            "echo \"Primeiro elemento: ${meuArray[0]}\"",
+            "echo \"Segundo elemento: ${meuArray[1]}\"",
+            "echo \"Terceiro elemento: ${meuArray[2]}\"",
+            "",
+            "for elemento in \"${meuArray[@]}\"; do",
+            "\techo \"Elemento: $elemento\"",
+            "done"
+        ],
+        "description": "Prints the elements of an array"
+    },
+    "For loop 1 to 1000": {
+        "prefix": "bash-for-loop",
+        "body": [
+            "for ((i=1; i<=1000; i++))",
+            "do",
+            "\techo $i",
+            "done"
+        ],
+        "description": "Loop from 1 to 1000 and print each number"
     }
 }
