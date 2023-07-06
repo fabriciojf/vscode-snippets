@@ -110,7 +110,7 @@
         ],
         "description": "Bash Function"
     },
-    "Print array elements": {
+    "print-array-elements": {
         "prefix": "bash-print-array",
         "body": [
             "meuArray=(5000, 1490, 1480, 1470, 1460, 1450)",
@@ -127,7 +127,7 @@
         ],
         "description": "Prints the elements of an array"
     },
-    "For loop 1 to 1000": {
+    "for-loop": {
         "prefix": "bash-for-loop",
         "body": [
             "for ((i=1; i<=1000; i++))",
@@ -136,5 +136,18 @@
             "done"
         ],
         "description": "Loop from 1 to 1000 and print each number"
+    },
+    "bash-while-properties": {
+        "prefix": "bash-while-properties",
+        "body": [
+            "repositoriesFile=~/bin/repositories-note.properties",
+            "while IFS='=' read -r chave valor",
+            "do",
+            "\tif [[ $chave =~ ^[^#|^$] ]]; then",
+            "\t\texecutePull $chave $valor",
+            "\tfi",
+            "done < \"$repositoriesFile\""
+        ],
+        "description": "While in properties file"
     }
 }

@@ -597,7 +597,7 @@
         "prefix": [
             "cake-bootstrap4-cdn",
             "html-bootstrap4-cdn",
-            "bootstrap4-cdn",
+            "bootstrap4-cdn"
         ],
         "body": [
             "<!-- Latest compiled and minified CSS -->",
@@ -611,4 +611,12 @@
         ],
         "description": "Bootstrap 4 CDN"
     },
+    "logs-function": {
+        "prefix": "cake-logs-in-file",
+        "body": [
+            "\\$this->log('Message', 'file in app/tmp/logs');",
+            "\\$this->log('chegou aqui', 'domni');"
+        ],
+        "description": "Log messages in a function"
+    }
 }

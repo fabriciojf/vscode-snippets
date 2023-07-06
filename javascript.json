@@ -35,7 +35,7 @@
     "AjaxGetPost": {
         "prefix": [
             "ajax-get-post",
-            "js-get-post",
+            "js-get-post"
         ],
         "body": [
             "let _url = '<?= Router::url(array(",
@@ -58,7 +58,7 @@
             "    error: function(err) {",
             "        console.log('error', err);",
             "    }",
-            "});",
+            "});"
         ],
         "description": "Ajax Get Post"
     },
@@ -372,7 +372,7 @@
     "JsWhenToDate": {
         "prefix": [
             "js-when-to-date",
-            "ajax-when-to-date",
+            "ajax-when-to-date"
         ],
         "body": [
             "let time = 1678737927980,                       // 2023-03-13 20:05:27",
@@ -387,7 +387,7 @@
     },
     "NodeUseStrict": {
         "prefix": [
-            "node-use-strict",
+            "node-use-strict"
         ],
         "body": [
             "'use strict';"
@@ -479,5 +479,52 @@
             "}"
         ],
         "description": "Iterates over object properties and logs key-value pairs"
+    },
+    "NodeConvertJsonArrayToInValues": {
+        "prefix": "node-convert-json-array-to-in-values",
+        "body": [
+            "convertJsonArrayToInValues(req) {",
+            "\tconst keys = req.body;",
+            "\tconst query = `SELECT * FROM table WHERE field IN (${keys.map((_, index) => `$${index + 1}`).join(',')})`;",
+            "\treturn await executeQuery(query, keys);",
+            "}"
+        ],
+        "description": "Converts a JSON array into an IN clause for a SQL query"
+    },
+    "JavascriptCakeUrl": {
+        "prefix": [
+            "javascript-cake-url",
+            "js-cake-url"
+        ],
+        "body": [
+            "let _url = '<?= Router::url(array(",
+            "\t'plugin' => false,",
+            "\t'admin' => true,",
+            "\t'controller' => 'yourController',",
+            "\t'action' => 'your_action',",
+            "), false); ?>';"
+        ],
+        "description": "Generates a URL using Router::url with specific parameters"
+    },
+    "node-static-class": {
+        "prefix": "node-static-class",
+        "body": [
+            "const config = require('../config');\n",
+            "class MyClass {",
+            "\tstatic async methodOne(param) {",
+            "\t\tawait MyClass.methodTwo(param);",
+            "\t}",
+            "",
+            "\tstatic async methodTwo(param) {",
+            "\t\tconsole.log(param);",
+            "\t}",
+            "",
+            "\tstatic _privateMethod() {",
+            "\t\tconsole.log('To private use _methodName()');",
+            "\t}",
+            "}\n",
+            "module.exports = MyClass;\n"
+        ],
+        "description": "Create a class with static methods in Node.js"
     }
 }
