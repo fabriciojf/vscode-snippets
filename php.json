@@ -413,7 +413,7 @@
         "prefix": "cake-base-url",
         "body": [
             "Router::url('/', false);",
-            "Router::url(array('controller'=>'users','action'=>'index'), false);",
+            "Router::url(array('controller'=>'users','action'=>'index'), false);"
         ],
         "description": "Cake Base Url"
     },
@@ -457,7 +457,7 @@
     "cakeImportPhpClass": {
         "prefix": [
             "cake-import-php-class",
-            "cake-import-config",
+            "cake-import-config"
         ],
         "body": [
             "// Processando o objeto",
@@ -528,7 +528,7 @@
             "    return \\$body;",
             "} catch (Exception \\$ex) {",
             "    return json_encode(array());",
-            "}",
+            "}"
         ],
         "description": "Cake HTTP Socket Template"
     },
@@ -555,7 +555,7 @@
         "prefix": [
             "cake-show-sql",
             "cake-dump-sql",
-            "cake-sql",
+            "cake-sql"
         ],
         "body": [
             "\\$this->showSql('CrmContact');"
@@ -566,7 +566,7 @@
         "prefix": [
             "cake-query",
             "cake-query-update",
-            "cake-query-param",
+            "cake-query-param"
         ],
         "body": [
             "$this->User->query(",
@@ -597,7 +597,7 @@
         "prefix": [
             "cake-bootstrap4-cdn",
             "html-bootstrap4-cdn",
-            "bootstrap4-cdn",
+            "bootstrap4-cdn"
         ],
         "body": [
             "<!-- Latest compiled and minified CSS -->",
@@ -611,4 +611,12 @@
         ],
         "description": "Bootstrap 4 CDN"
     },
+    "logs-function": {
+        "prefix": "cake-logs-in-file",
+        "body": [
+            "\\$this->log('Message', 'file in app/tmp/logs');",
+            "\\$this->log('chegou aqui', 'domni');"
+        ],
+        "description": "Log messages in a function"
+    }
 }
