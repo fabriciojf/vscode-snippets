@@ -104,10 +104,33 @@
         "prefix": "bash-command-n-lines",
         "body": [
             "node prompt.js service=OMNIDEMO \\",
-            "    user=dnk \\",
-            "    url=http://localhost:3130/chassi \\",
-            "    media=message"
+            "\tuser=dnk \\",
+            "\turl=http://localhost:3130/chassi \\",
+            "\tmedia=message"
         ],
-      "description": "Bash Function"
+        "description": "Bash Function"
+    },
+    "PingMTU": {
+        "prefix": "pingmtu",
+        "body": [
+            "host=\"google.com\"",
+            "start_mtu=4000",
+            "end_mtu=2000",
+            "step=-10",
+            "",
+            "# realizando a sequencia inversa, contagem regressiva",
+            "for mtu in $(seq $start_mtu $step $end_mtu)",
+            "do",
+            "\techo \"Testing MTU: $mtu\"",
+            "\tping -c 4 -D -s $((mtu - 28)) -M do -W 1 -q $host > /dev/null",
+            "\tif [ $? -eq 0 ]; then",
+            "\t\techo \"MTU $mtu is supported\"",
+            "\t\tbreak",
+            "\telse",
+            "\t\techo \"MTU $mtu is not supported\"",
+            "\tfi",
+            "done"
+        ],
+        "description": "Ping MTU sequence"
     }
 }

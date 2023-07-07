@@ -53,5 +53,32 @@
 			"CMD [\"/usr/sbin/exportfs\", \"-ar\"]"
 		],
 		"description": "Docker Command Entrypoint"
+	},
+	"DockerVolumes": {
+		"prefix": [
+			"docker-volumes"
+		],
+		"body":
+		    "services:",
+            "\tpgadmin4: "
+			"\t\tvolumes:",
+      		"\t\t\t- './zabbix/alertscripts:/usr/lib/zabbix/alertscripts'",
+			"\t\t\t- pgadmin-data:/var/lib/pgadmin",
+			"volumes:",
+            "\tpgadmin-data:",
+		],
+		"description": "Docker Volumes"
+	},
+	"DockerPorts": {
+		"prefix": [
+			"docker-ports"
+		],
+		"body":
+		    "services:",
+            "\tpgadmin4: "
+			"\t\tports:",
+      		"\t\t\t- \"16543:80\"",
+		],
+		"description": "Docker Ports"
 	}
 }
