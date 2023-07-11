@@ -526,5 +526,69 @@
             "module.exports = MyClass;\n"
         ],
         "description": "Create a class with static methods in Node.js"
+    },
+    "dates-function": {
+        "prefix": "node-dates-manipulations",
+        "body": [
+            "function dates() {",
+            "\t// current date",
+            "\tconst now = new Date(),",
+            "",
+            "\t// first hour of day",
+            "\tfirstHourOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0),",
+            "\tfirstHourUTCOfDay = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0),",
+            "",
+            "\t// last hour of day",
+            "\tlastHourOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59),",
+            "\tlastHourUTCOfDay = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 23, 59, 59),",
+            "",
+            "\t// format first hour of day",
+            "\t// const moment = require('moment');",
+            "\tformatted = moment(firstHourOfDay).format('YYYY-MM-DD HH:mm:ss'),",
+            "",
+            "\t// criando a data a partir de uma string",
+            "\tdateString = '2023-07-07 14:45:10',",
+            "\tformattedDateString = dateString.replace(' ', 'T'),",
+            "\tdateObject = new Date(formattedDateString);",
+            "}"
+        ],
+        "description": "Perform date operations"
+    },
+    "string-to-date": {
+        "prefix": "node-string-to-date",
+        "body": [
+            "\t// criando a data a partir de uma string",
+            "\tconst dateString = '2023-07-07 14:45:10',",
+            "\tformattedDateString = dateString.replace(' ', 'T'),",
+            "\tdateObject = new Date(formattedDateString);"
+        ],
+        "description": "Convert String to Date"
+    },
+
+    "first-last-dates": {
+        "prefix": "node-fisrt-last-hours-of-day",
+        "body": [
+            "function dates() {",
+            "\t// current date",
+            "\tconst now = new Date(),",
+            "",
+            "\t// first hour of day",
+            "\tfirstHourOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0),",
+            "\tfirstHourUTCOfDay = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0),",
+            "",
+            "\t// last hour of day",
+            "\tlastHourOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59),",
+            "\tlastHourUTCOfDay = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 23, 59, 59);"
+        ],
+        "description": "Node Fisrt and Last Hours of Day"
+    },
+    "dates-format": {
+        "prefix": "node-format-date",
+        "body": [
+            "\t// format date using moment.js",
+            "\t// const moment = require('moment');",
+            "\tconst formatted = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');"
+        ],
+        "description": "Perform date operations"
     }
 }

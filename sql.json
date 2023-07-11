@@ -94,7 +94,7 @@
             "  RETURNS boolean",
             "AS \\$BODY\\$",
             "DECLARE",
-            "  v1 INT;",
+            "  reg record;",
             "BEGIN",
             "",
             "  DELETE FROM chats;",
@@ -114,7 +114,7 @@
         "description": "SQL function"
     },
     "functionReturnTable": {
-        "prefix": "sql-function-return-table",
+        "prefix": "sql-function-return-table-with-for",
         "body": [
             "CREATE OR REPLACE FUNCTION fc_name(",
             "   p1 integer",
@@ -189,7 +189,7 @@
     "sqlWhenToTimestamp": {
         "prefix": [
             "sql-when-to-timestamp",
-            "sql-gettime-to-timestamp",
+            "sql-gettime-to-timestamp"
         ],
         "body": [
             "select to_timestamp(1679088922069/1000),",
@@ -202,7 +202,7 @@
     "sqlOutputArray": {
         "prefix": [
             "sql-output-array",
-            "sql-select-to-array",
+            "sql-select-to-array"
         ],
         "body": [
             "SELECT",
@@ -212,7 +212,41 @@
             "FROM users;"
         ],
         "description": "SQL Agregação de Strings"
+    },
+    "metric-abandonmentRate-function": {
+        "prefix": "sql-function-return-table",
+        "body": [
+            "CREATE OR REPLACE FUNCTION metric_tme(",
+            "\tstart_time timestamp,",
+            "\tend_time timestamp",
+            ")",
+            "RETURNS TABLE(",
+            "\ttme float,",
+            "\tbucket timestamp",
+            ")",
+            "AS $BODY$",
+            "DECLARE",
+            "\ttme_var float;",
+            "\tbucket_var timestamp;",
+            "BEGIN",
+            "",
+            "\tSELECT AVG(measure), time_bucket('15 minutes', time)",
+            "\t\tINTO tme_var, bucket_var",
+            "\t\tFROM answer_time",
+            "\t\tWHERE (time BETWEEN start_time AND end_time)",
+            "\t\t\tAND tags->>'type' = 'queue'",
+            "\t\t\tAND measure is not null",
+            "\t\tGROUP BY time_bucket('15 minutes', time);",
+            "",
+            "\tRETURN QUERY",
+            "\tSELECT tme_var, bucket_var;",
+            "",
+            "END;",
+            "$BODY$",
+            "LANGUAGE plpgsql VOLATILE;",
+            "",
+            "select * from metric_tme('2023-01-01 0:0', '2023-12-31 0:0');"
+        ],
+        "description": "Calculate abandonment rate based on start and end time"
     }
-
-
 }
