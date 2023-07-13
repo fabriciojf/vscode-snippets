@@ -320,16 +320,23 @@
         ],
         "description": "Cake Set, save field"
     },
-    "cakeDate": {
-        "prefix": "cake-date-format",
+    "time-component": {
+        "prefix": [
+            "cake-date-format",
+            "cake-datetime-format",
+            "cake-time-component",
+            "cake-datetim-examples"
+        ],
         "body": [
+            "<?php",
             "\\$dt = '2025-05-05 11:11:00';",
             "\\$date = date_create(\\$dt);",
+            "debug(\\$date->format(\"Y-m-d H:i:s\"));",
             "debug(date_format(\\$date, \"Y/m/d H:i:s\"));",
             "debug(date('Y-m-d H:i:s'));",
-            "debug(date(\\$date, \"Y-m-d H:i:s\"));"
+            "debug(gmdate('Y-m-d H:i:s')); // UTC"
         ],
-        "description": "Cake date format"
+        "description": "Perform time-related operations using CakePHP's Time component"
     },
     "cakeJoinFilterResult": {
         "prefix": "cake-join-filter-results",
@@ -636,5 +643,77 @@
         },
         "insertion": "prepend",
         "transform": "uppercase"
+    },
+    "cake-my-model-update": {
+        "prefix": "cake-update-model",
+        "body": [
+            "\\$myModelObj = \\$this->MyModel->find('first', array(",
+            "\t'conditions' => array(",
+            "\t\t'MyModel.field' => 'value',",
+            "\t),",
+            "\t'order' => 'MyModel.id DESC',",
+            "));",
+            "",
+            "if (\\$myModelObj != null) {",
+            "\t\\$this->MyModel->id = \\$myModelObj['MyModel']['id'];",
+            "\t\\$this->MyModel->saveField('field', 'value');",
+            "}",
+            "",
+            "\\$myModelFields = array(",
+            "\t'field1' => 'value 1',",
+            "\t'field2' => 'value 2 ',",
+            "\t'field3' => 'value 3'",
+            ");",
+            "",
+            "if (\\$myModelObj != null) {",
+            "\t\\$this->MyModel->id = \\$myModelObj['MyModel']['id'];",
+            "\t\\$this->MyModel->set(\\$myModelFields);",
+            "",
+            "\tif (\\$this->MyModel->save()) {",
+            "\t\tdebug('Success');",
+            "\t} else {",
+            "\t\tdebug('Err');",
+            "\t}",
+            "}"
+        ],
+        "description": "Perform save operations on MyModel with conditional checks"
+    },
+    "cake-model-save": {
+        "prefix": "cake-save-model",
+        "body": [
+            "\\$myModelObj = \\$this->MyModel->find('first', array(",
+            "\t'conditions' => array(",
+            "\t\t'MyModel.field' => 'value',",
+            "\t),",
+            "\t'order' => 'MyModel.id DESC',",
+            "));",
+            "",
+            "if (\\$myModelObj != null) {",
+            "",
+            "\t\\$myModelFields = array(",
+            "\t\t'field1' => 'value 1',",
+            "\t\t'field2' => 'value 2 ',",
+            "\t\t'field3' => 'value 3'",
+            "\t);",
+            "",
+            "\t\\$this->MyModel->id = \\$myModelObj['MyModel']['id'];",
+            "\t\\$this->MyModel->set(\\$myModelFields);",
+            "",
+            "\tif (\\$this->MyModel->save()) {",
+            "\t\tdebug('Success');",
+            "\t} else {",
+            "\t\tdebug('Err');",
+            "\t}",
+            "}"
+        ],
+        "description": "Perform save operations on MyModel with conditional checks"
+    },
+    "my-model-find-all": {
+        "prefix": "cake-load-model-inside-component",
+        "body": [
+            "\\$myModel = ClassRegistry::init('MyModel');",
+            "\\$myModel->find('all');"
+        ],
+        "description": "Cake load model inside component"
     }
 }
