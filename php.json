@@ -2,6 +2,7 @@
     "redirect": {
         "prefix": "cake-redirect",
         "body": [
+            "<?",
             "\\$this->redirect(array(",
             "    'plugin' => false,",
             "    'admin' => true,",
@@ -9,6 +10,7 @@
             "    'action' => ''",
             "));"
         ],
+        "scope": "php",
         "description": "Cake Redirect"
     },
     "link": {
@@ -614,5 +616,25 @@
             "\\$this->log('chegou aqui', 'domni');"
         ],
         "description": "Log messages in a function"
+    },
+    "mySnippet": {
+        "prefix": "mysnippet",
+        "body": [
+            "console.log('${1:Hello, World!}');"
+        ],
+        "description": "Prints a customizable message to the console.",
+        "scope": "javascript",
+        "variables": {
+            "name": {
+                "description": "Enter a name",
+                "default": "John Doe"
+            },
+            "greeting": {
+                "description": "Enter a greeting",
+                "default": "Hello"
+            }
+        },
+        "insertion": "prepend",
+        "transform": "uppercase"
     }
 }
