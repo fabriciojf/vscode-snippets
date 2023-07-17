@@ -564,7 +564,6 @@
         ],
         "description": "Convert String to Date"
     },
-
     "first-last-dates": {
         "prefix": "node-fisrt-last-hours-of-day",
         "body": [
@@ -590,5 +589,22 @@
             "\tconst formatted = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');"
         ],
         "description": "Perform date operations"
+    },
+    "iterate-json-object": {
+        "prefix": [
+            "js-for-json-object",
+            "ajax-for-json-object",
+            "javascript-for-json-object"
+        ],
+        "body": [
+            "let json = JSON.parse(data);",
+            "for (let key in json) {",
+            "\tif (json.hasOwnProperty(key)) {",
+            "\t\tlet value = json[key];",
+            "\t\tconsole.log(`Chave: ${key}, Valor: ${value}`);",
+            "\t}",
+            "}"
+        ],
+        "description": "Iterate over the properties of a JSON object and log key-value pairs"
     }
 }

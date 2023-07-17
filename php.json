@@ -715,5 +715,21 @@
             "\\$myModel->find('all');"
         ],
         "description": "Cake load model inside component"
+    },
+    "helper-auth": {
+        "prefix": "cake-helper-get-auth-user",
+        "body": [
+            "$uid = \\$this->Session->read('Auth.User.id');"
+        ],
+        "description": "Tipos de layouts contendo menus laterais específicos"
+    },
+    "model-inside-model": {
+        "prefix": "cake-inserting-model-inside-model",
+        "body": [
+            "$Pausa = ClassRegistry::init('Pausa');",
+            "return $Pausa->read(false, 1);"
+        ],
+        "description": "Carregando um model dentro de outro modelno CakePHP"
     }
+
 }
