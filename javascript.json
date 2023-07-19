@@ -606,5 +606,24 @@
             "}"
         ],
         "description": "Iterate over the properties of a JSON object and log key-value pairs"
+    },
+    "js-switch-statement": {
+        "prefix": [
+            "js-case-switch",
+            "javascript-case-switch"
+        ],
+        "body": [
+            "let param = 'term1';",
+            "switch (param) {",
+            "\tcase 'term1':",
+            "\t\tconsole.log('Term 1');",
+            "\t\tbreak;",
+            "\t",
+            "\tdefault:",
+            "\t\tconsole.log('Default');",
+            "\t\tbreak;",
+            "}"
+        ],
+        "description": "Switch statement example"
     }
 }

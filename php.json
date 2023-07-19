@@ -574,11 +574,11 @@
             "cake-query-param"
         ],
         "body": [
-            "$this->User->query(",
+            "\\$this->User->query(",
             "        'select * from model where param like ?',",
             "        array('value%')",
             "    );",
-            "$this->User->query(",
+            "\\$this->User->query(",
             "        'select * from model where param1 like :p1 and param2 like :p2',",
             "        array('p1' => 'value1%', 'p2' => 'value2%')",
             "    );"
@@ -617,32 +617,14 @@
         "description": "Bootstrap 4 CDN"
     },
     "logs-function": {
-        "prefix": "cake-logs-in-file",
+        "prefix": [
+            "cake-logs-in-file",
+            "cake-domni-log"
+        ],
         "body": [
-            "\\$this->log('Message', 'file in app/tmp/logs');",
-            "\\$this->log('chegou aqui', 'domni');"
+            "\\$this->log('$0', 'domni');"
         ],
         "description": "Log messages in a function"
-    },
-    "mySnippet": {
-        "prefix": "mysnippet",
-        "body": [
-            "console.log('${1:Hello, World!}');"
-        ],
-        "description": "Prints a customizable message to the console.",
-        "scope": "javascript",
-        "variables": {
-            "name": {
-                "description": "Enter a name",
-                "default": "John Doe"
-            },
-            "greeting": {
-                "description": "Enter a greeting",
-                "default": "Hello"
-            }
-        },
-        "insertion": "prepend",
-        "transform": "uppercase"
     },
     "cake-my-model-update": {
         "prefix": "cake-update-model",
@@ -708,14 +690,6 @@
         ],
         "description": "Perform save operations on MyModel with conditional checks"
     },
-    "my-model-find-all": {
-        "prefix": "cake-load-model-inside-component",
-        "body": [
-            "\\$myModel = ClassRegistry::init('MyModel');",
-            "\\$myModel->find('all');"
-        ],
-        "description": "Cake load model inside component"
-    },
     "helper-auth": {
         "prefix": "cake-helper-get-auth-user",
         "body": [
@@ -726,10 +700,72 @@
     "model-inside-model": {
         "prefix": "cake-inserting-model-inside-model",
         "body": [
-            "$Pausa = ClassRegistry::init('Pausa');",
-            "return $Pausa->read(false, 1);"
+            "\\$Pausa = ClassRegistry::init('Pausa');",
+            "return \\$Pausa->read(false, 1);"
         ],
         "description": "Carregando um model dentro de outro modelno CakePHP"
+    },
+    "php-switch-statement": {
+        "prefix": [
+            "cake-switch-case",
+            "php-switch-case"
+        ],
+        "body": [
+            "switch (\\$valor) {",
+            "\tcase \\$valor1:",
+            "\t\t// ",
+            "\t\tbreak;",
+            "\tdefault:",
+            "\t\t// ",
+            "\t\tbreak;",
+            "}"
+        ],
+        "description": "Switch statement in PHP"
+    },
+    "load-model-inside-component": {
+        "prefix": "cake-load-model-inside-component",
+        "body": [
+            "public function loadModel(\\$modelClass)",
+            "{",
+            "\t\\$this->{\\$modelClass} = ClassRegistry::init(\\$modelClass);",
+            "}"
+        ],
+        "description": "Load a model dynamically in CakePHP"
+    },
+    "cake-initialize-component": {
+        "prefix": [
+            "cake-initialize-component",
+            "cake-before-filter-inside-component"
+        ],
+        "body": [
+            "// Started with the component",
+            "public function initialize(Controller \\$controller)",
+            "{",
+            "\tparent::initialize(\\$controller);",
+            "}"
+        ],
+        "description": "Initialize a component in CakePHP"
+    },
+    "updateAll": {
+        "prefix": "cake-update-all",
+        "body": [
+            "<?$0",
+            "\\$this->Model->updateAll(",
+            "\tarray('field1' => 'value1', 'field2' => 'value2'),",
+            "\tarray('conditions' => array())",
+            ");"
+        ],
+        "description": "Update records in CakePHP"
+    },
+    "saveMany": {
+        "prefix": "cake-update-with-save-many",
+        "body": [
+            "\\$data = array(",
+            "\tarray('id' => 1, 'field1' => 'value1'),",
+            "\tarray('id' => 2, 'field1' => 'value2'),",
+            ");",
+            "\\$this->Model->saveMany(\\$data);"
+        ],
+        "description": "Save multiple records in CakePHP"
     }
-
 }
