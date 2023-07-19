@@ -40,7 +40,7 @@
             "    RETURNS trigger",
             "    LANGUAGE 'plpgsql'",
             "    COST 100",
-            "AS \\$BODY\\$",
+            "AS \\$\\$",
             "BEGIN",
             "",
             "  if ((new.status != 'online') AND (old.status = 'online')) then",
@@ -50,7 +50,7 @@
             "",
             "  return new;",
             "END;",
-            "\\$BODY\\$;"
+            "\\$\\$; LANGUAGE plpgsql;"
         ],
         "description": "SQL New Table"
     },
@@ -84,7 +84,7 @@
             "   p2 integer",
             ")",
             "  RETURNS boolean",
-            "AS \\$BODY\\$",
+            "AS \\$\\$",
             "DECLARE",
             "  reg record;",
             "BEGIN",
@@ -100,8 +100,7 @@
             "",
             "  RETURN true;",
             "END;",
-            "\\$BODY\\$",
-            "LANGUAGE plpgsql VOLATILE;"
+            "\\$\\$ LANGUAGE plpgsql;"
         ],
         "description": "SQL function"
     },
@@ -112,7 +111,7 @@
             "   p1 integer",
             ")",
             "  RETURNS TABLE(r_id integer, r_name character varying)",
-            "AS \\$BODY\\$",
+            "AS \\$\\$",
             "DECLARE",
             "  v1 record;",
             "BEGIN",
@@ -130,8 +129,7 @@
             "  END LOOP;",
             "  RETURN;",
             "END;",
-            "\\$BODY\\$",
-            "LANGUAGE plpgsql VOLATILE;"
+            "\\$\\$ LANGUAGE plpgsql;"
         ],
         "description": "SQL function"
     },
@@ -156,7 +154,7 @@
             "RETURNS setof integer",
             "  OR",
             "RETURNS character varying",
-            "AS \\$BODY\\$",
+            "AS \\$\\$",
             "DECLARE",
             "  l_value INT;",
             "BEGIN",
@@ -173,8 +171,7 @@
             "  END LOOP;",
             "",
             "END;",
-            "\\$BODY\\$",
-            "LANGUAGE plpgsql VOLATILE;"
+            "\\$\\$ LANGUAGE plpgsql;"
         ],
         "description": "SQL Jsonb SimpleSelect"
     },
@@ -208,7 +205,7 @@
     "metric-abandonmentRate-function": {
         "prefix": "sql-function-return-table",
         "body": [
-            "CREATE OR REPLACE FUNCTION metric_tme(",
+            "CREATE OR REPLACE FUNCTION fcname(",
             "\tstart_time timestamp,",
             "\tend_time timestamp",
             ")",
@@ -216,7 +213,7 @@
             "\ttme float,",
             "\tbucket timestamp",
             ")",
-            "AS $BODY$",
+            "AS \\$\\$",
             "DECLARE",
             "\ttme_var float;",
             "\tbucket_var timestamp;",
@@ -234,11 +231,89 @@
             "\tSELECT tme_var, bucket_var;",
             "",
             "END;",
-            "$BODY$",
-            "LANGUAGE plpgsql VOLATILE;",
+            "\\$\\$ LANGUAGE plpgsql;",
             "",
-            "select * from metric_tme('2023-01-01 0:0', '2023-12-31 0:0');"
+            "select * from fcname('2023-01-01 0:0', '2023-12-31 0:0');"
         ],
         "description": "Calculate abandonment rate based on start and end time"
+    },
+    "selectCurrentDate": {
+        "prefix": [
+            "sql-select-current-date",
+            "sql-select-structure",
+            "sql-select-join-lateral",
+            "sql-select-elegant"
+        ],
+        "body": [
+            "SELECT",
+            "\tu.name, u.extension, p.pause_label",
+            "FROM",
+            "\tagent_access_histories a",
+            "JOIN",
+            "\tusers u ON u.id = a.user_id",
+            "JOIN",
+            "\troles r ON r.id = u.role_id",
+            "LEFT JOIN LATERAL (",
+            "\tSELECT pause_label",
+            "\tFROM agent_access_histories",
+            "\tWHERE user_id = u.id",
+            "\t\tAND access_type != 'login'",
+            "\tORDER BY start_time DESC",
+            "\tLIMIT 1",
+            ") AS p ON true",
+            "WHERE",
+            "\ta.start_time::date = CURRENT_DATE",
+            "\tAND r.alias IN ('admin', 'agent')",
+            "GROUP BY",
+            "\tu.name, u.extension, u.status, p.pause_label",
+            "ORDER BY",
+            "\tu.name ASC;"
+        ],
+        "description": "Select query in SQL"
+    },
+    "roundTwoDecimal": {
+        "prefix": "sql-round-2-decimal",
+        "body": [
+            "CREATE FUNCTION two_decimals()",
+            "RETURNS TABLE (",
+            "\tavailable bigint,",
+            "\tavailable_percentual numeric(10,2),",
+            "\ttotal bigint",
+            ") AS",
+            "$$",
+            "DECLARE",
+            "\tavailable_var BIGINT;",
+            "\tlogged_var BIGINT;",
+            "BEGIN",
+            "\tSELECT",
+            "\t\tSUM(CASE WHEN pause_label = 'available' THEN 1 ELSE 0 END) AS available,",
+            "\t\tSUM(CASE WHEN pause_label IS NULL THEN 1 ELSE 0 END) AS logged",
+            "\tINTO",
+            "\t\tavailable_var,",
+            "\t\tlogged_var",
+            "\tFROM",
+            "\t\t(",
+            "\t\t\tSELECT",
+            "\t\t\t\ta.user_id,",
+            "\t\t\t\tMAX(a.pause_label) AS pause_label",
+            "\t\t\tFROM",
+            "\t\t\t\tagent_access_histories a",
+            "\t\t\tWHERE",
+            "\t\t\t\ta.end_time IS NULL",
+            "\t\t\tGROUP BY",
+            "\t\t\t\ta.user_id",
+            "\t\t) AS latest_pause",
+            "\tGROUP BY",
+            "\t\tpause_label;",
+            "",
+            "\tRETURN QUERY SELECT",
+            "\t\tavailable_var,",
+            "\t\tROUND(available_var * 100.0 / logged_var, 2),",
+            "\t\tlogged_var;",
+            "END;",
+            "$$",
+            "LANGUAGE plpgsql;"
+        ],
+        "description": "Returns numeric2 information"
     }
 }

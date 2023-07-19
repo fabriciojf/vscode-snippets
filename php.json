@@ -767,5 +767,108 @@
             "\\$this->Model->saveMany(\\$data);"
         ],
         "description": "Save multiple records in CakePHP"
+    },
+    "belongsTo": {
+        "prefix": [
+            "cake-belongs-to",
+            "cake-many-to-one"
+        ],
+        "body": [
+            "/**",
+            " * belongsTo associations",
+            " *",
+            " * @var array",
+            " */",
+            "public \\$belongsTo = array(",
+            "\t'User' => array(",
+            "\t\t'className' => 'User',",
+            "\t\t'foreignKey' => 'user_id',",
+            "\t\t'fields' => array(",
+            "\t\t\t'id',",
+            "\t\t\t'name',",
+            "\t\t\t'email',",
+            "\t\t\t'gravatar'",
+            "\t\t),",
+            "\t\t'conditions' => '',",
+            "\t\t'order' => ''",
+            "\t),",
+            ");"
+        ],
+        "description": "Defines belongsTo associations"
+    },
+    "hasMany": {
+        "prefix": [
+            "cake-has-many",
+            "cake-one-to-many"
+        ],
+        "body": [
+            "/**",
+            " * hasMany associations",
+            " *",
+            " * @var array",
+            " */",
+            "public \\$hasMany = array(",
+            "\t'FormQuestion',",
+            "\t'Note' => array(",
+            "\t\t'className' => 'Note',",
+            "\t\t'foreignKey' => 'account_id',",
+            "\t\t'dependent' => false,",
+            "\t\t'order' => 'Note.id DESC',",
+            "\t),",
+            ");"
+        ],
+        "description": "Defines hasMany associations"
+    },
+    "hasAndBelongsToMany": {
+        "prefix": [
+            "cake-has-and-belongs-to-many",
+            "cake-many-to-many"
+        ],
+        "body": [
+            "/**",
+            " * hasAndBelongsToMany associations",
+            " *",
+            " * @var array",
+            " */",
+            "public \\$hasAndBelongsToMany = array(",
+            "\t'Contact' => array(",
+            "\t\t'className' => 'Contact',",
+            "\t\t'joinTable' => 'account_contacts',",
+            "\t\t'foreignKey' => 'contact_id',",
+            "\t\t'associationForeignKey' => 'account_id',",
+            "\t),",
+            ");"
+        ],
+        "description": "Defines hasAndBelongsToMany associations"
+    },
+    "validate": {
+        "prefix": [
+            "cake-validates"
+        ],
+        "body": [
+            "/**",
+            " * Validates",
+            " */",
+            "public \\$validate = array(",
+            "\t'username' => array(",
+            "\t\t'isUnique' => array(",
+            "\t\t\t'rule' => 'isUnique',",
+            "\t\t\t'message' => 'The username has already been taken.',",
+            "\t\t\t'last' => true,",
+            "\t\t),",
+            "\t\t'notEmpty' => array(",
+            "\t\t\t'rule' => 'notEmpty',",
+            "\t\t\t'message' => 'This field cannot be left blank.',",
+            "\t\t\t'last' => true,",
+            "\t\t),",
+            "\t\t'validAlias' => array(",
+            "\t\t\t'rule' => 'validAlias',",
+            "\t\t\t'message' => 'This field must be alphanumeric',",
+            "\t\t\t'last' => true,",
+            "\t\t),",
+            "\t),",
+            ");"
+        ],
+        "description": "Defines validation rules"
     }
 }
