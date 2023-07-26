@@ -459,5 +459,108 @@
 			"?>"
 		],
 		"description": "Cake HTTP Socket Template"
-	}
+	},
+    "HtmlLinkPausaEdit": {
+        "prefix": [
+			"cake-index-table-edit-link",
+			"html-index-table-edit-link"
+		],
+        "body": [
+            "<td><?= \\$this->Html->link(\\$OBJECT['MODEL']['FIELD'], array(",
+            "\t'plugin' => false,",
+            "\t'admin' => true,",
+            "\t'controller' => 'CONTROLLER',",
+            "\t'action' => 'edit', \\$OBJECT['MODEL']['id']",
+            "), array(",
+            "\t'class' => 'index-label'",
+            ")); ?>&nbsp;</td>"
+        ],
+        "description": "Html link for Pausa edit"
+    },
+	"ZmdiIconList": {
+        "prefix": [
+			"html-icon-list"
+		],
+        "body": [
+            "<i class=\"zmdi zmdi-format-list-bulleted top-button-icon\"></i>"
+        ],
+        "description": "Zmdi Icon List - format-list-bulleted"
+    },
+	"ZmdiIconAdd": {
+        "prefix": [
+			"html-icon-add"
+		],
+        "body": [
+            "<i class=\"zmdi zmdi-plus top-button-icon\"></i>"
+        ],
+        "description": "Zmdi Icon Add - format-list-bulleted"
+    },
+	"ZmdiIconEdit": {
+        "prefix": [
+			"html-icon-edit"
+		],
+        "body": [
+            "<i class=\"zmdi zmdi-edit top-button-icon\"></i>"
+        ],
+        "description": "Zmdi Icon Edit - format-list-bulleted"
+    },
+	"ZmdiIconView": {
+        "prefix": [
+			"html-icon-view"
+		],
+        "body": [
+            "<i class=\"zmdi zmdi-eye top-button-icon\"></i>"
+        ],
+        "description": "Zmdi Icon View - format-list-bulleted"
+    },
+	"ZmdiIconTrash": {
+        "prefix": [
+			"html-icon-trash"
+		],
+        "body": [
+            "<i class=\"ion ion-trash-a top-button-icon\"></i>"
+        ],
+        "description": "Zmdi Icon View - format-list-bulleted"
+    },
+    "GetSetFilterFormData": {
+        "prefix": [
+            "html-get-set-filter-form-data",
+			"html-filter-date-time-picker"
+        ],
+        "body": [
+            "<?= \\$this->Form->create('filters'); ?>",
+            "<script type=\"text/javascript\">",
+            "    $(function() {",
+            "        $(\"#dt_from\").datetimepicker({",
+            "            format: 'DD/MM/YYYY HH:mm'",
+            "        });",
+            "    });",
+            "</script>",
+            "<div class=\"col-sm-4\">",
+            "    <div class=\"form-group row\">",
+            "        <label for=\"staticStatus\" class=\"col-sm-4 col-form-label text-right\">Data Início *</label>",
+            "        <div class=\"col-sm-8\">",
+            "            <?= \\$this->Form->input('filter_from', array(",
+            "                'id' => 'dt_from',",
+            "                'class' => 'form-control form-control-sm',",
+            "                'label' => false,",
+            "            )); ?>",
+            "        </div>",
+            "    </div>",
+            "</div>"
+        ],
+        "description": "DateTimePicker setup and view"
+    },
+	"RoundDecimals": {
+        "prefix": [
+            "html-round-2-decimals",
+			"php-round-2-decimals"
+        ],
+        "body": [
+            "$number = 123.456789;",
+			"debug(round($number, 2));"
+        ],
+        "description": "Round number 2 decimals in PHP"
+    }
+
 }

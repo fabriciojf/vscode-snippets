@@ -2,14 +2,26 @@
     "simpleif": {
         "prefix": "sql-if",
         "body": [
-            "IF (jsondata->>'media' is not null) THEN",
-            "    NEW.channel = jsondata->>'media';",
+            "IF (jsondata->>'media' IS NULL) THEN",
+            "\tRAISE EXCEPTION 'Media Null';",
+            "ELSIF (jsondata->>'media' == 'email') THEN",
+            "\tRAISE NOTICE 'Media = Email';",
+            "ELSE",
+            "\tRAISE NOTICE '%', jsondata->>'media';",
             "END IF;"
         ],
         "description": "SQL Simple IF"
     },
-    "simplecase": {
-        "prefix": "sql-case",
+    "simplecasewhen": {
+        "prefix": "sql-case-when-simple",
+        "body": [
+            "CASE WHEN (jsondata->>'media') IS NULL THEN 'aaaa' ELSE jsondata->>'media' END AS media,",
+            "COALESCE(COUNT(CASE WHEN resource_type = 'agent' THEN 1 END), 0) AS resource_type_count,"
+        ],
+        "description": "SQL Simple Case"
+    },
+    "casewhen": {
+        "prefix": "sql-case-when",
         "body": [
             "SELECT CASE WHEN (jsondata->>'media') IS NULL THEN",
             "    'aaaa'",
@@ -18,7 +30,7 @@
             "END",
             "FROM chassi_contacts"
         ],
-        "description": "SQL Simple Case"
+        "description": "SQL Case When"
     },
     "createtable": {
         "prefix": "sql-newtable",
@@ -315,5 +327,56 @@
             "LANGUAGE plpgsql;"
         ],
         "description": "Returns numeric2 information"
+    },
+    "SQLCTEWith": {
+        "prefix": "sql-cte-with-sintaxe",
+        "body": [
+            "-- Common Table Expression",
+            "WITH filtered_data AS (",
+            "\tSELECT",
+            "\t\ttime, tags->>'how' AS how",
+            "\tFROM",
+            "\t\tanswer_time",
+            "\tWHERE",
+            "\t\t(time BETWEEN start_time AND end_time)",
+            "\t\tAND tags->>'type' = 'queue'",
+            "\t\tAND (by_service = '' OR tags->>'service' = by_service)",
+            ")",
+            "SELECT",
+            "\tCOUNT(*) AS total,",
+            "\tSUM(CASE WHEN how = 'transferred' OR how = 'transfered' THEN 1 ELSE 0 END) AS total_abandoned,",
+            "\tSUM(CASE WHEN how = 'transferred' OR how = 'transfered' THEN 1 ELSE 0 END) * 100 / COUNT(*) AS abandon_percent,",
+            "\tCASE",
+            "\t\tWHEN bucket_interval_time > 0 THEN time_bucket(bucket_interval_time * interval '1 minute', time)",
+            "\t\tELSE '1970-01-01 00:00:00+00'::TIMESTAMP with time zone",
+            "\tEND AS bucket",
+            "FROM",
+            "\tfiltered_data",
+            "GROUP BY",
+            "\tbucket"
+        ],
+        "description": "SQL Query with CTE and aggregations"
+    },
+    "TimeBucket": {
+        "prefix": "sql-time-bucket",
+        "body": [
+            "time_bucket('15 minutes', time) AS bucket_start,",
+            "time_bucket(by_bucket_size, time) AS bucket_start,"
+        ],
+        "description": "Time bucket using time_bucket function"
+    },
+    "SQLQueryWithDoubleCTE": {
+        "prefix": "query-cte-double-with",
+        "body": [
+            "-- Common Table Expression",
+            "WITH filtered_data AS (",
+            "\tSELECT * FROM tabela1 WHERE coluna1 = 'valor'",
+            "),",
+            "second_filtered_data AS (",
+            "\tSELECT * FROM tabela2 WHERE coluna2 = 'valor'",
+            ")",
+            "SELECT * FROM filtered_data JOIN second_filtered_data ON filtered_data.id = second_filtered_data.id;"
+        ],
+        "description": "SQL Query with Common Table Expressions (CTEs)"
     }
 }

@@ -768,33 +768,24 @@
         ],
         "description": "Save multiple records in CakePHP"
     },
-    "belongsTo": {
+    "hasOne": {
         "prefix": [
-            "cake-belongs-to",
-            "cake-many-to-one"
+            "cake-has-one",
+            "cake-one-to-one"
         ],
         "body": [
-            "/**",
-            " * belongsTo associations",
-            " *",
-            " * @var array",
-            " */",
-            "public \\$belongsTo = array(",
-            "\t'User' => array(",
-            "\t\t'className' => 'User',",
-            "\t\t'foreignKey' => 'user_id',",
-            "\t\t'fields' => array(",
-            "\t\t\t'id',",
-            "\t\t\t'name',",
-            "\t\t\t'email',",
-            "\t\t\t'gravatar'",
-            "\t\t),",
-            "\t\t'conditions' => '',",
-            "\t\t'order' => ''",
+            "public \\$hasOne = array(",
+            "\t'ModelName' => array(",
+            "\t\t'className' => 'ModelName', // Nome da classe do modelo que está sendo associado",
+            "\t\t'foreignKey' => 'foreign_key', // Nome da coluna chave estrangeira na tabela do modelo associado",
+            "\t\t'conditions' => array(), // Condições adicionais para a associação",
+            "\t\t'fields' => array(), // Campos do modelo associado que serão retornados na consulta",
+            "\t\t'order' => array(), // Ordenação dos resultados",
+            "\t\t'dependent' => false // Opção de dependência, define o que acontece com o registro associado quando o registro principal é excluído",
             "\t),",
             ");"
         ],
-        "description": "Defines belongsTo associations"
+        "description": "Defines a hasOne association"
     },
     "hasMany": {
         "prefix": [
@@ -802,22 +793,35 @@
             "cake-one-to-many"
         ],
         "body": [
-            "/**",
-            " * hasMany associations",
-            " *",
-            " * @var array",
-            " */",
             "public \\$hasMany = array(",
-            "\t'FormQuestion',",
-            "\t'Note' => array(",
-            "\t\t'className' => 'Note',",
-            "\t\t'foreignKey' => 'account_id',",
-            "\t\t'dependent' => false,",
-            "\t\t'order' => 'Note.id DESC',",
+            "\t'ModelName' => array(",
+            "\t\t'className' => 'ModelName', // Nome da classe do modelo que está sendo associado",
+            "\t\t'foreignKey' => 'foreign_key', // Nome da coluna chave estrangeira na tabela do modelo associado",
+            "\t\t'conditions' => array(), // Condições adicionais para a associação",
+            "\t\t'fields' => array(), // Campos do modelo associado que serão retornados na consulta",
+            "\t\t'order' => array(), // Ordenação dos resultados",
+            "\t\t'dependent' => false // Opção de dependência, define o que acontece com os dados associados quando o registro principal é excluído",
             "\t),",
             ");"
         ],
         "description": "Defines hasMany associations"
+    },
+    "belongsTo": {
+        "prefix": [
+            "cake-belongs-to"
+        ],
+        "body": [
+            "public \\$belongsTo = array(",
+            "\t'ModelName' => array(",
+            "\t\t'className' => 'ModelName', // Nome da classe do modelo que está sendo associado",
+            "\t\t'foreignKey' => 'foreign_key', // Nome da coluna chave estrangeira na tabela do modelo atual que referencia a chave primária do modelo associado",
+            "\t\t'conditions' => array(), // Condições adicionais para a associação",
+            "\t\t'fields' => array(), // Campos do modelo associado que serão retornados na consulta",
+            "\t\t'order' => array(), // Ordenação dos resultados",
+            "\t),",
+            ");"
+        ],
+        "description": "Defines a belongsTo association"
     },
     "hasAndBelongsToMany": {
         "prefix": [
@@ -825,19 +829,19 @@
             "cake-many-to-many"
         ],
         "body": [
-            "/**",
-            " * hasAndBelongsToMany associations",
-            " *",
-            " * @var array",
-            " */",
             "public \\$hasAndBelongsToMany = array(",
-            "\t'Contact' => array(",
-            "\t\t'className' => 'Contact',",
-            "\t\t'joinTable' => 'account_contacts',",
-            "\t\t'foreignKey' => 'contact_id',",
-            "\t\t'associationForeignKey' => 'account_id',",
-            "\t),",
-            ");"
+            "\t'ModelName' => array(",
+            "\t\t'className' => 'ModelName', // Nome da classe do modelo que está sendo associado",
+            "\t\t'joinTable' => 'join_table', // Nome da tabela intermediária que associa os dois modelos",
+            "\t\t'foreignKey' => 'foreign_key', // Nome da coluna chave estrangeira na tabela intermediária que referencia a chave primária do modelo atual",
+            "\t\t'associationForeignKey' => 'association_foreign_key', // Nome da coluna chave estrangeira na tabela intermediária que referencia a chave primária do modelo associado",
+            "\t\t'conditions' => array(), // Condições adicionais para a associação",
+            "\t\t'fields' => array(), // Campos do modelo associado que serão retornados na consulta",
+            "\t\t'order' => array(), // Ordenação dos resultados",
+            "\t\t'limit' => null, // Número máximo de resultados retornados",
+            "\t\t'offset' => null, // Número de resultados para pular antes de retornar os resultados",
+            "\t), // Fim do array para a associação com ModelName",
+            "); // Fim do array \\$hasAndBelongsToMany"
         ],
         "description": "Defines hasAndBelongsToMany associations"
     },
@@ -870,5 +874,185 @@
             ");"
         ],
         "description": "Defines validation rules"
+    },
+    "filterResultsTemplate": {
+        "prefix": [
+            "cake-filter-results-template",
+            "cake-template-filter-results"
+        ],
+        "body": [
+            "\t\\$this->Pausa->recursive = 0;",
+            "\t\\$this->FilterResults->addFilters(",
+            "\t\tarray(",
+            "\t\t\t'filter_label' => array(",
+            "\t\t\t\t'Pausa.label' => array(",
+            "\t\t\t\t\t'operator' => 'like',",
+            "\t\t\t\t),",
+            "\t\t\t),",
+            "\t\t);",
+            "",
+            "\t\\$conditions = array();",
+            "\tif (\\$this->FilterResults->getConditions()) {",
+            "\t\t\\$conditions = array_merge(\\$this->FilterResults->getConditions(), \\$conditions);",
+            "\t}",
+            "",
+            "\t\\$this->FilterResults->setPaginate('order', 'Pausa.label ASC');",
+            "\t\\$this->FilterResults->setPaginate('conditions', \\$conditions);",
+            "\t\\$this->FilterResults->setPaginate('limit', 10);",
+            "\t\\$this->set('pausas', \\$this->paginate());"
+        ],
+        "description": "Defines the filter results() function"
+    },
+    "CakePHPFilterResults": {
+        "prefix": [
+            "cake-filter-results-jsonb",
+            "cake-filter-results-join-jsonb"
+        ],
+        "body": [
+            "// Set paginate fields for FilterResults",
+            "\\$this->FilterResults->setPaginate('fields', array(",
+            "\t'CoreContact.cid',",
+            "\t'\"CoreSegment\".\"data\"->>'start' AS \"CoreSegment__start\"',",
+            "));",
+            "",
+            "// Set paginate joins for FilterResults",
+            "\\$this->FilterResults->setPaginate('joins', array(",
+            "\tarray(",
+            "\t\t'table' => 'core_segments',",
+            "\t\t'alias' => 'CoreSegment',",
+            "\t\t'type' => 'INNER',",
+            "\t\t'conditions' => array(",
+            "\t\t\t\"CoreContact.cid = CoreSegment.cid\"",
+            "\t\t)",
+            "\t)",
+            "));",
+            "",
+            "// Output CoreContact cid",
+            "<td><?= h(\\$contact['CoreContact']['cid']); ?></td>",
+            "",
+            "<td><?= h(\\$contact['CoreSegment']['start']); ?></td>"
+        ],
+        "description": "CakePHP FilterResults and Output Examples"
+    },
+    "CoreContactFindAll": {
+        "prefix": [
+            "cake-find-join-jsonb",
+            "cake-find-join-jsonb-field"
+        ],
+        "body": [
+            "\\$this->CoreContact->find('all', array(",
+            "\t'recursive' => 0,",
+            "\t'fields' => array(",
+            "\t\t'CoreContact.cid',",
+            "\t\t'\"CoreSegment\".\"data\"->>\\'start\\' AS \"CoreSegment__start\"',",
+            "\t),",
+            "\t'joins' => array(",
+            "\t\tarray(",
+            "\t\t\t'table' => 'core_segments',",
+            "\t\t\t'alias' => 'CoreSegment',",
+            "\t\t\t'type' => 'INNER',",
+            "\t\t\t'conditions' => array(",
+            "\t\t\t\t\"CoreContact.cid = CoreSegment.cid\"",
+            "\t\t\t)",
+            "\t\t)",
+            "\t)",
+            "));"
+        ],
+        "description": "CoreContact find all with joins and custom fields"
+    },
+    "cakeJsonbPattern": {
+        "prefix": [
+            "cake-jsonb-field-pattern"
+        ],
+        "body": [
+            "\t'fields' => array(",
+            "\t\t'\"CoreSegment\".\"data\"->>\\'start\\' AS \"CoreSegment__start\"',",
+            "\t),"
+        ],
+        "description": "CoreContact find all with joins and custom fields"
+    },
+    "filterResultsJsonb": {
+        "prefix": "cake-filter-results-jsonb",
+        "body": [
+            "'filter_status' => array(",
+            "\t'\\\"CoreContact\\\".\\\"data\\\"->>\\'endReason\\'' => array(",
+            "\t\t'select' => array(",
+            "\t\t\t'' => '...',",
+            "\t\t\t'abandoned' => 'Abandonado',",
+            "\t\t\t'answered' => 'Atendido',",
+            "\t\t\t'reject' => 'Rejeitado',",
+            "\t\t\t'transferred' => 'Transferido',",
+            "\t\t),",
+            "\t\t'operator' => 'like'",
+            "\t)",
+            "),"
+        ],
+        "description": "Filter results options for jsonb data->>endReason"
+    },
+    "PaginatorSettings": {
+        "prefix": "cake-paginator-settings",
+        "body": [
+            "\\$this->Paginator->settings = array(",
+            "\t'limit' => 10, // Número de resultados por página",
+            "\t'paramType' => 'querystring', // Define o tipo de parâmetro para as páginas",
+            "\t'fields' => array(), // Campos que serão retornados pela query, se não definir, retornará todos",
+            "\t'order' => array(), // Ordenação dos resultados, se necessário",
+            "\t'joins' => array(), // Joins adicionais, se necessário",
+            "\t'conditions' => array(), // Condições adicionais, se necessário",
+            "\t'group' => '', // Agrupamento dos resultados, se necessário",
+            "\t'limit' => 10, // Número de resultados por página",
+            "\t'page' => 1, // Número da página inicial",
+            "\t'recursive' => -1 // Define a recursividade do model, se necessário",
+            ");"
+        ],
+        "description": "Paginator settings for setting up pagination options"
+    },
+    "GetSetFilterFormData": {
+        "prefix": [
+            "cake-get-set-filter-form-data"
+        ],
+        "body": [
+            "// Set default Value",
+            "\\$this->request->data['filters']['filter_from'] = date('d/m/Y 00:00');",
+            "\\$this->request->data['filters']['filter_to'] = date('d/m/Y 23:59');",
+            "",
+            "// get value",
+            "array(",
+            "\t'start_time' => \\$this->Dates->ptBRToSql(\\$this->request->data['filters']['filter_from']),",
+            "\t'end_time' => \\$this->Dates->ptBRToSql(\\$this->request->data['filters']['filter_to']),",
+            ");",
+            "",
+            "// view",
+            "<?= \\$this->Form->create('filters'); ?>",
+            "<script type=\"text/javascript\">",
+            "    $(function() {",
+            "        $(\"#dt_from\").datetimepicker({",
+            "            format: 'DD/MM/YYYY HH:mm'",
+            "        });",
+            "    });",
+            "</script>",
+            "<div class=\"col-sm-4\">",
+            "    <div class=\"form-group row\">",
+            "        <label for=\"staticStatus\" class=\"col-sm-4 col-form-label text-right\">Data Início *</label>",
+            "        <div class=\"col-sm-8\">",
+            "            <?= \\$this->Form->input('filter_from', array(",
+            "                'id' => 'dt_from',",
+            "                'class' => 'form-control form-control-sm',",
+            "                'label' => false,",
+            "            )); ?>",
+            "        </div>",
+            "    </div>",
+            "</div>"
+        ],
+        "description": "Get and set filter form data"
+    },
+    "DatesToSql": {
+        "prefix": "cake-dates-tosql",
+        "body": [
+            "'start_time' => \\$this->Dates->toSql(\\$this->request->data['filters']['filter_from']),",
+            "// 'd/m/Y H:i:s' formato vindo da view para ser convertido em 'Y-m-d H:i:s'",
+            "'end_time' => \\$this->Dates->toSql(\\$this->request->data['filters']['filter_from'], 'd/m/Y H:i:s'),"
+        ],
+        "description": "Set 'start_time' with Dates->toSql"
     }
 }

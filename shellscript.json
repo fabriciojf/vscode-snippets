@@ -62,6 +62,8 @@
             "\techo \"O argumento é nulo.\"",
             "elif [[ \"\\$2\" != *\".log\"* ]]; then # contains",
             "\techo \"True\"",
+            "else",
+            "\techo \"False\"",
             "fi"
         ],
         "description": "Bash IF"

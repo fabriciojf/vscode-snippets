@@ -625,5 +625,24 @@
             "}"
         ],
         "description": "Switch statement example"
+    },
+    "RouterURLs": {
+        "prefix": [
+            "js-router-urls",
+            "js-cake-router"
+        ],
+        "body": [
+            "// basic router, true with http",
+            "<?= Router::url('/', true) ?>",
+            "",
+            "// class router, false without http",
+            "<?= Router::url(array(",
+            "\t'plugin' => false,",
+            "\t'admin' => true,",
+            "\t'controller' => 'domni_contacts',",
+            "\t'action' => 'close_open_contacts',",
+            "), false); ?>"
+        ],
+        "description": "Router URLs with different options"
     }
 }
