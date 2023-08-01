@@ -1,34 +1,25 @@
 {
     "AjaxCake": {
         "prefix": [
-            "ajax-cake",
-            "js-cake",
-            "javascript-cake"
+            "js-cake-ajax-template",
+            "javascript-cake-ajax-template"
         ],
         "body": [
-            "function fcname() {",
-            "    let _url = '<?= Router::url(array(",
-            "                    'plugin' => false,",
-            "                    'admin' => true,",
-            "                    'controller' => 'yourController',",
-            "                    'action' => 'your_action',",
-            "                ), false); ?>';",
-            "    $.ajax({",
-            "        // type: 'POST', || 'GET', ",
-            "        // dataType: 'json,' || 'xml', || 'jsonp', || 'script' ",
-            "        url: _url,",
-            "        cache: false,",
-            "        data: {",
-            "            'yourParam': 'your_value'",
-            "        },",
-            "        success: function(data) {",
-            "            console.log('data', data);",
-            "        },",
-            "        error: function(err) {",
-            "            console.log('error', err);",
-            "        }",
-            "    });",
-            "}"
+            "$.ajax({",
+            "\t// type: 'POST', || 'GET', ",
+            "\t// dataType: 'json,' || 'xml', || 'jsonp', || 'script' ",
+            "\turl: `\\${domain}yourController/your_action`,",
+            "\tcache: false,",
+            "\tdata: {",
+            "\t\t'yourParam': 'your_value'",
+            "\t},",
+            "\tsuccess: function(data) {",
+            "\t\tconsole.log('data', data);",
+            "\t},",
+            "\terror: function(err) {",
+            "\t\tconsole.log('error', err);",
+            "\t}",
+            "});"
         ],
         "description": "Ajax Cake"
     },
@@ -47,7 +38,7 @@
             "$.ajax({",
             "    // type: 'POST', || 'GET', ",
             "    // dataType: 'json,' || 'xml', || 'jsonp', || 'script' ",
-            "    url: _url,",
+            "\turl: `\\${domain}yourController/your_action`,",
             "    cache: false,",
             "    data: {",
             "        'yourParam': 'your_value'",
@@ -89,13 +80,12 @@
     },
     "AjaxClass": {
         "prefix": [
-            "ajax-class",
-            "javascript-class",
-            "js-class"
+            "ajax-class-template",
+            "javascript-class-template",
+            "js-class-template"
         ],
         "body": [
-            "var className;",
-            "var cClassName = function() {",
+            "var ClassName = function() {",
             "    this.init = init;",
             "",
             "    function init() {",
@@ -103,8 +93,9 @@
             "    }",
             "}",
             "",
+            "var className;",
             "$('window').ready(function() {",
-            "    className = new cClassName();",
+            "    className = new ClassName();",
             "    className.init();",
             "});"
         ],
@@ -644,5 +635,75 @@
             "), false); ?>"
         ],
         "description": "Router URLs with different options"
+    },
+    "LocalStorageCompleteExample": {
+        "prefix": "js-storage-complete-example",
+        "body": [
+            "// Armazenar um valor no LocalStorage",
+            "localStorage.setItem('nome', 'João');",
+            "localStorage.setItem('idade', '30');",
+            "localStorage.setItem('cidade', 'São Paulo');",
+            "",
+            "// Recuperar o valor do LocalStorage",
+            "const nome = localStorage.getItem('nome');",
+            "console.log('Nome:', nome); // Saída: \"Nome: João\"",
+            "",
+            "const idade = localStorage.getItem('idade');",
+            "console.log('Idade:', idade); // Saída: \"Idade: 30\"",
+            "",
+            "// Remover um item do LocalStorage",
+            "localStorage.removeItem('cidade');",
+            "",
+            "// Recuperar o valor do item removido (deve ser null)",
+            "const cidadeRemovida = localStorage.getItem('cidade');",
+            "console.log('Cidade Removida:', cidadeRemovida); // Saída: \"Cidade Removida: null\"",
+            "",
+            "// Limpar todo o LocalStorage",
+            "localStorage.clear();",
+            "",
+            "// Verificar o número de itens armazenados (deve ser 0 após o clear)",
+            "const numItens = localStorage.length;",
+            "console.log('Número de Itens:', numItens); // Saída: \"Número de Itens: 0\"",
+            "",
+            "// Armazenar mais valores no LocalStorage",
+            "localStorage.setItem('profissao', 'Engenheiro');",
+            "localStorage.setItem('email', 'joao@example.com');",
+            "",
+            "// Recuperar o valor de um item através do índice (chave no índice 1)",
+            "const chaveNoIndice1 = localStorage.key(1);",
+            "console.log('Chave no Índice 1:', chaveNoIndice1); // Saída: \"Chave no Índice 1: email\""
+        ],
+        "description": "Exemplo de uso de SET do localStorage"
+    },
+    "LocalStorageSetExample": {
+        "prefix": "js-storage-set",
+        "body": [
+            "// Armazenar um valor no SessionStorage",
+            "localStorage.setItem('paginaAtiva', 'paginaPrincipal');"
+        ],
+        "description": "Exemplo de uso de SET do localStorage"
+    },
+    "LocalStorageGetExample": {
+        "prefix": "js-storage-get",
+        "body": [
+            "// Recuperar o valor do SessionStorage",
+            "const paginaAtiva = localStorage.getItem('paginaAtiva');"
+        ],
+        "description": "Exemplo de uso de GET do localStorage"
+    },
+    "LocalStorageDeleteClearExample": {
+        "prefix": [
+            "js-storage-delete",
+            "js-storage-clear",
+            "js-storage-remove-item"
+        ],
+        "body": [
+            "// Remover um item do SessionStorage",
+            "sessionStorage.removeItem('cidade');",
+            "",
+            "// Limpar todo o SessionStorage",
+            "sessionStorage.clear();"
+        ],
+        "description": "Exemplo de uso de GET do localStorage"
     }
 }

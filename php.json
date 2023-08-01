@@ -965,9 +965,12 @@
             "cake-jsonb-field-pattern"
         ],
         "body": [
-            "\t'fields' => array(",
-            "\t\t'\"CoreSegment\".\"data\"->>\\'start\\' AS \"CoreSegment__start\"',",
-            "\t),"
+            "'fields' => array(",
+            "\t'\"CoreSegment\".\"data\"->>\\'start\\' AS \"CoreSegment__start\"',",
+            "),",
+            "'conditions' => array(",
+            "\t'\"CoreIssue\".\"data\"->>\\'expire\\' >= ?' => \\$now->format('Y-m-d H:i:s'),",
+            "),"
         ],
         "description": "CoreContact find all with joins and custom fields"
     },
