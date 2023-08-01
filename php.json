@@ -1057,5 +1057,34 @@
             "'end_time' => \\$this->Dates->toSql(\\$this->request->data['filters']['filter_from'], 'd/m/Y H:i:s'),"
         ],
         "description": "Set 'start_time' with Dates->toSql"
+    },
+    "CakeComponentTemplate": {
+        "prefix": "cake-component-template",
+        "body": [
+            "<?php",
+            "",
+            "App::uses('SessionComponent', 'Controller/Component');",
+            "",
+            "class NameComponent extends Component",
+            "{",
+            "",
+            "\t/**",
+            "\t * @var array Componentes utilizados pela classe.",
+            "\t */",
+            "\tpublic $components = array(",
+            "\t\t'Session',",
+            "\t\t'Auth',",
+            "\t);",
+            "",
+            "\t/**",
+            "\t * Carrega um modelo dentro do componente.",
+            "\t */",
+            "\tpublic function loadModel($modelClass)",
+            "\t{",
+            "\t\t$this->{$modelClass} = ClassRegistry::init($modelClass);",
+            "\t}",
+            "}"
+        ],
+        "description": "Template de Componente cake"
     }
 }
