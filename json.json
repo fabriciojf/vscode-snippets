@@ -3,11 +3,11 @@
         "prefix": "snippet-model",
         "body": [
             "\"snippet\": {",
-			"    \"prefix\": \"snip-model\",",
-			"    \"body\": [",
-			"        \"\"",
-			"    ],",
-			"    \"description\": \"Snip Model\"",
+			"\t\"prefix\": \"snip-model\",",
+			"\t\"body\": [",
+			"\t\t\"\"",
+			"\t],",
+			"\t\"description\": \"Snip Model\"",
 			"},"
         ],
         "description": "Snip Model"

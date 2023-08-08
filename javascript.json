@@ -5,8 +5,47 @@
             "javascript-cake-ajax-template"
         ],
         "body": [
-            "$.ajax({",
-            "\t// type: 'POST', || 'GET', ",
+            "${1:<script>}",
+            "\\$.ajax({",
+            "\t// method: 'POST', || 'GET', ",
+            "\t// dataType: 'json', || 'xml', || 'jsonp', || 'script' ",
+            "\turl: `\\${domain}yourController/your_action`,",
+            "\tcache: false,",
+            "\tdata: {",
+            "\t\t'yourParam': 'your_value'",
+            "\t},",
+            "\tsuccess: function(data) {",
+            "\t\tconsole.log('data', data);",
+            "\t},",
+            "\terror: function(err) {",
+            "\t\tconsole.log('error', err);",
+            "\t},",
+            "\tcomplete: function(xhr, status) {",
+            "\t\tif (status === 'success') {",
+            "\t\t\tconsole.log(xhr.responseText, xhr);",
+            "\t\t} else if (status === 'error') {",
+            "\t\t\tconsole.log('Erro na requisição AJAX');",
+            "\t\t}",
+            "\t},",
+            "});"
+        ],
+        "description": "Ajax Cake"
+    },
+    "AjaxGetPost": {
+        "prefix": [
+            "ajax-get-post",
+            "js-get-post"
+        ],
+        "body": [
+            "${1:<script>}",
+            "let _url = '<?= Router::url(array(",
+            "\t\t\t'plugin' => false,",
+            "\t\t\t\t'admin' => true,",
+            "\t\t\t\t'controller' => 'yourController',",
+            "\t\t\t\t'action' => 'your_action',",
+            "\t\t\t\t), false); ?>';",
+            "\\$.ajax({",
+            "\t// method: 'POST', || 'GET', ",
             "\t// dataType: 'json,' || 'xml', || 'jsonp', || 'script' ",
             "\turl: `\\${domain}yourController/your_action`,",
             "\tcache: false,",
@@ -19,36 +58,13 @@
             "\terror: function(err) {",
             "\t\tconsole.log('error', err);",
             "\t}",
-            "});"
-        ],
-        "description": "Ajax Cake"
-    },
-    "AjaxGetPost": {
-        "prefix": [
-            "ajax-get-post",
-            "js-get-post"
-        ],
-        "body": [
-            "let _url = '<?= Router::url(array(",
-            "                'plugin' => false,",
-            "                'admin' => true,",
-            "                'controller' => 'yourController',",
-            "                'action' => 'your_action',",
-            "            ), false); ?>';",
-            "$.ajax({",
-            "    // type: 'POST', || 'GET', ",
-            "    // dataType: 'json,' || 'xml', || 'jsonp', || 'script' ",
-            "\turl: `\\${domain}yourController/your_action`,",
-            "    cache: false,",
-            "    data: {",
-            "        'yourParam': 'your_value'",
-            "    },",
-            "    success: function(data) {",
-            "        console.log('data', data);",
-            "    },",
-            "    error: function(err) {",
-            "        console.log('error', err);",
-            "    }",
+            "\tcomplete: function(xhr, status) {",
+            "\t\tif (status === 'success') {",
+            "\t\t\tconsole.log(xhr.responseText, xhr);",
+            "\t\t} else if (status === 'error') {",
+            "\t\t\tconsole.log('Erro na requisição AJAX');",
+            "\t\t}",
+            "\t},",
             "});"
         ],
         "description": "Ajax Get Post"
@@ -60,6 +76,7 @@
             "js-window"
         ],
         "body": [
+            "${1:<script>}",
             "$('window').ready(function() {",
             "",
             "});"
@@ -73,6 +90,7 @@
             "js-append"
         ],
         "body": [
+            "${1:<script>}",
             ".append($('<>').addClass('')",
             ")"
         ],
@@ -85,18 +103,19 @@
             "js-class-template"
         ],
         "body": [
+            "${1:<script>}",
             "var ClassName = function() {",
-            "    this.init = init;",
+            "\tthis.init = init;",
             "",
-            "    function init() {",
-            "        console.log('Class Started');",
-            "    }",
+            "\tfunction init() {",
+            "\t\tconsole.log('Class Started');",
+            "\t}",
             "}",
             "",
             "var className;",
-            "$('window').ready(function() {",
-            "    className = new ClassName();",
-            "    className.init();",
+            "\\$('window').ready(function() {",
+            "\tclassName = new ClassName();",
+            "\tclassName.init();",
             "});"
         ],
         "description": "Ajax Window"
@@ -108,8 +127,9 @@
             "cake-selected-combo"
         ],
         "body": [
+            "${1:<script>}",
             "let id = \\$('#SELECT_ID :selected').val(),",
-            "    label = \\$('#SELECT_ID :selected').text();"
+            "\tlabel = \\$('#SELECT_ID :selected').text();"
         ],
         "description": "Ajax Selected Combo"
     },
@@ -119,21 +139,22 @@
             "node-class-model"
         ],
         "body": [
+            "${1:<script>}",
             "const config = require('./config/config');",
             "",
             "function CLASSNAME() {",
-            "    mongoClient.connect(config.mongo.connectionString, function (err, db) {",
-            "        if (err) throw err;",
-            "        mongodb = db.db(\"chassi\");",
-            "    });",
-            "    classVarName = 'Class Variable';",
+            "\tmongoClient.connect(config.mongo.connectionString, function (err, db) {",
+            "\t\tif (err) throw err;",
+            "\t\tmongodb = db.db(\"chassi\");",
+            "\t});",
+            "\tclassVarName = 'Class Variable';",
             "}",
             "",
             "CLASSNAME.prototype = {",
-            "    start: function(req, res, callback) {",
-            "        console.log(classVarName);",
-            "        return res.json({status: \"success\"});",
-            "    }",
+            "\tstart: function(req, res, callback) {",
+            "\t\tconsole.log(classVarName);",
+            "\t\treturn res.json({status: \"success\"});",
+            "\t}",
             "}",
             "",
             "module.exports = new CLASSNAME();",
@@ -143,11 +164,11 @@
             "const config = require('./config/config');",
             "",
             "function FIRSTFUNCTION(param) {",
-            "    console.log(param);",
+            "\tconsole.log(param);",
             "}",
             "",
             "module.exports = {",
-            "    FIRSTFUNCTION: FIRSTFUNCTION",
+            "\tFIRSTFUNCTION: FIRSTFUNCTION",
             "}",
             ""
         ],
@@ -158,19 +179,20 @@
             "node-pg-promisse"
         ],
         "body": [
+            "${1:<script>}",
             "const query = {",
-            "    name: 'set_unique_name',",
-            "    text: \" SELECT \" +",
-            "          \"   FROM users \" +",
-            "          \"  WHERE name like $1 \" +",
-            "          \"     OR email like $2 \" +",
-            "          \" OFFSET 1 \" +",
-            "          \"  LIMIT 1 \",",
-            "    values: [`%\\${name}%`, `%\\${email}%`]",
+            "\tname: 'set_unique_name',",
+            "\ttext: \" SELECT \" +",
+            "\t\t  \"   FROM users \" +",
+            "\t\t  \"  WHERE name like $1 \" +",
+            "\t\t  \"\t OR email like $2 \" +",
+            "\t\t  \" OFFSET 1 \" +",
+            "\t\t  \"  LIMIT 1 \",",
+            "\tvalues: [`%\\${name}%`, `%\\${email}%`]",
             "}",
             "db.query(query)",
-            "    .then(data => { console.log(data.rows); })",
-            "    .catch(err => { console.log(err); });"
+            "\t.then(data => { console.log(data.rows); })",
+            "\t.catch(err => { console.log(err); });"
         ],
         "description": "Node Pg Promisse"
     },
@@ -179,23 +201,24 @@
             "node-pg-callback"
         ],
         "body": [
+            "${1:<script>}",
             "const query = {",
-            "    name: 'set_unique_name',",
-            "    text: \" SELECT * \" +",
-            "          \"   FROM users \" +",
-            "          \"  WHERE name like $1 \" +",
-            "          \"     OR email like $2 \" +",
-            "          \" OFFSET 1 \" +",
-            "          \"  LIMIT 1 \",",
-            "    values: [`%\\${name}%`, `%\\${email}%`],",
-            "    rowMode: 'array',",
+            "\tname: 'set_unique_name',",
+            "\ttext: \" SELECT * \" +",
+            "\t\t\"   FROM users \" +",
+            "\t\t\"  WHERE name like $1 \" +",
+            "\t\t\"\t OR email like $2 \" +",
+            "\t\t\" OFFSET 1 \" +",
+            "\t\t\"  LIMIT 1 \",",
+            "\tvalues: [`%\\${name}%`, `%\\${email}%`],",
+            "\trowMode: 'array',",
             "}",
             "db.query(query, (err, res) => {",
-            "    if (err) {",
-            "        console.log(err.stack);",
-            "    } else {",
-            "        callback(res.rows);",
-            "    }",
+            "\tif (err) {",
+            "\t\tconsole.log(err.stack);",
+            "\t} else {",
+            "\t\tcallback(res.rows);",
+            "\t}",
             "});"
         ],
         "description": "Node Pg Callback"
@@ -205,6 +228,7 @@
             "ajax-modal"
         ],
         "body": [
+            "${1:<script>}",
             "$('#MODALID').modal('show');",
             "$('#MODALID').modal('hide');"
         ],
@@ -225,6 +249,7 @@
             "ajax-moment-datetime-examples"
         ],
         "body": [
+            "${1:<script>}",
             "// Date Create",
             "moment(new Date()).format('DD/MM/YYYY HH:mm:ss')",
             "moment(new Date(1678706562019)).format('DD/MM/YYYY HH:mm:ss')",
@@ -252,9 +277,10 @@
             "ajax-array-append-push"
         ],
         "body": [
+            "${1:<script>}",
             "let items = [];",
             "for (const child of children) {",
-            "    items.push(child.id);",
+            "\titems.push(child.id);",
             "}"
         ],
         "description": "Append items into array"
@@ -264,12 +290,13 @@
             "ajax-array-for"
         ],
         "body": [
+            "${1:<script>}",
             "for (const child of children) {",
-            "    console.log(child)",
+            "\tconsole.log(child)",
             "}",
             "",
             "children.forEach(function(element, i) {",
-            "    console.log(element)",
+            "\tconsole.log(element)",
             "});"
         ],
         "description": "Ajax Format Date Time"
@@ -279,6 +306,7 @@
             "ajax-string-replace"
         ],
         "body": [
+            "${1:<script>}",
             "yourText.replace('this', 'for this')"
         ],
         "description": "Ajax Format Date Time"
@@ -288,6 +316,7 @@
             "node-port-pattern"
         ],
         "body": [
+            "${1:<script>}",
             "const port = process.env.PORT || config.port"
         ],
         "description": "Node Port Pattern"
@@ -297,17 +326,18 @@
             "node-tools-template"
         ],
         "body": [
+            "${1:<script>}",
             "const hmh = require('hmh');",
             "",
             "function formatDate(date) {",
-            "    const year = date.getFullYear();",
-            "    const month = String(date.getMonth() + 1).padStart(2, '0');",
-            "    const day = String(date.getDate()).padStart(2, '0');",
-            "    return `\\${day}/\\${month}/\\${year}`;",
+            "\tconst year = date.getFullYear();",
+            "\tconst month = String(date.getMonth() + 1).padStart(2, '0');",
+            "\tconst day = String(date.getDate()).padStart(2, '0');",
+            "\treturn `\\${day}/\\${month}/\\${year}`;",
             "}",
             "",
             "module.exports = {",
-            "    formatDate",
+            "\tformatDate",
             "};"
         ],
         "description": "Node tools template"
@@ -317,30 +347,31 @@
             "node-class-database"
         ],
         "body": [
+            "${1:<script>}",
             "const db = require('./pg_connection');",
             "",
             "class ChatDb {",
-            "    constructor() { }",
+            "\tconstructor() { }",
             "",
-            "    /**",
-            "     * Busca um usuário pelo username",
-            "     * @param {*} req request",
-            "     * @param {*} callback função de callback",
-            "     */",
-            "    async find(req, callback) {",
-            "        const username = req.params.username.trim();",
-            "        try {",
-            "            const { rows } = await db.query(`",
-            "                SELECT *",
-            "                FROM users u",
-            "                WHERE u.name like $1",
-            "            `, [username]);",
-            "            callback(rows);",
-            "        } catch (err) {",
-            "            console.log(err);",
-            "            callback({ error: 'SQL Error!!' });",
-            "        }",
-            "    }",
+            "\t/**",
+            "\t * Busca um usuário pelo username",
+            "\t * @param {*} req request",
+            "\t * @param {*} callback função de callback",
+            "\t */",
+            "\tasync find(req, callback) {",
+            "\t\tconst username = req.params.username.trim();",
+            "\t\ttry {",
+            "\t\t\tconst { rows } = await db.query(`",
+            "\t\t\t\tSELECT *",
+            "\t\t\t\tFROM users u",
+            "\t\t\t\tWHERE u.name like $1",
+            "\t\t\t`, [username]);",
+            "\t\t\tcallback(rows);",
+            "\t\t} catch (err) {",
+            "\t\t\tconsole.log(err);",
+            "\t\t\tcallback({ error: 'SQL Error!!' });",
+            "\t\t}",
+            "\t}",
             "};",
             "",
             "module.exports = new ChatDb();"
@@ -352,10 +383,11 @@
             "node-exports"
         ],
         "body": [
+            "${1:<script>}",
             "module.exports = new Controller();",
             "module.exports = {",
-            "    saveEvent,",
-            "    saveSlot",
+            "\tsaveEvent,",
+            "\tsaveSlot",
             "}"
         ],
         "description": "Node Exports Function template"
@@ -366,10 +398,11 @@
             "ajax-when-to-date"
         ],
         "body": [
+            "${1:<script>}",
             "let time = 1678737927980,                       // 2023-03-13 20:05:27",
-            "    nowtime = new Date().getTime(),             // 1679073784226",
-            "    utc = new Date(time).toUTCString(),         // Mon, 13 Mar 2023 20:05:27 GMT",
-            "    local = new Date(time).toLocaleString();    // 13/03/2023, 17:05:27",
+            "\tnowtime = new Date().getTime(),             // 1679073784226",
+            "\tutc = new Date(time).toUTCString(),         // Mon, 13 Mar 2023 20:05:27 GMT",
+            "\tlocal = new Date(time).toLocaleString();    // 13/03/2023, 17:05:27",
             "// moment.js",
             "console.log(moment(time).utc().format('YYYY-MM-DD HH:mm:ss'));                  // 2023-03-13 20:05:27",
             "console.log(moment(nowtime).utcOffset('-03:00').format('YYYY-MM-DD HH:mm:ss')); // São Paulo: 2023-03-13 17:05:27"
@@ -381,6 +414,7 @@
             "node-use-strict"
         ],
         "body": [
+            "${1:<script>}",
             "'use strict';"
         ],
         "description": "Node use strict"
@@ -391,6 +425,7 @@
             "node-date-time-util-template"
         ],
         "body": [
+            "${1:<script>}",
             "'use strict';",
             "",
             "/**",
@@ -402,25 +437,25 @@
             " * @returns date formatada no padrao format",
             " */",
             "function formatDate(date, format) {",
-            "    var day = date.getDate(),",
-            "            month = date.getMonth() + 1,",
-            "        year = date.getFullYear(),",
-            "        hours = date.getHours(),",
-            "        minutes = date.getMinutes(),",
-            "        seconds = date.getSeconds(),",
-            "        formDate = format;",
-            "    formDate = formDate.replace('dd', day < 10 ? '0' + day : day);",
-            "    formDate = formDate.replace('mm', month < 10 ? '0' + month : month);",
-            "    formDate = formDate.replace('yyyy', year);",
-            "    formDate = formDate.replace('HH', hours < 10 ? '0' + hours : hours);",
-            "    formDate = formDate.replace('MM', minutes < 10 ? '0' + minutes : minutes);",
-            "    formDate = formDate.replace('SS', seconds < 10 ? '0' + seconds : seconds);",
-            "    return formDate;",
+            "\tvar day = date.getDate(),",
+            "\t\t\tmonth = date.getMonth() + 1,",
+            "\t\tyear = date.getFullYear(),",
+            "\t\thours = date.getHours(),",
+            "\t\tminutes = date.getMinutes(),",
+            "\t\tseconds = date.getSeconds(),",
+            "\t\tformDate = format;",
+            "\tformDate = formDate.replace('dd', day < 10 ? '0' + day : day);",
+            "\tformDate = formDate.replace('mm', month < 10 ? '0' + month : month);",
+            "\tformDate = formDate.replace('yyyy', year);",
+            "\tformDate = formDate.replace('HH', hours < 10 ? '0' + hours : hours);",
+            "\tformDate = formDate.replace('MM', minutes < 10 ? '0' + minutes : minutes);",
+            "\tformDate = formDate.replace('SS', seconds < 10 ? '0' + seconds : seconds);",
+            "\treturn formDate;",
             "}",
             "",
             "// module exports",
             "module.exports = {",
-            "    formatDate: formatDate",
+            "\tformatDate: formatDate",
             "};"
         ],
         "description": "Node Date Time Util"
@@ -428,6 +463,7 @@
     "NodeStaticClass": {
         "prefix": "fmt",
         "body": [
+            "${1:<script>}",
             "'use strict';",
             "",
             "const config = require('../config/config');",
@@ -461,6 +497,7 @@
     "NodeJsonPropertiesFor": {
         "prefix": "node-json-properties-for",
         "body": [
+            "${1:<script>}",
             "let items = {name: 'jhon', age: 12, email: 'jhon@lenon.com'}",
             "for (let key in items) {",
             "\tif (items.hasOwnProperty(key)) {",
@@ -474,6 +511,7 @@
     "NodeConvertJsonArrayToInValues": {
         "prefix": "node-convert-json-array-to-in-values",
         "body": [
+            "${1:<script>}",
             "convertJsonArrayToInValues(req) {",
             "\tconst keys = req.body;",
             "\tconst query = `SELECT * FROM table WHERE field IN (${keys.map((_, index) => `$${index + 1}`).join(',')})`;",
@@ -488,6 +526,7 @@
             "js-cake-url"
         ],
         "body": [
+            "${1:<script>}",
             "let _url = '<?= Router::url(array(",
             "\t'plugin' => false,",
             "\t'admin' => true,",
@@ -500,6 +539,7 @@
     "node-static-class": {
         "prefix": "node-static-class",
         "body": [
+            "${1:<script>}",
             "const config = require('../config');\n",
             "class MyClass {",
             "\tstatic async methodOne(param) {",
@@ -521,6 +561,7 @@
     "dates-function": {
         "prefix": "node-dates-manipulations",
         "body": [
+            "${1:<script>}",
             "function dates() {",
             "\t// current date",
             "\tconst now = new Date(),",
@@ -548,6 +589,7 @@
     "string-to-date": {
         "prefix": "node-string-to-date",
         "body": [
+            "${1:<script>}",
             "\t// criando a data a partir de uma string",
             "\tconst dateString = '2023-07-07 14:45:10',",
             "\tformattedDateString = dateString.replace(' ', 'T'),",
@@ -558,6 +600,7 @@
     "first-last-dates": {
         "prefix": "node-fisrt-last-hours-of-day",
         "body": [
+            "${1:<script>}",
             "function dates() {",
             "\t// current date",
             "\tconst now = new Date(),",
@@ -575,6 +618,7 @@
     "dates-format": {
         "prefix": "node-format-date",
         "body": [
+            "${1:<script>}",
             "\t// format date using moment.js",
             "\t// const moment = require('moment');",
             "\tconst formatted = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');"
@@ -588,6 +632,7 @@
             "javascript-for-json-object"
         ],
         "body": [
+            "${1:<script>}",
             "let json = JSON.parse(data);",
             "for (let key in json) {",
             "\tif (json.hasOwnProperty(key)) {",
@@ -604,6 +649,7 @@
             "javascript-case-switch"
         ],
         "body": [
+            "${1:<script>}",
             "let param = 'term1';",
             "switch (param) {",
             "\tcase 'term1':",
@@ -623,6 +669,7 @@
             "js-cake-router"
         ],
         "body": [
+            "${1:<script>}",
             "// basic router, true with http",
             "<?= Router::url('/', true) ?>",
             "",
@@ -639,6 +686,7 @@
     "LocalStorageCompleteExample": {
         "prefix": "js-storage-complete-example",
         "body": [
+            "${1:<script>}",
             "// Armazenar um valor no LocalStorage",
             "localStorage.setItem('nome', 'João');",
             "localStorage.setItem('idade', '30');",
@@ -678,6 +726,7 @@
     "LocalStorageSetExample": {
         "prefix": "js-storage-set",
         "body": [
+            "${1:<script>}",
             "// Armazenar um valor no SessionStorage",
             "localStorage.setItem('paginaAtiva', 'paginaPrincipal');"
         ],
@@ -686,6 +735,7 @@
     "LocalStorageGetExample": {
         "prefix": "js-storage-get",
         "body": [
+            "${1:<script>}",
             "// Recuperar o valor do SessionStorage",
             "const paginaAtiva = localStorage.getItem('paginaAtiva');"
         ],
@@ -698,6 +748,7 @@
             "js-storage-remove-item"
         ],
         "body": [
+            "${1:<script>}",
             "// Remover um item do SessionStorage",
             "sessionStorage.removeItem('cidade');",
             "",
@@ -705,5 +756,151 @@
             "sessionStorage.clear();"
         ],
         "description": "Exemplo de uso de GET do localStorage"
+    },
+    "CSRFTokenExample": {
+        "prefix": [
+            "js-csrf-token-example",
+            "js-ajax-post-csrf-token-example",
+            "cake-post-token-example",
+            "cake-ajax-post-csrf-token-example"
+        ],
+        "body": [
+            "${1:<script>}",
+            "public $components = array('Security');",
+            "",
+            "// Em um controlador do CakePHP",
+            "public function myAction() {",
+            "\t$csrfToken = $this->Security->generateToken($this->request);",
+            "\t$this->set('csrfToken', $csrfToken);",
+            "}",
+            "",
+            "<script>",
+            "\t$(document).ready(function() {",
+            "\t\tvar csrfToken = '<?php echo $csrfToken; ?>';",
+            "\t\t$.ajax({",
+            "\t\t\turl: '/controller/action',",
+            "\t\t\tmethod: 'POST',",
+            "\t\t\theaders: {",
+            "\t\t\t\t'X-CSRF-Token': csrfToken",
+            "\t\t\t},",
+            "\t\t\tdata: {},",
+            "\t\t\tsuccess: function(response) {},",
+            "\t\t\terror: function(xhr, status, error) {}",
+            "\t\t});",
+            "\t});",
+            "</script>"
+        ],
+        "description": "Exemplo de uso do CSRF Token com CakePHP e AJAX"
+    },
+    "storageExample": {
+        "prefix": [
+            "js-storage-agent-actions",
+            "js-agent-storage-actions"
+        ],
+        "body": [
+            "${1:<script>}",
+            "window.agentInstance.updateStorage(cid, 'status', 'in_service');",
+            "let status = window.agentInstance.getStorageByKey(cid, 'status');",
+            "window.agentInstance.deteleStorage(cid);"
+        ],
+        "description": "Exemplo de uso de GET do localStorage"
+    },
+    "isArray": {
+        "prefix": [
+            "js-is-array"
+        ],
+        "body": [
+            "${1:<script>}",
+            "const item = [1, 2, 3];",
+            "if (Array.isArray(item)) {",
+            "\tconsole.log(\"O item é um array.\");",
+            "} else {",
+            "\tconsole.log(\"O item não é um array.\");",
+            "}"
+        ],
+        "description": "Verifica se o item é um array"
+    },
+    "isString": {
+        "prefix": [
+            "js-is-string"
+        ],
+        "body": [
+            "${1:<script>}",
+            "const item = \"Hello, world!\";",
+            "if (typeof item === \"string\") {",
+            "\tconsole.log(\"O item é uma string.\");",
+            "} else {",
+            "\tconsole.log(\"O item não é uma string.\");",
+            "}"
+        ],
+        "description": "Verifica se o item é uma String"
+    },
+    "isJsonObject": {
+        "prefix": [
+            "js-is-json-object"
+        ],
+        "body": [
+            "${1:<script>}",
+            "const json = {message:{id:1,text:\"123\"}};",
+            "if (typeof json.message === 'object') {",
+            "\tconsole.log('is object');",
+            "} else {",
+            "\tconsole.log('is string');",
+            "}",
+            "if (typeof json.message.text === 'object') {",
+            "\tconsole.log('is object');",
+            "} else {",
+            "\tconsole.log('is string');",
+            "}"
+        ],
+        "description": "Verifica se o item é uma String"
+    },
+    "getTimestamp": {
+        "prefix": [
+            "js-timestamp",
+            "js-timestamp-now"
+        ],
+        "body": [
+            "${1:<script>}",
+            "// padrao domni",
+            "let timestamp = Date.now();",
+            "let dateTime = moment(timestamp).format('DD/MM HH:mm');"
+        ],
+        "description": "Exemplo de uso de GET do localStorage"
+    },
+    "milisegundosToHour": {
+        "prefix": [
+            "js-milisegundos-to-hour",
+            "js-convert-milisegundos"
+        ],
+        "body": [
+            "${1:<script>}",
+            "const durationBase = moment.duration(durationInMilisegundos);",
+            "const durationUtc = moment.utc(durationBase.asMilliseconds());",
+            "duration = durationUtc.format(\"HH:mm:ss\");"
+        ],
+        "description": "Milisegundos to Hour"
+    },
+    "jsActiveCid": {
+        "prefix": [
+            "js-active-contact-get-cid",
+            "js-get-current-cid"
+        ],
+        "body": [
+            "${1:<script>}",
+            "let activeContact = windowAgentInstance.getActiveContact().get();",
+            "// activeContact.cid .who or .type (widgetType)"
+        ],
+        "description": "Milisegundos to Hour"
+    },
+    "jsDomain": {
+        "prefix": [
+            "js-domain"
+        ],
+        "body": [
+            "${1:<script>}",
+            "url: `\\${windowDomain}controller/action`,"
+        ],
+        "description": "Milisegundos to Hour"
     }
 }

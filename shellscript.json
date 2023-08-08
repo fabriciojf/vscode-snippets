@@ -72,15 +72,15 @@
         "prefix": "bash-case",
         "body": [
             "case \\$1 in",
-            "    '')",
-            "        echo '\\empty'",
-            "    ;;",
-            "    'v1') ;& 'v2'",
-            "        echo 'v1-v2'",
-            "    ;;",
-            "    *)",
-            "        echo 'Informe o parametro'",
-            "    ;;",
+            "\t'')",
+            "\t\techo '\\empty'",
+            "\t;;",
+            "\t'v1') ;& 'v2'",
+            "\t\techo 'v1-v2'",
+            "\t;;",
+            "\t*)",
+            "\t\techo 'Informe o parametro'",
+            "\t;;",
             "esac"
         ],
         "description": "Bash Case"
@@ -89,7 +89,7 @@
         "prefix": "bash-function",
         "body": [
             "function print() {",
-            "    echo 'message: \\$1'",
+            "\techo 'message: \\$1'",
             "}",
             "# calling",
             "print 'teste'"

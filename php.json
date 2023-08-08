@@ -2,12 +2,11 @@
     "redirect": {
         "prefix": "cake-redirect",
         "body": [
-            "<?",
-            "\\$this->redirect(array(",
-            "    'plugin' => false,",
-            "    'admin' => true,",
-            "    'controller' => '',",
-            "    'action' => ''",
+            "${1:<?}\\$this->redirect(array(",
+            "\t'plugin' => false,",
+            "\t'admin' => true,",
+            "\t'controller' => '',",
+            "\t'action' => ''",
             "));"
         ],
         "scope": "php",
@@ -16,25 +15,26 @@
     "link": {
         "prefix": "cake-link",
         "body": [
-            "echo \\$this->Html->link('', array(",
-            "    'plugin' => false,",
-            "    'admin' => true,",
-            "    'controller' => '',",
-            "    'action' => ''",
+            "${1:<?}echo \\$this->Html->link('', array(",
+            "\t'plugin' => false,",
+            "\t'admin' => true,",
+            "\t'controller' => '',",
+            "\t'action' => ''",
             "));"
         ],
-        "description": "Cake Link"
+        "description": "Cake Link",
+        "scope": "php"
     },
     "linkclass": {
         "prefix": "cake-link-class",
         "body": [
-            "echo \\$this->Html->link('', array(",
-            "    'plugin' => false,",
-            "    'admin' => true,",
-            "    'controller' => '',",
-            "    'action' => ''",
+            "${1:<?}echo \\$this->Html->link('', array(",
+            "\t'plugin' => false,",
+            "\t'admin' => true,",
+            "\t'controller' => '',",
+            "\t'action' => ''",
             "), array(",
-            "    'class' => ''",
+            "\t'class' => ''",
             "));"
         ],
         "description": "Cake Link"
@@ -42,12 +42,11 @@
     "completelink": {
         "prefix": "cake-link-cp",
         "body": [
-            "<?php",
-            "echo \\$this->Html->link('', array(",
-            "    'plugin' => false,",
-            "    'admin' => true,",
-            "    'controller' => '',",
-            "    'action' => ''",
+            "${1:<?}echo \\$this->Html->link('', array(",
+            "\t'plugin' => false,",
+            "\t'admin' => true,",
+            "\t'controller' => '',",
+            "\t'action' => ''",
             "));",
             "?>"
         ],
@@ -56,21 +55,21 @@
     "flashok": {
         "prefix": "cake-flash-ok",
         "body": [
-            "\\$this->Session->setFlash(__('Settings updated successfully'), 'default', array('class' => 'success'));"
+            "${1:<?}\\$this->Session->setFlash(__('Settings updated successfully'), 'default', array('class' => 'success'));"
         ],
         "description": "Cake Success Flash"
     },
     "flasherror": {
         "prefix": "cake-flash-error",
         "body": [
-            "\\$this->Session->setFlash(__('Error, please try again!'), 'default', array('class' => 'error'));"
+            "${1:<?}\\$this->Session->setFlash(__('Error, please try again!'), 'default', array('class' => 'error'));"
         ],
         "description": "Cake Success Flash"
     },
     "ajaxaction": {
         "prefix": "cake-ajaxaction",
         "body": [
-            "\\$this->autoRender = false;",
+            "${1:<?}\\$this->autoRender = false;",
             "if (\\$this->request->is('ajax')) {",
             "\t\\$q = \\$this->request->query;",
             "",
@@ -93,11 +92,11 @@
     "before": {
         "prefix": "cake-before",
         "body": [
-            "public function beforeFilter()",
+            "${1:<?}public function beforeFilter()",
             "{",
-            "    parent::beforeFilter();",
-            "    \\$this->set('title_for_layout', __(''));",
-            "    //\\$this->Auth->allow('action',);",
+            "\tparent::beforeFilter();",
+            "\t\\$this->set('title_for_layout', __(''));",
+            "\t//\\$this->Auth->allow('action',);",
             "}"
         ],
         "description": "Cake Before Action"
@@ -105,10 +104,10 @@
     "require": {
         "prefix": "cake-require",
         "body": [
-            "// \\$allSettings = var inside settings.php",
+            "${1:<?}// \\$allSettings = var inside settings.php",
             "require(APP . 'Config' . DS . 'settings.php');",
             "foreach (\\$allSettings as $set) {",
-            "    debug(\\$set);",
+            "\tdebug(\\$set);",
             "}"
         ],
         "description": "Cake require"
@@ -116,8 +115,8 @@
     "components": {
         "prefix": "cake-components",
         "body": [
-            "public \\$components = array(",
-            "    'Highcharts.Highcharts',",
+            "${1:<?}public \\$components = array(",
+            "\t'Highcharts.Highcharts',",
             ");"
         ],
         "description": "Cake Components"
@@ -125,7 +124,7 @@
     "highcharts": {
         "prefix": "cake-highcharts",
         "body": [
-            "App::uses('HighchartsAppController', 'Highcharts.Controller');",
+            "${1:<?}App::uses('HighchartsAppController', 'Highcharts.Controller');",
             "\\$this->Highcharts = \\$this->Components->load('Highcharts.Highcharts');",
             "\\$this->Highcharts->initialize(\\$this);"
         ],
@@ -134,9 +133,9 @@
     "cakethrow": {
         "prefix": "cake-throw",
         "body": [
-            "\\$this->Model->id = \\$id;",
+            "${1:<?}\\$this->Model->id = \\$id;",
             "if (!\\$this->Model->exists()) {",
-            "    throw new NotFoundException(sprintf(__('Invalid %s'), __('')));",
+            "\tthrow new NotFoundException(sprintf(__('Invalid %s'), __('')));",
             "}"
         ],
         "description": "Cake Throw"
@@ -144,21 +143,21 @@
     "modelusetable": {
         "prefix": "cake-model-usetable",
         "body": [
-            "public \\$useTable = '';"
+            "${1:<?}public \\$useTable = '';"
         ],
         "description": "Cake Use Table"
     },
     "saveorupdate": {
         "prefix": "cake-save-or-update",
         "body": [
-            "if (\\$object != null) {",
-            "    \\$this->MODEL->id = \\$object['MODEL']['id'];",
-            "    \\$this->MODEL->saveField('created', date('YYYY-mm-dd HH:ii:ss'));",
+            "${1:<?}if (\\$object != null) {",
+            "\t\\$this->MODEL->id = \\$object['MODEL']['id'];",
+            "\t\\$this->MODEL->saveField('created', date('YYYY-mm-dd HH:ii:ss'));",
             "} else {",
-            "    \\$this->MODEL->create();",
-            "    \\$this->MODEL->save(array(",
-            "        'created' => date('YYYY-mm-dd HH:ii:ss'),",
-            "    ));",
+            "\t\\$this->MODEL->create();",
+            "\t\\$this->MODEL->save(array(",
+            "\t\t'created' => date('YYYY-mm-dd HH:ii:ss'),",
+            "\t));",
             "}",
             "",
             "\\$this->MODEL->read(false, \\$this->MODEL->id)"
@@ -168,9 +167,9 @@
     "modelvalidate": {
         "prefix": "cake-model-validate",
         "body": [
-            "\\$this->MODEL->id = \\$id;",
+            "${1:<?}\\$this->MODEL->id = \\$id;",
             "if (!\\$this->MODEL->exists()) {",
-            "    throw new NotFoundException(sprintf(__('Invalid %s'), __('MODEL')));",
+            "\tthrow new NotFoundException(sprintf(__('Invalid %s'), __('MODEL')));",
             "}"
         ],
         "description": "Verifica se o objeto existe no banco de dados"
@@ -178,7 +177,7 @@
     "layout": {
         "prefix": "cake-layout",
         "body": [
-            "// see the folder app/View/Layouts",
+            "${1:<?}// see the folder app/View/Layouts",
             "// admin_generic, admin_generic_light, admin_generic_fluid, admin_generic_no_scroll",
             "\\$this->layout = 'admin_generic';"
         ],
@@ -187,39 +186,38 @@
     "newcontroller": {
         "prefix": "cake-controller",
         "body": [
-            "",
-            "App::uses('AppController', 'Controller');",
+            "${1:<?}App::uses('AppController', 'Controller');",
             "class MODELController extends AppController",
             "{",
-            "    public function beforeFilter()",
-            "    {",
-            "       parent::beforeFilter();",
-            "    }",
+            "\tpublic function beforeFilter()",
+            "\t{",
+            "\t   parent::beforeFilter();",
+            "\t}",
             "",
-            "    public function admin_index()",
-            "    {",
-            "        \\$this->layout = 'admin_add';",
-            "        \\$this->MODEL->recursive = 0;",
-            "        \\$this->FilterResults->addFilters(array(",
-            "                'filter_name' => array(",
-            "                    'MODEL.name' => array(",
-            "                        'operator' => 'like',",
-            "                    )",
-            "                ),",
-            "            ));",
+            "\tpublic function admin_index()",
+            "\t{",
+            "\t\t\\$this->layout = 'admin_add';",
+            "\t\t\\$this->MODEL->recursive = 0;",
+            "\t\t\\$this->FilterResults->addFilters(array(",
+            "\t\t\t\t'filter_name' => array(",
+            "\t\t\t\t\t'MODEL.name' => array(",
+            "\t\t\t\t\t\t'operator' => 'like',",
+            "\t\t\t\t\t)",
+            "\t\t\t\t),",
+            "\t\t\t));",
             "",
-            "        \\$conditions = array();",
-            "        if (\\$this->FilterResults->getConditions()) {",
-            "            \\$conditions = array_merge(\\$this->FilterResults->getConditions(), \\$conditions);",
-            "        }",
+            "\t\t\\$conditions = array();",
+            "\t\tif (\\$this->FilterResults->getConditions()) {",
+            "\t\t\t\\$conditions = array_merge(\\$this->FilterResults->getConditions(), \\$conditions);",
+            "\t\t}",
             "",
-            "        \\$this->FilterResults->setPaginate('order', array(",
-            "            'MODEL.name' => 'ASC',",
-            "        ));",
-            "        \\$this->FilterResults->setPaginate('conditions', \\$conditions);",
-            "        \\$this->FilterResults->setPaginate('limit', 10);",
-            "        \\$this->set('MODEL', \\$this->paginate());",
-            "    }",
+            "\t\t\\$this->FilterResults->setPaginate('order', array(",
+            "\t\t\t'MODEL.name' => 'ASC',",
+            "\t\t));",
+            "\t\t\\$this->FilterResults->setPaginate('conditions', \\$conditions);",
+            "\t\t\\$this->FilterResults->setPaginate('limit', 10);",
+            "\t\t\\$this->set('MODEL', \\$this->paginate());",
+            "\t}",
             "}"
         ],
         "description": "Cake Use Table"
@@ -227,17 +225,17 @@
     "filter_list": {
         "prefix": "cake-filter-find",
         "body": [
-            "'filter_FIELD' => array(",
-            "    'MODEL.FIELD' => array(",
-            "        'operator' => '=',",
-            "        'select' => \\$this->FilterResults->select('',",
-            "            \\$this->MODEL->find('list', array(",
-            "                'fields' => array(",
-            "                    'MODEL.id',",
-            "                    'MODEL.name'",
-            "                ),",
-            "                'group' => 'MODEL.name')))",
-            "     )",
+            "${1:<?}'filter_FIELD' => array(",
+            "\t'MODEL.FIELD' => array(",
+            "\t\t'operator' => '=',",
+            "\t\t'select' => \\$this->FilterResults->select('',",
+            "\t\t\t\\$this->MODEL->find('list', array(",
+            "\t\t\t\t'fields' => array(",
+            "\t\t\t\t\t'MODEL.id',",
+            "\t\t\t\t\t'MODEL.name'",
+            "\t\t\t\t),",
+            "\t\t\t\t'group' => 'MODEL.name')))",
+            "\t )",
             "),"
         ],
         "description": "Filter type Find"
@@ -245,15 +243,15 @@
     "filter_select": {
         "prefix": "cake-filter-select",
         "body": [
-            "'filter_FIELD' => array(",
-            "    'MODEL.FIELD' => array(",
-            "        'operator' => '=',",
-            "        'select' => \\$this->FilterResults->select('FIELD', array(",
-            "            0 => 'OP1',",
-            "            1 => 'OP2',",
-            "            3 => 'OP3',",
-            "        ))",
-            "    )",
+            "${1:<?}'filter_FIELD' => array(",
+            "\t'MODEL.FIELD' => array(",
+            "\t\t'operator' => '=',",
+            "\t\t'select' => \\$this->FilterResults->select('FIELD', array(",
+            "\t\t\t0 => 'OP1',",
+            "\t\t\t1 => 'OP2',",
+            "\t\t\t3 => 'OP3',",
+            "\t\t))",
+            "\t)",
             "),"
         ],
         "description": "Filter type select"
@@ -261,16 +259,16 @@
     "filter_array": {
         "prefix": "cake-filter-array",
         "body": [
-            "'filter_FIELD' => array(",
-            "    'MODEL.FIELD' => array(",
-            "        'select' => array(",
-            "            '' => 'Qualquer MODEL',",
-            "            'op1' => 'Op1',",
-            "            'op2' => 'Op2',",
-            "            'op3' => 'Op3',",
-            "        ),",
-            "        'operator' => 'like'",
-            "    )",
+            "${1:<?}'filter_FIELD' => array(",
+            "\t'MODEL.FIELD' => array(",
+            "\t\t'select' => array(",
+            "\t\t\t'' => 'Qualquer MODEL',",
+            "\t\t\t'op1' => 'Op1',",
+            "\t\t\t'op2' => 'Op2',",
+            "\t\t\t'op3' => 'Op3',",
+            "\t\t),",
+            "\t\t'operator' => 'like'",
+            "\t)",
             "),"
         ],
         "description": "Filter type array"
@@ -278,15 +276,15 @@
     "filter_between": {
         "prefix": "cake-filter-between",
         "body": [
-            "'filter_from' => array(",
-            "    'MODEL.FIELD' => array(",
-            "        'operator' => '>='",
-            "    )",
+            "${1:<?}'filter_from' => array(",
+            "\t'MODEL.FIELD' => array(",
+            "\t\t'operator' => '>='",
+            "\t)",
             "),",
             "'filter_to' => array(",
-            "    'MODEL.FIELD' => array(",
-            "        'operator' => '<='",
-            "    )",
+            "\t'MODEL.FIELD' => array(",
+            "\t\t'operator' => '<='",
+            "\t)",
             "),"
         ],
         "description": "Filter type array"
@@ -294,7 +292,7 @@
     "return_json": {
         "prefix": "cake-json-return",
         "body": [
-            "\\$this->autoRender = false;",
+            "${1:<?}\\$this->autoRender = false;",
             "\\$MODEL = \\$this->MODEL->read(null, \\$id);",
             "return json_encode(\\$MODEL);"
         ],
@@ -303,16 +301,16 @@
     "titleForLayout": {
         "prefix": "cake-title-for-layout",
         "body": [
-            "\\$this->set('title_for_layout', __(''));"
+            "${1:<?}\\$this->set('title_for_layout', __(''));"
         ],
         "description": "Return Title for Layout"
     },
     "saveField": {
         "prefix": "cake-save-field",
         "body": [
-            "\\$this->MODEL->id = \\$id;",
+            "${1:<?}\\$this->MODEL->id = \\$id;",
             "if (!\\$this->MODEL->exists()) {",
-            "    throw new NotFoundException(__('Invalid MODEL'));",
+            "\tthrow new NotFoundException(__('Invalid MODEL'));",
             "}",
             "// OR",
             "\\$this->MODEL->id = \\$id;",
@@ -328,8 +326,7 @@
             "cake-datetim-examples"
         ],
         "body": [
-            "<?php",
-            "\\$dt = '2025-05-05 11:11:00';",
+            "${1:<?}\\$dt = '2025-05-05 11:11:00';",
             "\\$date = date_create(\\$dt);",
             "debug(\\$date->format(\"Y-m-d H:i:s\"));",
             "debug(date_format(\\$date, \"Y/m/d H:i:s\"));",
@@ -341,27 +338,27 @@
     "cakeJoinFilterResult": {
         "prefix": "cake-join-filter-results",
         "body": [
-            "\\$this->FilterResults->setPaginate('joins', array(",
-            "    array(",
-            "        'alias' => 'ChassiContact',",
-            "        'table' => 'chassi_contacts',",
-            "        'type' => 'LEFT',",
-            "        'conditions' => '\"TabTreeTrack\".\"cid\" = \"ChassiContact\".\"cid\"'",
-            "    ),",
-            "    array(",
-            "        'alias' => 'User',",
-            "        'table' => 'users',",
-            "        'type' => 'LEFT',",
-            "        'conditions' => '\"ChassiContact\".\"user_id\" = \"User\".\"id\"'",
-            "    )",
+            "${1:<?}\\$this->FilterResults->setPaginate('joins', array(",
+            "\tarray(",
+            "\t\t'alias' => 'ChassiContact',",
+            "\t\t'table' => 'chassi_contacts',",
+            "\t\t'type' => 'LEFT',",
+            "\t\t'conditions' => '\"TabTreeTrack\".\"cid\" = \"ChassiContact\".\"cid\"'",
+            "\t),",
+            "\tarray(",
+            "\t\t'alias' => 'User',",
+            "\t\t'table' => 'users',",
+            "\t\t'type' => 'LEFT',",
+            "\t\t'conditions' => '\"ChassiContact\".\"user_id\" = \"User\".\"id\"'",
+            "\t)",
             "));",
             "\\$this->FilterResults->setPaginate('fields', array(",
-            "    \"TabTreeTrack.id\",",
-            "    \"TabTreeTrack.cid\",",
-            "    \"ChassiContact.media\",",
-            "    \"ChassiContact.channel\",",
-            "    \"User.name\",",
-            "    \"User.extension\",",
+            "\t\"TabTreeTrack.id\",",
+            "\t\"TabTreeTrack.cid\",",
+            "\t\"ChassiContact.media\",",
+            "\t\"ChassiContact.channel\",",
+            "\t\"User.name\",",
+            "\t\"User.extension\",",
             "));"
         ],
         "description": "Cake Join Filter Results"
@@ -369,18 +366,17 @@
     "cakeConditionOrAnd": {
         "prefix": "cake-condition-or-and",
         "body": [
-            "",
-            "'conditions' => array(",
-            "    'OR' => array(",
-            "        array( // or (user_id and user_to_id)",
-            "            'Chat.user_id' => $this->Auth->user('id'),",
-            "            'Chat.user_to_id' => $userToId,",
-            "        ),",
-            "        array( // or (user_id and user_to_id)",
-            "            'Chat.user_id' => $userToId,",
-            "            'Chat.user_to_id' => $this->Auth->user('id'),",
-            "        )",
-            "    )",
+            "${1:<?}'conditions' => array(",
+            "\t'OR' => array(",
+            "\t\tarray( // or (user_id and user_to_id)",
+            "\t\t\t'Chat.user_id' => $this->Auth->user('id'),",
+            "\t\t\t'Chat.user_to_id' => $userToId,",
+            "\t\t),",
+            "\t\tarray( // or (user_id and user_to_id)",
+            "\t\t\t'Chat.user_id' => $userToId,",
+            "\t\t\t'Chat.user_to_id' => $this->Auth->user('id'),",
+            "\t\t)",
+            "\t)",
             "),"
         ],
         "description": "Cake condition Or & And in the same query"
@@ -388,7 +384,7 @@
     "cakeDelete": {
         "prefix": "cake-delete-field",
         "body": [
-            "// delete(integer \\$id = null, boolean \\$cascade = true)",
+            "${1:<?}// delete(integer \\$id = null, boolean \\$cascade = true)",
             "\\$this->Model->delete(\\$model_id);",
             "// deleteAll(mixed \\$conditions, \\$cascade = true, \\$callbacks = false)",
             "\\$this->Model->deleteAll(array(\"Model.id > 0\"), true);"
@@ -398,7 +394,7 @@
     "LayoutConfigurationsImport": {
         "prefix": "cake-layout-configurations-import",
         "body": [
-            "// see the folder app/Config/dnk_submenu > attribute highlights",
+            "${1:<?}// see the folder app/Config/dnk_submenu > attribute highlights",
             "// agent-panel, internal_chat, supervisor-dashboard, agent_dashboard, ",
             "// reports, data-register, queues, settings",
             "\\$this->set('highlight', '');",
@@ -417,7 +413,7 @@
     "cakeBaseUrl": {
         "prefix": "cake-base-url",
         "body": [
-            "Router::url('/', false);",
+            "${1:<?}Router::url('/', false);",
             "Router::url(array('controller'=>'users','action'=>'index'), false);"
         ],
         "description": "Cake Base Url"
@@ -425,12 +421,11 @@
     "cakeFormInputArray": {
         "prefix": "cake-input-array",
         "body": [
-            "<?php",
-            "    $index = 0;",
-            "    foreach ($salmos as $sl) :",
+            "${1:<?}\t$index = 0;",
+            "\tforeach ($salmos as $sl) :",
             "?>",
-            "    <?= $this->Form->input(\"Music.{$index}.id\"); ?>",
-            "    <?= $this->Form->input(\"Music.{$index}.book_music_number\"); ?>",
+            "\t<?= $this->Form->input(\"Music.{$index}.id\"); ?>",
+            "\t<?= $this->Form->input(\"Music.{$index}.book_music_number\"); ?>",
             "<?php endforeach; ?>"
         ],
         "description": "Cake Form Input Array"
@@ -443,7 +438,7 @@
             "cake-timezone-convert"
         ],
         "body": [
-            "// Option 1",
+            "${1:<?}// Option 1",
             "// 'UTC', 'America/Sao_Paulo', ...",
             "date_default_timezone_set('America/Sao_Paulo');",
             "\\$whenJs = 1678737927980;",
@@ -465,10 +460,10 @@
             "cake-import-config"
         ],
         "body": [
-            "// Processando o objeto",
+            "${1:<?}// Processando o objeto",
             "require(APP . 'Config' . DS . 'FILE_NAME.php');",
             "foreach (\\$OBJECT_NAME as \\$item) {",
-            "    debug(\\$item['KEY'])",
+            "\tdebug(\\$item['KEY'])",
             "}",
             "",
             "// Enviando o objeto para view",
@@ -481,31 +476,31 @@
     "cakeJoinModel": {
         "prefix": "cake-join-model",
         "body": [
-            "// Join with string key",
+            "${1:<?}// Join with string key",
             "public \\$hasOne = array(",
-            "    'OtherModel' => array(",
-            "        'className' => 'OtherModel',",
-            "        'foreignKey' => false,",
-            "        'conditions' => array('CurrentModel.cid = OtherModel.cid'),",
-            "        'fields' => array(",
-            "            'id',",
-            "            'otherField',",
-            "         )",
-            "    )",
+            "\t'OtherModel' => array(",
+            "\t\t'className' => 'OtherModel',",
+            "\t\t'foreignKey' => false,",
+            "\t\t'conditions' => array('CurrentModel.cid = OtherModel.cid'),",
+            "\t\t'fields' => array(",
+            "\t\t\t'id',",
+            "\t\t\t'otherField',",
+            "\t\t )",
+            "\t)",
             ");",
             "// Custom Join ",
             "public \\$hasAndBelongsToMany = array(",
-            "    'OtherModel' => array(",
-            "        'className' => 'OtherModel',",
-            "        'joinTable' => 'other_table',",
-            "        'foreignKey' => 'field_id',",
-            "        'associationForeignKey' => 'field_id',",
-            "        'unique' => 'keepExisting',",
-            "        'fields' => array(",
-            "            'id',",
-            "            'otherField',",
-            "         )",
-            "    )",
+            "\t'OtherModel' => array(",
+            "\t\t'className' => 'OtherModel',",
+            "\t\t'joinTable' => 'other_table',",
+            "\t\t'foreignKey' => 'field_id',",
+            "\t\t'associationForeignKey' => 'field_id',",
+            "\t\t'unique' => 'keepExisting',",
+            "\t\t'fields' => array(",
+            "\t\t\t'id',",
+            "\t\t\t'otherField',",
+            "\t\t )",
+            "\t)",
             ");"
         ],
         "description": "Cake Join Model Example"
@@ -515,24 +510,24 @@
             "cake-http-socket-template"
         ],
         "body": [
-            "App::uses('HttpSocket', 'Network/Http');",
+            "${1:<?}App::uses('HttpSocket', 'Network/Http');",
             "\\$endpoint = \"{\\$this->emailApiHost}/api/email/message/{\\$emailKey}\";",
             "try {",
-            "    \\$http = new HttpSocket();",
-            "    \\$request = array(",
-            "        'header' => array(",
-            "            'Content-Type' => 'application/json',",
-            "            //'x-access-token' => \\$login->token,",
-            "        ),",
-            "    );",
-            "    \\$data = $http->get(\\$endpoint, \\$request);",
-            "    \\$body = array(",
-            "        'body' => \\$data->body,",
-            "        'endpoint' => \\$endpoint,",
-            "    );",
-            "    return \\$body;",
+            "\t\\$http = new HttpSocket();",
+            "\t\\$request = array(",
+            "\t\t'header' => array(",
+            "\t\t\t'Content-Type' => 'application/json',",
+            "\t\t\t//'x-access-token' => \\$login->token,",
+            "\t\t),",
+            "\t);",
+            "\t\\$data = $http->get(\\$endpoint, \\$request);",
+            "\t\\$body = array(",
+            "\t\t'body' => \\$data->body,",
+            "\t\t'endpoint' => \\$endpoint,",
+            "\t);",
+            "\treturn \\$body;",
             "} catch (Exception \\$ex) {",
-            "    return json_encode(array());",
+            "\treturn json_encode(array());",
             "}"
         ],
         "description": "Cake HTTP Socket Template"
@@ -544,10 +539,9 @@
             "html-json-output"
         ],
         "body": [
-            "<?php",
-            "\\$json = '{",
-            "    \"nome\": \"João\",",
-            "    \"idade\": 30",
+            "${1:<?}\\$json = '{",
+            "\t\"nome\": \"João\",",
+            "\t\"idade\": 30",
             "}';",
             "header('Content-Type: application/json');",
             "echo \\$json;",
@@ -563,7 +557,7 @@
             "cake-sql"
         ],
         "body": [
-            "\\$this->showSql('CrmContact');"
+            "${1:<?}\\$this->showSql('CrmContact');"
         ],
         "description": "Cake Show SQL"
     },
@@ -574,14 +568,14 @@
             "cake-query-param"
         ],
         "body": [
+            "${1:<?}\\$this->User->query(",
+            "\t\t'select * from model where param like ?',",
+            "\t\tarray('value%')",
+            "\t);",
             "\\$this->User->query(",
-            "        'select * from model where param like ?',",
-            "        array('value%')",
-            "    );",
-            "\\$this->User->query(",
-            "        'select * from model where param1 like :p1 and param2 like :p2',",
-            "        array('p1' => 'value1%', 'p2' => 'value2%')",
-            "    );"
+            "\t\t'select * from model where param1 like :p1 and param2 like :p2',",
+            "\t\tarray('p1' => 'value1%', 'p2' => 'value2%')",
+            "\t);"
         ],
         "description": "Cake Query Params"
     },
@@ -590,7 +584,7 @@
             "cake-element"
         ],
         "body": [
-            "// Crie a chamada ao elemento na view desejada",
+            "${1:<?}// Crie a chamada ao elemento na view desejada",
             "\\$this->element('sidemenu_whitelabel', array('highlight' => \\$highlight));",
             "",
             "// Dentro do elemento: portal/app/View/Elements/sidemenu_whitelabel.ctp",
@@ -605,7 +599,7 @@
             "bootstrap4-cdn"
         ],
         "body": [
-            "<!-- Latest compiled and minified CSS -->",
+            "${1:<?}<!-- Latest compiled and minified CSS -->",
             "<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css\">",
             "<!-- jQuery library -->",
             "<script src=\"https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js\"></script>",
@@ -622,14 +616,14 @@
             "cake-domni-log"
         ],
         "body": [
-            "\\$this->log('$0', 'domni');"
+            "${1:<?}\\$this->log('$0', 'domni');"
         ],
         "description": "Log messages in a function"
     },
     "cake-my-model-update": {
         "prefix": "cake-update-model",
         "body": [
-            "\\$myModelObj = \\$this->MyModel->find('first', array(",
+            "${1:<?}\\$myModelObj = \\$this->MyModel->find('first', array(",
             "\t'conditions' => array(",
             "\t\t'MyModel.field' => 'value',",
             "\t),",
@@ -661,9 +655,35 @@
         "description": "Perform save operations on MyModel with conditional checks"
     },
     "cake-model-save": {
-        "prefix": "cake-save-model",
+        "prefix": [
+            "cake-save-model",
+            "cake-create-model",
+            "cake-insert-model",
+            "cake-add-model"
+        ],
         "body": [
-            "\\$myModelObj = \\$this->MyModel->find('first', array(",
+            "${1:<?}\\$fields = array(",
+            "\t'field1' => 'value 1',",
+            "\t'field2' => 'value 2 ',",
+            "\t'field3' => 'value 3'",
+            ");",
+            "",
+            "\\$this->MyModel->set(\\$fields);",
+            "",
+            "if (\\$this->MyModel->save()) {",
+            "\tdebug('Success');",
+            "} else {",
+            "\tdebug('Err');",
+            "}"
+        ],
+        "description": "Perform save operations on MyModel with conditional checks"
+    },
+    "cake-model-update": {
+        "prefix": [
+            "cake-update-model"
+        ],
+        "body": [
+            "${1:<?}\\$myModelObj = \\$this->MyModel->find('first', array(",
             "\t'conditions' => array(",
             "\t\t'MyModel.field' => 'value',",
             "\t),",
@@ -672,14 +692,14 @@
             "",
             "if (\\$myModelObj != null) {",
             "",
-            "\t\\$myModelFields = array(",
+            "\t\\$fields = array(",
             "\t\t'field1' => 'value 1',",
             "\t\t'field2' => 'value 2 ',",
             "\t\t'field3' => 'value 3'",
             "\t);",
             "",
             "\t\\$this->MyModel->id = \\$myModelObj['MyModel']['id'];",
-            "\t\\$this->MyModel->set(\\$myModelFields);",
+            "\t\\$this->MyModel->set(\\$fields);",
             "",
             "\tif (\\$this->MyModel->save()) {",
             "\t\tdebug('Success');",
@@ -693,14 +713,14 @@
     "helper-auth": {
         "prefix": "cake-helper-get-auth-user",
         "body": [
-            "$uid = \\$this->Session->read('Auth.User.id');"
+            "${1:<?}$uid = \\$this->Session->read('Auth.User.id');"
         ],
         "description": "Tipos de layouts contendo menus laterais específicos"
     },
     "model-inside-model": {
         "prefix": "cake-inserting-model-inside-model",
         "body": [
-            "\\$Pausa = ClassRegistry::init('Pausa');",
+            "${1:<?}\\$Pausa = ClassRegistry::init('Pausa');",
             "return \\$Pausa->read(false, 1);"
         ],
         "description": "Carregando um model dentro de outro modelno CakePHP"
@@ -711,7 +731,7 @@
             "php-switch-case"
         ],
         "body": [
-            "switch (\\$valor) {",
+            "${1:<?}switch (\\$valor) {",
             "\tcase \\$valor1:",
             "\t\t// ",
             "\t\tbreak;",
@@ -725,7 +745,7 @@
     "load-model-inside-component": {
         "prefix": "cake-load-model-inside-component",
         "body": [
-            "public function loadModel(\\$modelClass)",
+            "${1:<?}public function loadModel(\\$modelClass)",
             "{",
             "\t\\$this->{\\$modelClass} = ClassRegistry::init(\\$modelClass);",
             "}"
@@ -738,7 +758,7 @@
             "cake-before-filter-inside-component"
         ],
         "body": [
-            "// Started with the component",
+            "${1:<?}// Started with the component",
             "public function initialize(Controller \\$controller)",
             "{",
             "\tparent::initialize(\\$controller);",
@@ -749,8 +769,7 @@
     "updateAll": {
         "prefix": "cake-update-all",
         "body": [
-            "<?$0",
-            "\\$this->Model->updateAll(",
+            "${1:<?}\\$this->Model->updateAll(",
             "\tarray('field1' => 'value1', 'field2' => 'value2'),",
             "\tarray('conditions' => array())",
             ");"
@@ -760,7 +779,7 @@
     "saveMany": {
         "prefix": "cake-update-with-save-many",
         "body": [
-            "\\$data = array(",
+            "${1:<?}\\$data = array(",
             "\tarray('id' => 1, 'field1' => 'value1'),",
             "\tarray('id' => 2, 'field1' => 'value2'),",
             ");",
@@ -774,7 +793,7 @@
             "cake-one-to-one"
         ],
         "body": [
-            "public \\$hasOne = array(",
+            "${1:<?}public \\$hasOne = array(",
             "\t'ModelName' => array(",
             "\t\t'className' => 'ModelName', // Nome da classe do modelo que está sendo associado",
             "\t\t'foreignKey' => 'foreign_key', // Nome da coluna chave estrangeira na tabela do modelo associado",
@@ -793,7 +812,7 @@
             "cake-one-to-many"
         ],
         "body": [
-            "public \\$hasMany = array(",
+            "${1:<?}public \\$hasMany = array(",
             "\t'ModelName' => array(",
             "\t\t'className' => 'ModelName', // Nome da classe do modelo que está sendo associado",
             "\t\t'foreignKey' => 'foreign_key', // Nome da coluna chave estrangeira na tabela do modelo associado",
@@ -811,7 +830,7 @@
             "cake-belongs-to"
         ],
         "body": [
-            "public \\$belongsTo = array(",
+            "${1:<?}public \\$belongsTo = array(",
             "\t'ModelName' => array(",
             "\t\t'className' => 'ModelName', // Nome da classe do modelo que está sendo associado",
             "\t\t'foreignKey' => 'foreign_key', // Nome da coluna chave estrangeira na tabela do modelo atual que referencia a chave primária do modelo associado",
@@ -829,7 +848,7 @@
             "cake-many-to-many"
         ],
         "body": [
-            "public \\$hasAndBelongsToMany = array(",
+            "${1:<?}public \\$hasAndBelongsToMany = array(",
             "\t'ModelName' => array(",
             "\t\t'className' => 'ModelName', // Nome da classe do modelo que está sendo associado",
             "\t\t'joinTable' => 'join_table', // Nome da tabela intermediária que associa os dois modelos",
@@ -850,7 +869,7 @@
             "cake-validates"
         ],
         "body": [
-            "/**",
+            "${1:<?}/**",
             " * Validates",
             " */",
             "public \\$validate = array(",
@@ -881,7 +900,7 @@
             "cake-template-filter-results"
         ],
         "body": [
-            "\t\\$this->Pausa->recursive = 0;",
+            "${1:<?}\t\\$this->Pausa->recursive = 0;",
             "\t\\$this->FilterResults->addFilters(",
             "\t\tarray(",
             "\t\t\t'filter_label' => array(",
@@ -909,7 +928,7 @@
             "cake-filter-results-join-jsonb"
         ],
         "body": [
-            "// Set paginate fields for FilterResults",
+            "${1:<?}// Set paginate fields for FilterResults",
             "\\$this->FilterResults->setPaginate('fields', array(",
             "\t'CoreContact.cid',",
             "\t'\"CoreSegment\".\"data\"->>'start' AS \"CoreSegment__start\"',",
@@ -940,7 +959,7 @@
             "cake-find-join-jsonb-field"
         ],
         "body": [
-            "\\$this->CoreContact->find('all', array(",
+            "${1:<?}\\$this->CoreContact->find('all', array(",
             "\t'recursive' => 0,",
             "\t'fields' => array(",
             "\t\t'CoreContact.cid',",
@@ -965,7 +984,7 @@
             "cake-jsonb-field-pattern"
         ],
         "body": [
-            "'fields' => array(",
+            "${1:<?}'fields' => array(",
             "\t'\"CoreSegment\".\"data\"->>\\'start\\' AS \"CoreSegment__start\"',",
             "),",
             "'conditions' => array(",
@@ -977,7 +996,7 @@
     "filterResultsJsonb": {
         "prefix": "cake-filter-results-jsonb",
         "body": [
-            "'filter_status' => array(",
+            "${1:<?}'filter_status' => array(",
             "\t'\\\"CoreContact\\\".\\\"data\\\"->>\\'endReason\\'' => array(",
             "\t\t'select' => array(",
             "\t\t\t'' => '...',",
@@ -995,7 +1014,7 @@
     "PaginatorSettings": {
         "prefix": "cake-paginator-settings",
         "body": [
-            "\\$this->Paginator->settings = array(",
+            "${1:<?}\\$this->Paginator->settings = array(",
             "\t'limit' => 10, // Número de resultados por página",
             "\t'paramType' => 'querystring', // Define o tipo de parâmetro para as páginas",
             "\t'fields' => array(), // Campos que serão retornados pela query, se não definir, retornará todos",
@@ -1015,7 +1034,7 @@
             "cake-get-set-filter-form-data"
         ],
         "body": [
-            "// Set default Value",
+            "${1:<?}// Set default Value",
             "\\$this->request->data['filters']['filter_from'] = date('d/m/Y 00:00');",
             "\\$this->request->data['filters']['filter_to'] = date('d/m/Y 23:59');",
             "",
@@ -1028,23 +1047,23 @@
             "// view",
             "<?= \\$this->Form->create('filters'); ?>",
             "<script type=\"text/javascript\">",
-            "    $(function() {",
-            "        $(\"#dt_from\").datetimepicker({",
-            "            format: 'DD/MM/YYYY HH:mm'",
-            "        });",
-            "    });",
+            "\t\\$(function() {",
+            "\t\t\\$(\"#dt_from\").datetimepicker({",
+            "\t\t\tformat: 'DD/MM/YYYY HH:mm'",
+            "\t\t});",
+            "\t});",
             "</script>",
             "<div class=\"col-sm-4\">",
-            "    <div class=\"form-group row\">",
-            "        <label for=\"staticStatus\" class=\"col-sm-4 col-form-label text-right\">Data Início *</label>",
-            "        <div class=\"col-sm-8\">",
-            "            <?= \\$this->Form->input('filter_from', array(",
-            "                'id' => 'dt_from',",
-            "                'class' => 'form-control form-control-sm',",
-            "                'label' => false,",
-            "            )); ?>",
-            "        </div>",
-            "    </div>",
+            "\t<div class=\"form-group row\">",
+            "\t\t<label for=\"staticStatus\" class=\"col-sm-4 col-form-label text-right\">Data Início *</label>",
+            "\t\t<div class=\"col-sm-8\">",
+            "\t\t\t<?= \\$this->Form->input('filter_from', array(",
+            "\t\t\t\t'id' => 'dt_from',",
+            "\t\t\t\t'class' => 'form-control form-control-sm',",
+            "\t\t\t\t'label' => false,",
+            "\t\t\t)); ?>",
+            "\t\t</div>",
+            "\t</div>",
             "</div>"
         ],
         "description": "Get and set filter form data"
@@ -1052,10 +1071,95 @@
     "DatesToSql": {
         "prefix": "cake-dates-tosql",
         "body": [
-            "'start_time' => \\$this->Dates->toSql(\\$this->request->data['filters']['filter_from']),",
+            "${1:<?}'start_time' => \\$this->Dates->toSql(\\$this->request->data['filters']['filter_from']),",
             "// 'd/m/Y H:i:s' formato vindo da view para ser convertido em 'Y-m-d H:i:s'",
             "'end_time' => \\$this->Dates->toSql(\\$this->request->data['filters']['filter_from'], 'd/m/Y H:i:s'),"
         ],
         "description": "Set 'start_time' with Dates->toSql"
+    },
+    "CSRFTokenExample": {
+        "prefix": [
+            "js-csrf-token-example",
+            "js-ajax-post-csrf-token-example",
+            "cake-post-token-example",
+            "cake-ajax-post-csrf-token-example"
+        ],
+        "body": [
+            "${1:<?}public $components = array('Security');",
+            "",
+            "// Em um controlador do CakePHP",
+            "public function myAction() {",
+            "\t\\$csrfToken = \\$this->Security->generateToken(\\$this->request);",
+            "\t\\$this->set('csrfToken', \\$csrfToken);",
+            "}",
+            "",
+            "<script>",
+            "\t\\$(document).ready(function() {",
+            "\t\tvar csrfToken = '<?php echo \\$csrfToken; ?>';",
+            "\t\t\\$.ajax({",
+            "\t\t\turl: '/controller/action',",
+            "\t\t\tmethod: 'POST',",
+            "\t\t\theaders: {",
+            "\t\t\t\t'X-CSRF-Token': csrfToken",
+            "\t\t\t},",
+            "\t\t\tdata: {},",
+            "\t\t\tsuccess: function(response) {},",
+            "\t\t\terror: function(xhr, status, error) {}",
+            "\t\t});",
+            "\t});",
+            "</script>"
+        ],
+        "description": "Exemplo de uso do CSRF Token com CakePHP e AJAX"
+    },
+    "DisableSecurityValidation": {
+        "prefix": [
+            "cake-disable-post-validate",
+            "cake-disable-post-security"
+        ],
+        "body": [
+            "${1:<?}// Desabilitando validatePost no before filter",
+            "if (strpos(\\$this->params->action, 'ajax')) {",
+            "\t\\$this->Security->validatePost = false;",
+            "\t\\$this->Security->csrfCheck = false;",
+            "}"
+        ],
+        "description": "Exemplo de desabilitar validações de segurança para ação AJAX"
+    },
+    "JSONDecodeExample": {
+        "prefix": [
+            "cake-json-to-array",
+            "cake-stdclass-to-array",
+            "cake-json-decode-to-array"
+        ],
+        "body": [
+            "${1:<?}// use true no json_decode para retornar um array",
+            "// false para retornar um stdClass",
+            "\\$array = json_decode(\\$jsonString, true);",
+            "\\$stdClass = json_decode(\\$jsonString);",
+            "\\$array = get_object_vars(\\$stdClass);"
+        ],
+        "description": "Exemplo de uso do json_decode com true e false"
+    },
+    "ApiHelperGetList": {
+        "prefix": [
+            "cake-list-find-all",
+            "cake-list-find-all-api-helper"
+        ],
+        "body": [
+            "${1:<?}",
+            "// default values",
+            "// \\$type = 'all, list, first, count'",
+            "// \\$fields = array('id, name')",
+            "// \\$conditions = array()",
+            "// \\$order = array('name' => 'asc'))",
+            "<?php",
+            "    // \\$this->Api->find('list', 'Model', \\$fields, \\$conditions, \\$order)",
+            "    \\$objects = \\$this->Api->find('list', 'Model');",
+            "?>",
+            "<?php foreach (\\$objects as \\$key => \\$label) : ?>",
+            "<?php endforeach; ?>"
+        ],
+        "description": "Exemplo de uso do get lista da api helper"
     }
+
 }

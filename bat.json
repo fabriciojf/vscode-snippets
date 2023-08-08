@@ -5,9 +5,9 @@
 			"@echo off",
 			"docker stop apache",
 			"docker run --name apache --net devnetwork --ip 172.50.50.110 ^",
-			"   -p 880:80 ^",
-			"   -d dnk/apache"
+			"\t-p 880:80 ^",
+			"\t-d dnk/apache"
 		],
 		"description": "Bat Template"
-	},
+	}
 }
