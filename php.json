@@ -22,7 +22,6 @@
             "));"
         ],
         "description": "Cake Link",
-        "scope": "php"
     },
     "linkclass": {
         "prefix": "cake-link-class",
