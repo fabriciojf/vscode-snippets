@@ -479,7 +479,8 @@
     },
 	"ZmdiIconList": {
         "prefix": [
-			"html-icon-list"
+			"html-icon-list",
+			"zmdi-icon-list"
 		],
         "body": [
             "<i class=\"zmdi zmdi-format-list-bulleted top-button-icon\"></i>"
@@ -488,7 +489,8 @@
     },
 	"ZmdiIconAdd": {
         "prefix": [
-			"html-icon-add"
+			"html-icon-add",
+			"zmdi-icon-add"
 		],
         "body": [
             "<i class=\"zmdi zmdi-plus top-button-icon\"></i>"
@@ -497,7 +499,8 @@
     },
 	"ZmdiIconEdit": {
         "prefix": [
-			"html-icon-edit"
+			"html-icon-edit",
+			"zmdi-icon-edit"
 		],
         "body": [
             "<i class=\"zmdi zmdi-edit top-button-icon\"></i>"
@@ -506,7 +509,8 @@
     },
 	"ZmdiIconView": {
         "prefix": [
-			"html-icon-view"
+			"html-icon-view",
+			"zmdi-icon-view"
 		],
         "body": [
             "<i class=\"zmdi zmdi-eye top-button-icon\"></i>"
@@ -515,12 +519,13 @@
     },
 	"ZmdiIconTrash": {
         "prefix": [
-			"html-icon-trash"
+			"html-icon-trash",
+			"ion-icon-trash"
 		],
         "body": [
             "<i class=\"ion ion-trash-a top-button-icon\"></i>"
         ],
-        "description": "Zmdi Icon View - format-list-bulleted"
+        "description": "Ion Icon View - format-list-bulleted"
     },
     "GetSetFilterFormData": {
         "prefix": [
@@ -580,5 +585,53 @@
             "<?php endforeach; ?>"
         ],
         "description": "Exemplo de uso do get lista da api helper"
+    },
+	"BootstrapHTMLTemplate": {
+        "prefix": "html-template-bootstrap",
+        "body": [
+            "<!DOCTYPE html>",
+            "<html lang=\"en\">",
+            "<head>",
+            "\t<meta charset=\"UTF-8\">",
+            "\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+            "\t<title>Document</title>",
+            "\t<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\">",
+            "</head>",
+            "<body>",
+			"\t<div class=\"container mt-4\">",
+            "\t\t<div class=\"card\">",
+            "\t\t\t<img src=\"https://via.placeholder.com/150\" class=\"card-img-top\" alt=\"Imagem do Card\">",
+            "\t\t\t<div class=\"card-body\">",
+            "\t\t\t\t<h5 class=\"card-title\">Título do Card</h5>",
+            "\t\t\t\t<p class=\"card-text\">Este é um exemplo de conteúdo para o card. Você pode adicionar texto, imagens e outros elementos aqui.</p>",
+            "\t\t\t\t<a href=\"#\" class=\"btn btn-primary\">Botão</a>",
+            "\t\t\t</div>",
+            "\t\t</div>",
+            "\t</div>",
+            "\t",
+            "\t<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>",
+			"\t<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js\"></script>",
+			"\t<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js\"></script>",
+            "</body>",
+            "</html>"
+        ],
+        "description": "Modelo de página HTML com Bootstrap"
+    },
+	"B4Card": {
+        "prefix": [
+			"b4-card",
+			"html-card"
+		],
+        "body": [
+            "<div class=\"card\">",
+            "\t<img src=\"https://via.placeholder.com/150\" class=\"card-img-top\" alt=\"Imagem do Card\">",
+            "\t<div class=\"card-body\">",
+            "\t\t<h5 class=\"card-title\">Título do Card</h5>",
+            "\t\t<p class=\"card-text\">Este é um exemplo de conteúdo para o card. Você pode adicionar texto, imagens e outros elementos aqui.</p>",
+            "\t\t<a href=\"#\" class=\"btn btn-primary\">Botão</a>",
+            "\t</div>",
+            "</div>"
+        ],
+        "description": "Template bootstrap card"
     }
 }

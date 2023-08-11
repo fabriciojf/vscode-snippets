@@ -448,9 +448,26 @@
             "\\$value = '2023-04-13T11:52:42.366+0000';",
             "\\$date = new DateTime(\\$value, new DateTimeZone('UTC'));",
             "\\$date->setTimezone(new DateTimeZone('America/Sao_Paulo'));",
-            "\\$theDate = date_format(\\$date, 'Y-m-d H:i:s');"
+            "\\$theDate = date_format(\\$date, 'Y-m-d H:i:s');",
+            "",
+            "// Option 3 - now (UTC)",
+            "\\$currentDateTime = new DateTime('now', new DateTimeZone('UTC'));",
+            "\\$utcDateTimeString = $currentDateTime->format('Y-m-d H:i:s');"
         ],
         "description": "Cake When (int) to Date"
+    },
+    "cakeNowUtc": {
+        "prefix": [
+            "cake-utc-now",
+            "cake-now-utc"
+        ],
+        "body": [
+            "${1:<?}",
+            "// now (UTC)",
+            "\\$currentDateTime = new DateTime('now', new DateTimeZone('UTC'));",
+            "\\$utcDateTimeString = \\$currentDateTime->format('Y-m-d H:i:s');"
+        ],
+        "description": "Cake now UTC"
     },
     "cakeImportPhpClass": {
         "prefix": [
@@ -622,15 +639,19 @@
         "prefix": "cake-update-model",
         "body": [
             "${1:<?}\\$myModelObj = \\$this->MyModel->find('first', array(",
+            "\t'fields' => array(",
+            "\t\t'id',",
+            "\t),",
             "\t'conditions' => array(",
             "\t\t'MyModel.field' => 'value',",
-            "\t),",
-            "\t'order' => 'MyModel.id DESC',",
             "));",
             "",
+            "\\$status = 'success'",
             "if (\\$myModelObj != null) {",
             "\t\\$this->MyModel->id = \\$myModelObj['MyModel']['id'];",
             "\t\\$this->MyModel->saveField('field', 'value');",
+            "} else {",
+            "\t\\$status = 'Register not found';",
             "}",
             "",
             "\\$myModelFields = array(",

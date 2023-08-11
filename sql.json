@@ -378,5 +378,15 @@
             "SELECT * FROM filtered_data JOIN second_filtered_data ON filtered_data.id = second_filtered_data.id;"
         ],
         "description": "SQL Query with Common Table Expressions (CTEs)"
+    },
+    "SQLQuerySetDefault": {
+        "prefix": [
+            "query-set-default",
+            "sql-set-default"
+        ],
+        "body": [
+            "ALTER TABLE table_name ALTER COLUMN field_name SET DEFAULT integer_value;"
+        ],
+        "description": "SQL Query set Default"
     }
 }

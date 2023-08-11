@@ -650,7 +650,6 @@
         ],
         "body": [
             "${1:<script>}",
-            "let param = 'term1';",
             "switch (param) {",
             "\tcase 'term1':",
             "\t\tconsole.log('Term 1');",
