@@ -633,5 +633,15 @@
             "</div>"
         ],
         "description": "Template bootstrap card"
+    },
+	"B4Offset": {
+        "prefix": [
+			"b4-offset",
+			"html-offset-bootstrap"
+		],
+        "body": [
+			"<div class=\"col-md-6 offset-md-3\"></div>"
+        ],
+        "description": "Template bootstrap offset"
     }
 }

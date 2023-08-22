@@ -793,14 +793,14 @@
     },
     "storageExample": {
         "prefix": [
-            "js-storage-agent-actions",
-            "js-agent-storage-actions"
+            "js-storage-update",
+            "js-agent-storage-update"
         ],
         "body": [
             "${1:<script>}",
-            "window.agentInstance.updateStorage(cid, 'status', 'in_service');",
-            "let status = window.agentInstance.getStorageByKey(cid, 'status');",
-            "window.agentInstance.deteleStorage(cid);"
+            "const storage = new PortalStorage();",
+            "// offline, in_service, inviting_assistant, in_assistant, in_pause ",
+            "storage.update(query.cid, 'status', 'offline');"
         ],
         "description": "Exemplo de uso de GET do localStorage"
     },
@@ -901,5 +901,29 @@
             "url: `\\${windowDomain}controller/action`,"
         ],
         "description": "Milisegundos to Hour"
+    },
+    "jsLowercase": {
+        "prefix": [
+            "js-to-lowercase",
+            "js-tolowercase",
+            "js-to-uppercase",
+            "js-touppercase"
+        ],
+        "body": [
+            "var minusculo = text.toLowerCase();",
+            "var maiusculo = text.toUpperCase();"
+        ],
+        "description": "Milisegundos to Hour"
+    },
+    "modalShowHide": {
+        "prefix": [
+            "js-modal-show-hide"
+        ],
+        "body": [
+            "${1:<script>}",
+            "$('#email-reply').modal('show');",
+            "$('#email-reply').modal('hide');"
+        ],
+        "description": "Modal Show Hide Example"
     }
 }
