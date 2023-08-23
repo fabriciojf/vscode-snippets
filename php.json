@@ -1202,22 +1202,14 @@
     },
     "ApiHelperGetList": {
         "prefix": [
+            "cake-api-find-all-list",
             "cake-list-find-all",
             "cake-list-find-all-api-helper"
         ],
         "body": [
-            "${1:<?}",
-            "// default values",
-            "// \\$type = 'all, list, first, count'",
-            "// \\$fields = array('id, name')",
-            "// \\$conditions = array()",
-            "// \\$order = array('name' => 'asc'))",
-            "<?php",
-            "    // \\$this->Api->find('list', 'Model', \\$fields, \\$conditions, \\$order)",
-            "    \\$objects = \\$this->Api->find('list', 'Model');",
-            "?>",
-            "<?php foreach (\\$objects as \\$key => \\$label) : ?>",
-            "<?php endforeach; ?>"
+            "${1:<?}// \\$type = 'all, list, first, count'",
+            "// \\$this->Api->find('list', 'Model', \\$fields, \\$conditions, \\$order)",
+            "\\$objects = \\$this->Api->find('list', 'Model');"
         ],
         "description": "Exemplo de uso do get lista da api helper"
     }
