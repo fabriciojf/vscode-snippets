@@ -1002,7 +1002,8 @@
     },
     "cakeJsonbPattern": {
         "prefix": [
-            "cake-jsonb-field-pattern"
+            "cake-jsonb-field-pattern",
+            "cake-virtual-field-jsonb-pattern"
         ],
         "body": [
             "${1:<?}'fields' => array(",
@@ -1092,8 +1093,7 @@
     "DatesToSql": {
         "prefix": "cake-dates-tosql",
         "body": [
-            "${1:<?}'start_time' => \\$this->Dates->toSql(\\$this->request->data['filters']['filter_from']),",
-            "// 'd/m/Y H:i:s' formato vindo da view para ser convertido em 'Y-m-d H:i:s'",
+            "${1:<?}",
             "'end_time' => \\$this->Dates->toSql(\\$this->request->data['filters']['filter_from'], 'd/m/Y H:i:s'),"
         ],
         "description": "Set 'start_time' with Dates->toSql"
@@ -1210,6 +1210,28 @@
             "${1:<?}// \\$type = 'all, list, first, count'",
             "// \\$this->Api->find('list', 'Model', \\$fields, \\$conditions, \\$order)",
             "\\$objects = \\$this->Api->find('list', 'Model');"
+        ],
+        "description": "Exemplo de uso do get lista da api helper"
+    },
+    "BootstrapAppend": {
+        "prefix": [
+            "cake-prepend",
+            "cake-append"
+        ],
+        "body": [
+            "${1:<?}",
+            "<div class=\"input-group\">",
+            "    <?= \\$this->Form->input('filter_from_day', array(",
+            "        'id' => 'dt_from_day',",
+            "        'class' => 'form-control form-control-sm',",
+            "        'label' => false,",
+            "        'placeholder' => 'Dia/Mês/Ano Hora',",
+            "        'div' => false // <--important",
+            "    )); ?>",
+            "    <div class=\"input-group-append\">",
+            "        <div class=\"input-group-text\"><i class=\"zmdi zmdi-calendar\"></i></div>",
+            "    </div>",
+            "</div>"
         ],
         "description": "Exemplo de uso do get lista da api helper"
     }

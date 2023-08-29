@@ -643,5 +643,27 @@
 			"<div class=\"col-md-6 offset-md-3\"></div>"
         ],
         "description": "Template bootstrap offset"
+    },
+    "BootstrapAppend": {
+        "prefix": [
+            "cake-prepend",
+            "cake-append"
+        ],
+        "body": [
+            "${1:<?}",
+            "<div class=\"input-group\">",
+            "    <?= \\$this->Form->input('filter_from_day', array(",
+            "        'id' => 'dt_from_day',",
+            "        'class' => 'form-control form-control-sm',",
+            "        'label' => false,",
+            "        'placeholder' => 'Dia/Mês/Ano Hora',",
+            "        'div' => false // <--important",
+            "    )); ?>",
+            "    <div class=\"input-group-append\">",
+            "        <div class=\"input-group-text\"><i class=\"zmdi zmdi-calendar\"></i></div>",
+            "    </div>",
+            "</div>"
+        ],
+        "description": "Exemplo de uso do get lista da api helper"
     }
 }

@@ -925,5 +925,38 @@
             "$('#email-reply').modal('hide');"
         ],
         "description": "Modal Show Hide Example"
+    },
+    "jsClone": {
+        "prefix": "js-clone-object",
+        "body": [
+            "const clone = Object.assign({}, originalObj);",
+            "conf = dnkapi.clone(originalObj); // deep clone"
+        ],
+        "description": "Exemplo de clonagem rasa de objeto em JavaScript"
+    },
+    "DeepClone": {
+        "prefix": "deep-clone",
+        "body": [
+            "function clone(obj) {",
+            "\tif (obj === null || typeof obj !== 'object') {",
+            "\t\treturn obj;",
+            "\t}",
+            "\tif (Array.isArray(obj)) {",
+            "\t\tconst newArr = [];",
+            "\t\tfor (let i = 0; i < obj.length; i++) {",
+            "\t\t\tnewArr[i] = clone(obj[i]);",
+            "\t\t}",
+            "\t\treturn newArr;",
+            "\t}",
+            "\tconst newObj = {};",
+            "\tfor (let key in obj) {",
+            "\t\tif (obj.hasOwnProperty(key)) {",
+            "\t\t\tnewObj[key] = clone(obj[key]);",
+            "\t\t}",
+            "\t}",
+            "\treturn newObj;",
+            "}"
+        ],
+        "description": "Função para clonagem profunda de objetos em JavaScript"
     }
 }
