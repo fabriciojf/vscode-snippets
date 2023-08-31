@@ -35,11 +35,11 @@
     "createtable": {
         "prefix": "sql-newtable",
         "body": [
-            "CREATE TABLE NAME (",
-            "\tid serial PRIMARY KEY,",
-            "\tcreated TIMESTAMP NOT NULL DEFAULT now(),",
-            "\tupdated TIMESTAMP NOT NULL DEFAULT now(),",
-            "\tUNIQUE(FIELD)",
+            "create table name (",
+            "\tid serial primary key,",
+            "\tcreated timestamp not null default now(),",
+            "\tupdated timestamp not null default now(),",
+            "\tunique(field)",
             ");"
         ],
         "description": "SQL New Table"

@@ -958,5 +958,30 @@
             "}"
         ],
         "description": "Função para clonagem profunda de objetos em JavaScript"
+    },
+    "AjaxFormSubmit": {
+        "prefix": [
+            "js-form-send",
+            "js-form-submit"
+        ],
+        "body": [
+            "$('#form_id').submit(function (e) {",
+            "\tvar formData = $(this).serialize();",
+            "\te.preventDefault();",
+            "\t$.ajax({",
+            "\t\ttype: 'POST',",
+            "\t\turl: `${windowDomain}controller/action`,",
+            "\t\tdata: formData,",
+            "\t\tsuccess: function (_data) {",
+            "\t\t\tconsole.log(data);",
+            "\t\t},",
+            "\t\terror: function (err) {",
+            "\t\t\tconsole.log(err);",
+            "\t\t}",
+            "\t});",
+            "\treturn false;",
+            "});"
+        ],
+        "description": "Exemplo de submissão de formulário via Ajax com jQuery"
     }
 }
