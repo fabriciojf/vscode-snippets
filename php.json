@@ -1234,6 +1234,35 @@
             "</div>"
         ],
         "description": "Exemplo de uso do get lista da api helper"
+    },
+    "CheckIfModelExists": {
+        "prefix": "cake-model-exists",
+        "body": [
+            "\\$this->MODEL->id = \\$id;",
+            "if (!\\$this->MODEL->exists()) {",
+            "\t\\$this->Session->setFlash(__('O MODEL não foi encontrado.'), 'default', array('class' => 'error'));",
+            "\treturn;",
+            "}"
+        ],
+        "description": "Verifica se o modelo existe em um controlador do CakePHP"
+    },
+    "SaveAssociatedExample": {
+        "prefix": [
+            "cake-save-many",
+            "cake-save-child"
+        ],
+        "body": [
+            "$MODELFields = array(",
+            "\tarray(",
+            "\t\t'title' => 'Panel Title',",
+            "\t\t'datasource' => 'internal',",
+            "\t\t'user_id' => $this->Auth->user('id'),",
+            "\t)",
+            ");",
+            "$PARENT = $this->PARENT->findById($PARENTId);",
+            "$PARENT['MODEL'] = $MODELFields;",
+            "$this->PARENT->saveAssociated($PARENT, array('deep' => true));"
+        ],
+        "description": "Exemplo de uso de saveAssociated em um controlador do CakePHP"
     }
-
 }
