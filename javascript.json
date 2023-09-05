@@ -77,7 +77,7 @@
         ],
         "body": [
             "${1:<script>}",
-            "$('window').ready(function() {",
+            "\\$('window').ready(function() {",
             "",
             "});"
         ],
@@ -91,7 +91,7 @@
         ],
         "body": [
             "${1:<script>}",
-            ".append($('<>').addClass('')",
+            ".append(\\$('<>').addClass('')",
             ")"
         ],
         "description": "Ajax Window"
@@ -229,8 +229,8 @@
         ],
         "body": [
             "${1:<script>}",
-            "$('#MODALID').modal('show');",
-            "$('#MODALID').modal('hide');"
+            "\\$('#MODALID').modal('show');",
+            "\\$('#MODALID').modal('hide');"
         ],
         "description": "Ajax Modal"
     },
@@ -364,7 +364,7 @@
             "\t\t\tconst { rows } = await db.query(`",
             "\t\t\t\tSELECT *",
             "\t\t\t\tFROM users u",
-            "\t\t\t\tWHERE u.name like $1",
+            "\t\t\t\tWHERE u.name like \\$1",
             "\t\t\t`, [username]);",
             "\t\t\tcallback(rows);",
             "\t\t} catch (err) {",
@@ -514,7 +514,7 @@
             "${1:<script>}",
             "convertJsonArrayToInValues(req) {",
             "\tconst keys = req.body;",
-            "\tconst query = `SELECT * FROM table WHERE field IN (${keys.map((_, index) => `$${index + 1}`).join(',')})`;",
+            "\tconst query = `SELECT * FROM table WHERE field IN (\\${keys.map((_, index) => `\\$\\${index + 1}`).join(',')})`;",
             "\treturn await executeQuery(query, keys);",
             "}"
         ],
@@ -637,7 +637,7 @@
             "for (let key in json) {",
             "\tif (json.hasOwnProperty(key)) {",
             "\t\tlet value = json[key];",
-            "\t\tconsole.log(`Chave: ${key}, Valor: ${value}`);",
+            "\t\tconsole.log(`Chave: \\${key}, Valor: \\${value}`);",
             "\t}",
             "}"
         ],
@@ -765,18 +765,18 @@
         ],
         "body": [
             "${1:<script>}",
-            "public $components = array('Security');",
+            "public \\$components = array('Security');",
             "",
             "// Em um controlador do CakePHP",
             "public function myAction() {",
-            "\t$csrfToken = $this->Security->generateToken($this->request);",
-            "\t$this->set('csrfToken', $csrfToken);",
+            "\t\\$csrfToken = \\$this->Security->generateToken(\\$this->request);",
+            "\t\\$this->set('csrfToken', \\$csrfToken);",
             "}",
             "",
             "<script>",
             "\t$(document).ready(function() {",
-            "\t\tvar csrfToken = '<?php echo $csrfToken; ?>';",
-            "\t\t$.ajax({",
+            "\t\tvar csrfToken = '<?php echo \\$csrfToken; ?>';",
+            "\t\t\\$.ajax({",
             "\t\t\turl: '/controller/action',",
             "\t\t\tmethod: 'POST',",
             "\t\t\theaders: {",
@@ -921,8 +921,8 @@
         ],
         "body": [
             "${1:<script>}",
-            "$('#email-reply').modal('show');",
-            "$('#email-reply').modal('hide');"
+            "\\$('#email-reply').modal('show');",
+            "\\$('#email-reply').modal('hide');"
         ],
         "description": "Modal Show Hide Example"
     },
@@ -965,15 +965,15 @@
             "js-form-submit"
         ],
         "body": [
-            "$('#form_id').submit(function (e) {",
-            "\tvar formData = $(this).serialize();",
+            "\\$('#form_id').submit(function (e) {",
+            "\tvar formData = \\$(this).serialize();",
             "\te.preventDefault();",
-            "\t$.ajax({",
+            "\t\\$.ajax({",
             "\t\ttype: 'POST',",
-            "\t\turl: `${windowDomain}controller/action`,",
+            "\t\turl: `\\${windowDomain}controller/action`,",
             "\t\tdata: formData,",
             "\t\tsuccess: function (_data) {",
-            "\t\t\tconsole.log(data);",
+            "\t\t\tconsole.log(_data);",
             "\t\t},",
             "\t\terror: function (err) {",
             "\t\t\tconsole.log(err);",
@@ -983,5 +983,36 @@
             "});"
         ],
         "description": "Exemplo de submissão de formulário via Ajax com jQuery"
+    },
+    "CheckSubstring": {
+        "prefix": [
+            "js-contains",
+            "js-string-contains"
+        ],
+        "body": [
+            "if (mainString.includes(substring)) {",
+            "\tconsole.log(\"A string contém a substring.\");",
+            "} else {",
+            "\tconsole.log(\"A string não contém a substring.\");",
+            "}"
+        ],
+        "description": "Verifica se uma string contém uma substring em JavaScript"
+    },
+    "AppendMessage": {
+        "prefix": [
+            "js-message-success",
+            "js-message-good",
+            "js-message-error",
+            "js-message-bad"
+        ],
+        "body": [
+            "\\$('#tab_1')",
+            "\t.append(\\$('<div>').addClass('message').attr('id', 'goodMessage').text('Serviço foi salvo com sucesso'))",
+            "\t.append(\\$('<div>').addClass('message').attr('id', 'badMessage').text('Erro ao Salvar Serviço'));",
+            "setInterval(() => {",
+            "\t\\$('#goodMessage').remove();",
+            "}, 1000);"
+        ],
+        "description": "Adiciona uma mensagem de sucesso ou erro usando jQuery"
     }
 }

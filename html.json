@@ -301,6 +301,50 @@
 		],
 		"description": "Cake Modal"
 	},
+
+	"CakeModalRight": {
+		"prefix": "cake-modal-right",
+		"body": [
+			"<button class=\"btn btn-default\" type=\"button\" data-toggle=\"modal\" data-target=\"#MODAL_NAME\"><i class=\"ion ion-plus-round\"></i></button>",
+			"<div class=\"modal custom-modal fade\" id=\"MODAL_NAME\">",
+			"\t<div class=\"modal-dialog modal-dialog-right modal-lg\">",
+			"\t\t<div class=\"modal-content\">",
+			"\t\t\t<?= \\$this->Form->create('MODEL', array('id' => 'MODEL_id')); ?>",
+			"\t\t\t<div class=\"modal-header\">",
+			"\t\t\t\t<h5 class=\"modal-title\">Adicionar MODEL</h5>",
+			"\t\t\t\t<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Fechar\">",
+			"\t\t\t\t\t<span aria-hidden=\"true\">&times;</span>",
+			"\t\t\t\t</button>",
+			"\t\t\t</div>",
+			"\t\t\t<div class=\"modal-body text-center\">",
+			"\t\t\t\t<?php",
+			"\t\t\t\techo \\$this->Form->hidden('id');",
+			"\t\t\t\t?>",
+			"\t\t\t\t<div class=\"form-group row\">",
+			"\t\t\t\t\t<label for=\"staticTitle\" class=\"col-sm-3 col-form-label text-right\"><?= __('Title') ?></label>",
+			"\t\t\t\t\t<div class=\"col-sm-9\">",
+			"\t\t\t\t\t\t<?= \\$this->Form->input('name', array('id' => 'tk_name', 'label' => false, 'class' => 'form-control')); ?>",
+			"\t\t\t\t\t\t<small class=\"form-text text-muted\">texto explicativo</small>",
+			"\t\t\t\t\t</div>",
+			"\t\t\t\t</div>",
+			"\t\t\t</div>",
+			"\t\t\t<div class=\"modal-footer\">",
+			"\t\t\t\t<?= \\$this->Form->end(array('label' => 'Salvar Dados', 'class' => 'btn btn-primary btn-sm')) ?>",
+			"\t\t\t\t<button type=\"button\" class=\"btn btn-secondary btn-sm\" data-dismiss=\"modal\">Cancelar</button>",
+			"\t\t\t</div>",
+			"\t\t</div>",
+			"\t</div>",
+			"</div>",
+			"<?= \\$this->Html->link('<i class=\"ion ion-plus\"></i>', '#', array(",
+			"\t\t'data-toggle' => 'modal',",
+			"\t\t'data-target' => '#MODAL_NAME',",
+			"\t\t'data-backdrop' => 'static',",
+			"\t\t'escape' => false,",
+			"\t));",
+			"?>"
+		],
+		"description": "Cake Modal"
+	},
 	"CakeSelectInput": {
 		"prefix": "cake-select",
 		"body": [
@@ -462,7 +506,9 @@
 	},
     "HtmlLinkPausaEdit": {
         "prefix": [
-			"cake-index-table-edit-link",
+			"cake-index-edit",
+			"cake-td-edit",
+			"cake-td-index",
 			"html-index-table-edit-link"
 		],
         "body": [
@@ -472,7 +518,7 @@
             "\t'controller' => 'CONTROLLER',",
             "\t'action' => 'edit', \\$OBJECT['MODEL']['id']",
             "), array(",
-            "\t'class' => 'index-label'",
+            "\t'class' => 'field-edit'",
             ")); ?>&nbsp;</td>"
         ],
         "description": "Html link for Pausa edit"
