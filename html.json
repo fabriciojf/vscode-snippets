@@ -301,7 +301,6 @@
 		],
 		"description": "Cake Modal"
 	},
-
 	"CakeModalRight": {
 		"prefix": "cake-modal-right",
 		"body": [
@@ -504,212 +503,224 @@
 		],
 		"description": "Cake HTTP Socket Template"
 	},
-    "HtmlLinkPausaEdit": {
-        "prefix": [
+	"HtmlLinkPausaEdit": {
+		"prefix": [
 			"cake-index-edit",
 			"cake-td-edit",
 			"cake-td-index",
 			"html-index-table-edit-link"
 		],
-        "body": [
-            "<td><?= \\$this->Html->link(\\$OBJECT['MODEL']['FIELD'], array(",
-            "\t'plugin' => false,",
-            "\t'admin' => true,",
-            "\t'controller' => 'CONTROLLER',",
-            "\t'action' => 'edit', \\$OBJECT['MODEL']['id']",
-            "), array(",
-            "\t'class' => 'field-edit'",
-            ")); ?>&nbsp;</td>"
-        ],
-        "description": "Html link for Pausa edit"
-    },
+		"body": [
+			"<td><?= \\$this->Html->link(\\$OBJECT['MODEL']['FIELD'], array(",
+			"\t'plugin' => false,",
+			"\t'admin' => true,",
+			"\t'controller' => 'CONTROLLER',",
+			"\t'action' => 'edit', \\$OBJECT['MODEL']['id']",
+			"), array(",
+			"\t'class' => 'field-edit'",
+			")); ?>&nbsp;</td>"
+		],
+		"description": "Html link for Pausa edit"
+	},
 	"ZmdiIconList": {
-        "prefix": [
+		"prefix": [
 			"html-icon-list",
 			"zmdi-icon-list"
 		],
-        "body": [
-            "<i class=\"zmdi zmdi-format-list-bulleted top-button-icon\"></i>"
-        ],
-        "description": "Zmdi Icon List - format-list-bulleted"
-    },
+		"body": [
+			"<i class=\"zmdi zmdi-format-list-bulleted top-button-icon\"></i>"
+		],
+		"description": "Zmdi Icon List - format-list-bulleted"
+	},
 	"ZmdiIconAdd": {
-        "prefix": [
+		"prefix": [
 			"html-icon-add",
 			"zmdi-icon-add"
 		],
-        "body": [
-            "<i class=\"zmdi zmdi-plus top-button-icon\"></i>"
-        ],
-        "description": "Zmdi Icon Add - format-list-bulleted"
-    },
+		"body": [
+			"<i class=\"zmdi zmdi-plus top-button-icon\"></i>"
+		],
+		"description": "Zmdi Icon Add - format-list-bulleted"
+	},
 	"ZmdiIconEdit": {
-        "prefix": [
+		"prefix": [
 			"html-icon-edit",
 			"zmdi-icon-edit"
 		],
-        "body": [
-            "<i class=\"zmdi zmdi-edit top-button-icon\"></i>"
-        ],
-        "description": "Zmdi Icon Edit - format-list-bulleted"
-    },
+		"body": [
+			"<i class=\"zmdi zmdi-edit top-button-icon\"></i>"
+		],
+		"description": "Zmdi Icon Edit - format-list-bulleted"
+	},
 	"ZmdiIconView": {
-        "prefix": [
+		"prefix": [
 			"html-icon-view",
 			"zmdi-icon-view"
 		],
-        "body": [
-            "<i class=\"zmdi zmdi-eye top-button-icon\"></i>"
-        ],
-        "description": "Zmdi Icon View - format-list-bulleted"
-    },
+		"body": [
+			"<i class=\"zmdi zmdi-eye top-button-icon\"></i>"
+		],
+		"description": "Zmdi Icon View - format-list-bulleted"
+	},
 	"ZmdiIconTrash": {
-        "prefix": [
+		"prefix": [
 			"html-icon-trash",
 			"ion-icon-trash"
 		],
-        "body": [
-            "<i class=\"ion ion-trash-a top-button-icon\"></i>"
-        ],
-        "description": "Ion Icon View - format-list-bulleted"
-    },
-    "GetSetFilterFormData": {
-        "prefix": [
-            "html-get-set-filter-form-data",
+		"body": [
+			"<i class=\"ion ion-trash-a top-button-icon\"></i>"
+		],
+		"description": "Ion Icon View - format-list-bulleted"
+	},
+	"GetSetFilterFormData": {
+		"prefix": [
+			"html-get-set-filter-form-data",
 			"html-filter-date-time-picker"
-        ],
-        "body": [
-            "<?= \\$this->Form->create('filters'); ?>",
-            "<script type=\"text/javascript\">",
-            "\t$(function() {",
-            "\t\t$(\"#dt_from\").datetimepicker({",
-            "\t\t\tformat: 'DD/MM/YYYY HH:mm'",
-            "\t\t});",
-            "\t});",
-            "</script>",
-            "<div class=\"col-sm-4\">",
-            "\t<div class=\"form-group row\">",
-            "\t\t<label for=\"staticStatus\" class=\"col-sm-4 col-form-label text-right\">Data Início *</label>",
-            "\t\t<div class=\"col-sm-8\">",
-            "\t\t\t<?= \\$this->Form->input('filter_from', array(",
-            "\t\t\t\t'id' => 'dt_from',",
-            "\t\t\t\t'class' => 'form-control form-control-sm',",
-            "\t\t\t\t'label' => false,",
-            "\t\t\t)); ?>",
-            "\t\t</div>",
-            "\t</div>",
-            "</div>"
-        ],
-        "description": "DateTimePicker setup and view"
-    },
+		],
+		"body": [
+			"<?= \\$this->Form->create('filters'); ?>",
+			"<script type=\"text/javascript\">",
+			"\t$(function() {",
+			"\t\t$(\"#dt_from\").datetimepicker({",
+			"\t\t\tformat: 'DD/MM/YYYY HH:mm'",
+			"\t\t});",
+			"\t});",
+			"</script>",
+			"<div class=\"col-sm-4\">",
+			"\t<div class=\"form-group row\">",
+			"\t\t<label for=\"staticStatus\" class=\"col-sm-4 col-form-label text-right\">Data Início *</label>",
+			"\t\t<div class=\"col-sm-8\">",
+			"\t\t\t<?= \\$this->Form->input('filter_from', array(",
+			"\t\t\t\t'id' => 'dt_from',",
+			"\t\t\t\t'class' => 'form-control form-control-sm',",
+			"\t\t\t\t'label' => false,",
+			"\t\t\t)); ?>",
+			"\t\t</div>",
+			"\t</div>",
+			"</div>"
+		],
+		"description": "DateTimePicker setup and view"
+	},
 	"RoundDecimals": {
-        "prefix": [
-            "html-round-2-decimals",
+		"prefix": [
+			"html-round-2-decimals",
 			"php-round-2-decimals"
-        ],
-        "body": [
-            "$number = 123.456789;",
+		],
+		"body": [
+			"$number = 123.456789;",
 			"debug(round($number, 2));"
-        ],
-        "description": "Round number 2 decimals in PHP"
-    },
-    "ApiHelperGetList": {
-        "prefix": [
-            "cake-api-find-all-list-count"
-        ],
-        "body": [
-            "${1:<?php}",
-            "// default values",
-            "// \\$type = 'all, list, first, count'",
-            "// \\$fields = array('id, name')",
-            "// \\$conditions = array()",
-            "// \\$order = array('name' => 'asc'))",
-            "    // \\$this->Api->find('list', 'Model', \\$fields, \\$conditions, \\$order)",
-            "    \\$objects = \\$this->Api->find('list', 'Model');",
-            "?>",
-            "<?php foreach (\\$objects as \\$key => \\$label) : ?>",
-            "<?php endforeach; ?>"
-        ],
-        "description": "Exemplo de uso do get lista da api helper"
-    },
+		],
+		"description": "Round number 2 decimals in PHP"
+	},
+	"ApiHelperGetList": {
+		"prefix": [
+			"cake-api-find-all-list-count"
+		],
+		"body": [
+			"${1:<?php}",
+			"// default values",
+			"// \\$type = 'all, list, first, count'",
+			"// \\$fields = array('id, name')",
+			"// \\$conditions = array()",
+			"// \\$order = array('name' => 'asc'))",
+			"    // \\$this->Api->find('list', 'Model', \\$fields, \\$conditions, \\$order)",
+			"    \\$objects = \\$this->Api->find('list', 'Model');",
+			"?>",
+			"<?php foreach (\\$objects as \\$key => \\$label) : ?>",
+			"<?php endforeach; ?>"
+		],
+		"description": "Exemplo de uso do get lista da api helper"
+	},
 	"BootstrapHTMLTemplate": {
-        "prefix": "html-template-bootstrap",
-        "body": [
-            "<!DOCTYPE html>",
-            "<html lang=\"en\">",
-            "<head>",
-            "\t<meta charset=\"UTF-8\">",
-            "\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
-            "\t<title>Document</title>",
-            "\t<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\">",
-            "</head>",
-            "<body>",
+		"prefix": "html-template-bootstrap",
+		"body": [
+			"<!DOCTYPE html>",
+			"<html lang=\"en\">",
+			"<head>",
+			"\t<meta charset=\"UTF-8\">",
+			"\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+			"\t<title>Document</title>",
+			"\t<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\">",
+			"</head>",
+			"<body>",
 			"\t<div class=\"container mt-4\">",
-            "\t\t<div class=\"card\">",
-            "\t\t\t<img src=\"https://via.placeholder.com/150\" class=\"card-img-top\" alt=\"Imagem do Card\">",
-            "\t\t\t<div class=\"card-body\">",
-            "\t\t\t\t<h5 class=\"card-title\">Título do Card</h5>",
-            "\t\t\t\t<p class=\"card-text\">Este é um exemplo de conteúdo para o card. Você pode adicionar texto, imagens e outros elementos aqui.</p>",
-            "\t\t\t\t<a href=\"#\" class=\"btn btn-primary\">Botão</a>",
-            "\t\t\t</div>",
-            "\t\t</div>",
-            "\t</div>",
-            "\t",
-            "\t<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>",
+			"\t\t<div class=\"card\">",
+			"\t\t\t<img src=\"https://via.placeholder.com/150\" class=\"card-img-top\" alt=\"Imagem do Card\">",
+			"\t\t\t<div class=\"card-body\">",
+			"\t\t\t\t<h5 class=\"card-title\">Título do Card</h5>",
+			"\t\t\t\t<p class=\"card-text\">Este é um exemplo de conteúdo para o card. Você pode adicionar texto, imagens e outros elementos aqui.</p>",
+			"\t\t\t\t<a href=\"#\" class=\"btn btn-primary\">Botão</a>",
+			"\t\t\t</div>",
+			"\t\t</div>",
+			"\t</div>",
+			"\t",
+			"\t<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>",
 			"\t<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js\"></script>",
 			"\t<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js\"></script>",
-            "</body>",
-            "</html>"
-        ],
-        "description": "Modelo de página HTML com Bootstrap"
-    },
+			"</body>",
+			"</html>"
+		],
+		"description": "Modelo de página HTML com Bootstrap"
+	},
 	"B4Card": {
-        "prefix": [
+		"prefix": [
 			"b4-card",
 			"html-card"
 		],
-        "body": [
-            "<div class=\"card\">",
-            "\t<img src=\"https://via.placeholder.com/150\" class=\"card-img-top\" alt=\"Imagem do Card\">",
-            "\t<div class=\"card-body\">",
-            "\t\t<h5 class=\"card-title\">Título do Card</h5>",
-            "\t\t<p class=\"card-text\">Este é um exemplo de conteúdo para o card. Você pode adicionar texto, imagens e outros elementos aqui.</p>",
-            "\t\t<a href=\"#\" class=\"btn btn-primary\">Botão</a>",
-            "\t</div>",
-            "</div>"
-        ],
-        "description": "Template bootstrap card"
-    },
+		"body": [
+			"<div class=\"card\">",
+			"\t<img src=\"https://via.placeholder.com/150\" class=\"card-img-top\" alt=\"Imagem do Card\">",
+			"\t<div class=\"card-body\">",
+			"\t\t<h5 class=\"card-title\">Título do Card</h5>",
+			"\t\t<p class=\"card-text\">Este é um exemplo de conteúdo para o card. Você pode adicionar texto, imagens e outros elementos aqui.</p>",
+			"\t\t<a href=\"#\" class=\"btn btn-primary\">Botão</a>",
+			"\t</div>",
+			"</div>"
+		],
+		"description": "Template bootstrap card"
+	},
 	"B4Offset": {
-        "prefix": [
+		"prefix": [
 			"b4-offset",
 			"html-offset-bootstrap"
 		],
-        "body": [
+		"body": [
 			"<div class=\"col-md-6 offset-md-3\"></div>"
-        ],
-        "description": "Template bootstrap offset"
-    },
-    "BootstrapAppend": {
-        "prefix": [
-            "cake-prepend",
-            "cake-append"
-        ],
-        "body": [
-            "${1:<?}",
-            "<div class=\"input-group\">",
-            "    <?= \\$this->Form->input('filter_from_day', array(",
-            "        'id' => 'dt_from_day',",
-            "        'class' => 'form-control form-control-sm',",
-            "        'label' => false,",
-            "        'placeholder' => 'Dia/Mês/Ano Hora',",
-            "        'div' => false // <--important",
-            "    )); ?>",
-            "    <div class=\"input-group-append\">",
-            "        <div class=\"input-group-text\"><i class=\"zmdi zmdi-calendar\"></i></div>",
-            "    </div>",
-            "</div>"
-        ],
-        "description": "Exemplo de uso do get lista da api helper"
-    }
+		],
+		"description": "Template bootstrap offset"
+	},
+	"BootstrapAppend": {
+		"prefix": [
+			"cake-prepend",
+			"cake-append"
+		],
+		"body": [
+			"${1:<?}",
+			"<div class=\"input-group\">",
+			"    <?= \\$this->Form->input('filter_from_day', array(",
+			"        'id' => 'dt_from_day',",
+			"        'class' => 'form-control form-control-sm',",
+			"        'label' => false,",
+			"        'placeholder' => 'Dia/Mês/Ano Hora',",
+			"        'div' => false // <--important",
+			"    )); ?>",
+			"    <div class=\"input-group-append\">",
+			"        <div class=\"input-group-text\"><i class=\"zmdi zmdi-calendar\"></i></div>",
+			"    </div>",
+			"</div>"
+		],
+		"description": "Exemplo de uso do get lista da api helper"
+	},
+	"CakeLookup": {
+		"prefix": "cake-lookup",
+		"body": [
+			"<div class=\"form-group row\">",
+			"\t<label for=\"staticEmail\" class=\"col-sm-4 col-form-label text-right\"><?= __('Role') ?></label>",
+			"\t<div class=\"col-sm-8\">",
+			"\t\t<?= $this->Element('admin/lookup/roles_lookup'); ?>",
+			"\t</div>",
+			"</div>"
+		],
+		"description": "HTML form group with label and element"
+	}
 }
