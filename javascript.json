@@ -77,7 +77,7 @@
         ],
         "body": [
             "${1:<script>}",
-            "\\$('window').ready(function() {",
+            "\\$(document).ready(function() {",
             "",
             "});"
         ],
@@ -113,7 +113,7 @@
             "}",
             "",
             "var className;",
-            "\\$('window').ready(function() {",
+            "\\$(document).ready(function() {",
             "\tclassName = new ClassName();",
             "\tclassName.init();",
             "});"
@@ -1014,5 +1014,67 @@
             "}, 1000);"
         ],
         "description": "Adiciona uma mensagem de sucesso ou erro usando jQuery"
+    },
+    "Select2Js": {
+        "prefix": [
+            "js-select2",
+            "js-select2-prepend-selected"
+        ],
+        "body": [
+            "<div class=\"col-sm-9\">",
+            "\t<?= $this->Form->input('user_id', array(",
+            "\t\t'id' => 'user_id_lookup',",
+            "\t\t'label' => false,",
+            "\t\t'class' => 'form-control',",
+            "\t)); ?>",
+            "</div>",
+            "const users = <?= $this->Api->findToJson('list', 'User') ?>;",
+            "agentQueue = new ServiceAgent(users);",
+            "",
+            "function init() {",
+            "\t$('#user_id_lookup').prepend('<option value=\"\"></option>');",
+            "\t$('#user_id_lookup').select2({",
+            "\t\twidth: 'calc(100% - 45px)',",
+            "\t\tallowClear: true,",
+            "\t\tlanguage: {",
+            "\t\t\terrorLoading: function () {",
+            "\t\t\t\tvar newOption = new Option('', '', false, false);",
+            "\t\t\t\t$('#user_id_lookup').append(newOption).trigger('change');",
+            "\t\t\t},",
+            "\t\t\tnoResults: function () {",
+            "\t\t\t\tvar newOption = new Option('', '', false, false);",
+            "\t\t\t\t$('#user_id_lookup').append(newOption).trigger('change');",
+            "\t\t\t}",
+            "\t\t},",
+            "\t\tescapeMarkup: function (markup) {",
+            "\t\t\treturn markup;",
+            "\t\t},",
+            "\t\tplaceholder: '',",
+            "\t\tdata: query.users",
+            "\t});",
+            "\t$('#user_id_lookup').on('change', function () {",
+            "\t\tvar userId = $(this).val();",
+            "\t\tuserSelected(userId);",
+            "\t});",
+            "}",
+            "",
+            "function userSelected(userId) {",
+            "\tconsole.log('Opção selecionada: ', userId);",
+            "}"
+        ],
+        "description": "JavaScript function to initialize Select2"
+    },
+    "StringJoin": {
+        "prefix": [
+            "js-join-items",
+            "js-string-join",
+        ],
+        "body": [
+            "const array = ['item1', 'item2', 'item3'];",
+            "const result = array.join(', ');",
+            "",
+            "console.log(result); // Saída: \"item1, item2, item3\""
+        ],
+        "description": "Join array elements with commas"
     }
 }

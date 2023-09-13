@@ -1266,36 +1266,22 @@
     "PieChart": {
         "prefix": "cake-pie-chart",
         "body": [
-            "$data = array(",
-            "\t__('Atendidos') => $receiveds['answered'],",
-            "\t__('Abandonados') => $receiveds['abandoned'],",
-            "\t__('Perdidos') => $lost['metric_lost_contacts_total']",
+            "$chartData = array(",
+            "\tarray(",
+            "\t\t'name' => __('Atendidos'),",
+            "\t\t'y' => $receiveds['answered'],",
+            "\t\t'color' => '#B5CA92', // $this->colors['light-green']",
+            "\t),",
+            "\tarray(",
+            "\t\t'name' => __('Abandonados'),",
+            "\t\t'y' => $receiveds['abandoned'],",
+            "\t\t'color' => '#DB843D', // $this->colors['orange']",
+            "\t),",
             ");",
             "",
-            "$chartData = array();",
-            "if ($data != null) {",
-            "\tforeach ($data as $key => $value) {",
-            "\t\tif ($key == 'total') {",
-            "\t\t\tcontinue;",
-            "\t\t}",
-            "\t\t$chartData = array_merge($chartData, array(",
-            "\t\t\tarray(",
-            "\t\t\t\t__($key),",
-            "\t\t\t\t(int) $value",
-            "\t\t\t)",
-            "\t\t));",
-            "\t}",
-            "}",
-            "",
-            "$chartName = 'received_contacts';",
+            "$chartName = \"received_contacts{$dashDashletId}\";",
             "$chartTitle = __('Contatos Recebidos');",
-            "$this->Reports->pie($chartName, $chartTitle, $chartData);",
-            "$this->set(compact(",
-            "\t'chartName',",
-            "\t'chartData',",
-            "\t'chartTitle',",
-            "\t'dashDashletId'",
-            "));"
+            "$this->Reports->pie($chartName, $chartTitle, $chartData, '20%');"
         ],
         "description": "Processa e prepara dados para um gráfico no CakePHP"
     },
@@ -1332,5 +1318,58 @@
             "$this->Reports->line('resource_occupation', 'Ocupação de recursos', $xSeries, $series);"
         ],
         "description": "Gera um gráfico de linha com séries de dados no CakePHP"
+    },
+    "CakeNtoNRelantioship": {
+        "prefix": [
+            "cake-many-to-many",
+            "cake-has-and-belongs-to-many"
+        ],
+        "body": [
+            "// N to N users <-> userServices <-> services",
+            "// inside User model",
+            "public $hasAndBelongsToMany = array(",
+            "\t'DomniService' => array(",
+            "\t\t'className' => 'DomniService',",
+            "\t\t'joinTable' => 'user_services',",
+            "\t\t'foreignKey' => 'user_id',",
+            "\t\t'associationForeignKey' => 'domni_service_id',",
+            "\t\t'unique' => 'keepExisting',",
+            "\t)",
+            ");",
+            "",
+            "// inside DomniService model",
+            "public $hasAndBelongsToMany = array(",
+            "\t'User' => array(",
+            "\t\t'className' => 'User',",
+            "\t\t'joinTable' => 'user_services',",
+            "\t\t'foreignKey' => 'service_id',",
+            "\t\t'associationForeignKey' => 'user_id',",
+            "\t\t'unique' => 'keepExisting',",
+            "\t)",
+            ");",
+            "",
+            "// loading",
+            "$this->loadModel('User');",
+            "$this->User->recursive = 2;",
+            "debug($this->User->read(false, 1));"
+        ],
+        "description": "PHP code for many-to-many relationship configuration"
+    },
+    "CakeSpin": {
+        "prefix": [
+            "cake-loading-icon",
+            "cake-refresh-icon",
+            "cake-spinner-icon",
+            "ion-loading-icon",
+            "ion-refresh-icon",
+            "ion-spinner-icon"
+        ],
+        "body": [
+            "<i class=\"ion ion-load-d ion-spin float-left d-none f-25\" id=\"loadicon\"></i>",
+            "$('#loadicon').removeClass('d-none').addClass('d-inline');",
+            "// Your loading logic goes here",
+            "$('#loadicon').removeClass('d-inline').addClass('d-none');"
+        ],
+        "description": "HTML and JavaScript for showing/hiding a loading icon"
     }
 }
