@@ -83,6 +83,23 @@
         ],
         "description": "Ajax Window"
     },
+    "NodeMethod": {
+        "prefix": [
+            "node-method",
+            "node-class-method"
+        ],
+        "body": [
+            "create: async (req, res) => {",
+            "\ttry {",
+            "\t\tres.status(200).json({ message: 'Sucesso' });",
+            "\t} catch (error) {",
+            "\t\tconsole.log(error);",
+            "\t\tres.status(500).json({ message: 'Internal server error' });",
+            "\t}",
+            "}"
+        ],
+        "description": "Ajax Window"
+    },
     "AjaxAppend": {
         "prefix": [
             "ajax-append",
@@ -98,13 +115,11 @@
     },
     "AjaxClass": {
         "prefix": [
-            "ajax-class-template",
-            "javascript-class-template",
+            "jtemplate",
             "js-class-template"
         ],
         "body": [
-            "${1:<script>}",
-            "var ClassName = function() {",
+            "const $TM_FILENAME_BASE = function() {",
             "\tthis.init = init;",
             "",
             "\tfunction init() {",
@@ -112,13 +127,32 @@
             "\t}",
             "}",
             "",
-            "var className;",
-            "\\$(document).ready(function() {",
-            "\tclassName = new ClassName();",
-            "\tclassName.init();",
-            "});"
+            "module.exports = $TM_FILENAME_BASE();",
+            "",
+            "const c$TM_FILENAME_BASE = new $TM_FILENAME_BASE();",
+            "c$TM_FILENAME_BASE.init();"
         ],
         "description": "Ajax Window"
+    },
+    "Node Class": {
+        "prefix": [
+            "ntemplate",
+            "nclass"
+        ],
+        "body": [
+            "const $TM_FILENAME_BASE = {",
+            "\tfirst: async (req, res) => {",
+            "\t\ttry {",
+            " \t\t\tres.status(201).json({ message: '' });",
+            "\t\t} catch (error) {",
+            " \t\t\tres.status(500).json({ message: 'Internal server error' });",
+            "\t\t}",
+            "\t},",
+            "};",
+            "",
+            "module.exports = $TM_FILENAME_BASE;"
+        ],
+        "description": "Node Template"
     },
     "AjaxSelectedCombo": {
         "prefix": [
@@ -129,7 +163,13 @@
         "body": [
             "${1:<script>}",
             "let id = \\$('#SELECT_ID :selected').val(),",
-            "\tlabel = \\$('#SELECT_ID :selected').text();"
+            "\tlabel = \\$('#SELECT_ID :selected').text();",
+            "// Seleção de item pelo índice",
+            "$('#agentSelect option:eq(1)').prop('selected', true);",
+            "",
+            "// Desabilitando item do combo pelo valor",
+            "$('#agentSelect')",
+            "    .find('option[value=\"\"]').prop('disabled', true);"
         ],
         "description": "Ajax Selected Combo"
     },
@@ -140,24 +180,14 @@
         ],
         "body": [
             "${1:<script>}",
-            "const config = require('./config/config');",
-            "",
-            "function CLASSNAME() {",
-            "\tmongoClient.connect(config.mongo.connectionString, function (err, db) {",
-            "\t\tif (err) throw err;",
-            "\t\tmongodb = db.db(\"chassi\");",
-            "\t});",
-            "\tclassVarName = 'Class Variable';",
-            "}",
-            "",
-            "CLASSNAME.prototype = {",
-            "\tstart: function(req, res, callback) {",
+            "const { Service } = require('../models/Service');",
+            "const $TM_FILENAME_BASE = {",
+            "\tcreate: function(req, res) {",
             "\t\tconsole.log(classVarName);",
             "\t\treturn res.json({status: \"success\"});",
             "\t}",
             "}",
-            "",
-            "module.exports = new CLASSNAME();",
+            "module.exports = $TM_FILENAME_BASE;",
             "",
             "// Another Way",
             "'use strict';",
@@ -321,6 +351,39 @@
         ],
         "description": "Node Port Pattern"
     },
+    "NodeModelMongoose": {
+        "prefix": [
+            "model-mongoose",
+            "node-model-mongoose"
+        ],
+        "body": [
+            "const mongoose = require('mongoose');",
+            "const { ANOTHERSchema } = require('./ANOTHER');",
+            "",
+            "const { Schema } = mongoose;",
+            "",
+            "const $TM_FILENAME_BASESchema = new Schema(",
+            "    {",
+            "        name: {",
+            "            type: String,",
+            "            required: true,",
+            "            trim: true,",
+            "        },",
+            "        status: {",
+            "            type: [ANOTHERSchema],",
+            "        }",
+            "    },",
+            "    { timestamps: true }",
+            ");",
+            "",
+            "const $TM_FILENAME_BASE = mongoose.model('$TM_FILENAME_BASE', $TM_FILENAME_BASESchema);",
+            "",
+            "module.exports = {",
+            "    $TM_FILENAME_BASE",
+            "};"
+        ],
+        "description": "Node.js Model Mongoose"
+    },
     "NodeToolClass": {
         "prefix": [
             "node-tools-template"
@@ -350,7 +413,7 @@
             "${1:<script>}",
             "const db = require('./pg_connection');",
             "",
-            "class ChatDb {",
+            "class $TM_FILENAME_BASEDb {",
             "\tconstructor() { }",
             "",
             "\t/**",
@@ -374,9 +437,24 @@
             "\t}",
             "};",
             "",
-            "module.exports = new ChatDb();"
+            "module.exports = new $TM_FILENAME_BASEDb();"
         ],
         "description": "Node Database Class template"
+    },
+    "NodeTryCatch": {
+        "prefix": [
+            "node-try-catch",
+            "try"
+        ],
+        "body": [
+            "${1:<script>}",
+            "try {",
+            "",
+            "} catch (err) {",
+            "",
+            "}"
+        ],
+        "description": "Node Try Catch"
     },
     "NodeClassController": {
         "prefix": [
@@ -459,6 +537,92 @@
             "};"
         ],
         "description": "Node Date Time Util"
+    },
+    "NodeCrudMongo": {
+        "prefix": "node-crud",
+        "body": [
+            "const { $TM_FILENAME_BASE: $TM_FILENAME_BASEModel } = require('../models/$TM_FILENAME_BASE');",
+            "",
+            "const $TM_FILENAME_BASEController = {",
+            "",
+            "    create: async (req, res) => {",
+            "        try {",
+            "            const $TM_FILENAME_BASE = {",
+            "                name: req.body.name,",
+            "                data: req.body.data,",
+            "            };",
+            "            const response = await $TM_FILENAME_BASEModel.create($TM_FILENAME_BASE);",
+            "",
+            "            res.status(201).json({response, message: 'Contato criado com sucesso!'});",
+            "        } catch (error) {",
+            "            console.log(error);",
+            "            res.status(500).json({ message: 'Internal server error' });",
+            "        }",
+            "    },",
+            "    getAll: async (req, res) => {",
+            "        try {",
+            "            const $TM_FILENAME_BASEs = await $TM_FILENAME_BASEModel.find();",
+            "            res.status(200).json($TM_FILENAME_BASEs);",
+            "        } catch (error) {",
+            "            console.log(error);",
+            "            res.status(500).json({ message: 'Internal server error' });",
+            "        }",
+            "    },",
+            "    get: async (req, res) => {",
+            "        try {",
+            "            const { id } = req.params;",
+            "            const $TM_FILENAME_BASE = await $TM_FILENAME_BASEModel.findById(id);",
+            "            if (!$TM_FILENAME_BASE) {",
+            "                res.status(404).json({ message: 'Contato não encontrado' });",
+            "                return;",
+            "            }",
+            "            res.status(200).json($TM_FILENAME_BASE);",
+            "        } catch (error) {",
+            "            console.log(error);",
+            "            res.status(500).json({ message: 'Internal server error' });",
+            "        }",
+            "    },",
+            "    delete: async (req, res) => {",
+            "        try {",
+            "            const { id } = req.params;",
+            "            const $TM_FILENAME_BASE = await $TM_FILENAME_BASEModel.findById(id);",
+            "            if (!$TM_FILENAME_BASE) {",
+            "                res.status(404).json({ message: 'Contato não encontrado' });",
+            "                return;",
+            "            }",
+            "            const deleted$TM_FILENAME_BASE = await $TM_FILENAME_BASEModel.findByIdAndDelete(id);",
+            "            res.status(200).json({deleted$TM_FILENAME_BASE, message: 'Contato deletado com sucesso!'});",
+            "        } catch (error) {",
+            "            console.log(error);",
+            "            res.status(500).json({ message: 'Internal server error' });",
+            "        }",
+            "    },",
+            "    update: async (req, res) => {",
+            "        try {",
+            "            const { id } = req.params;",
+            "",
+            "            const $TM_FILENAME_BASE = {",
+            "                name: req.body.name,",
+            "                data: req.body.data,",
+            "            };",
+            "",
+            "            const updatedContact = await ContactModel.findByIdAndUpdate(id, $TM_FILENAME_BASE);",
+            "            if (!updatedContact) {",
+            "                res.status(404).json({ message: 'Contato não encontrado' });",
+            "                return;",
+            "            }",
+            "",
+            "            res.status(200).json({$TM_FILENAME_BASE, message: 'Contato atualizado com sucesso!'});",
+            "        } catch (error) {",
+            "            console.log(error);",
+            "            res.status(500).json({ message: 'Internal server error' });",
+            "        }",
+            "    }",
+            "}",
+            "",
+            "module.exports = $TM_FILENAME_BASEController;"
+        ],
+        "description": "Node.js Crud Mongo"
     },
     "NodeStaticClass": {
         "prefix": "fmt",
@@ -1015,59 +1179,10 @@
         ],
         "description": "Adiciona uma mensagem de sucesso ou erro usando jQuery"
     },
-    "Select2Js": {
-        "prefix": [
-            "js-select2",
-            "js-select2-prepend-selected"
-        ],
-        "body": [
-            "<div class=\"col-sm-9\">",
-            "\t<?= $this->Form->input('user_id', array(",
-            "\t\t'id' => 'user_id_lookup',",
-            "\t\t'label' => false,",
-            "\t\t'class' => 'form-control',",
-            "\t)); ?>",
-            "</div>",
-            "const users = <?= $this->Api->findToJson('list', 'User') ?>;",
-            "agentQueue = new ServiceAgent(users);",
-            "",
-            "function init() {",
-            "\t$('#user_id_lookup').prepend('<option value=\"\"></option>');",
-            "\t$('#user_id_lookup').select2({",
-            "\t\twidth: 'calc(100% - 45px)',",
-            "\t\tallowClear: true,",
-            "\t\tlanguage: {",
-            "\t\t\terrorLoading: function () {",
-            "\t\t\t\tvar newOption = new Option('', '', false, false);",
-            "\t\t\t\t$('#user_id_lookup').append(newOption).trigger('change');",
-            "\t\t\t},",
-            "\t\t\tnoResults: function () {",
-            "\t\t\t\tvar newOption = new Option('', '', false, false);",
-            "\t\t\t\t$('#user_id_lookup').append(newOption).trigger('change');",
-            "\t\t\t}",
-            "\t\t},",
-            "\t\tescapeMarkup: function (markup) {",
-            "\t\t\treturn markup;",
-            "\t\t},",
-            "\t\tplaceholder: '',",
-            "\t\tdata: query.users",
-            "\t});",
-            "\t$('#user_id_lookup').on('change', function () {",
-            "\t\tvar userId = $(this).val();",
-            "\t\tuserSelected(userId);",
-            "\t});",
-            "}",
-            "",
-            "function userSelected(userId) {",
-            "\tconsole.log('Opção selecionada: ', userId);",
-            "}"
-        ],
-        "description": "JavaScript function to initialize Select2"
-    },
     "StringJoin": {
         "prefix": [
             "js-join-items",
-            "js-string-join",
+            "js-string-join"
         ],
         "body": [
             "const array = ['item1', 'item2', 'item3'];",
@@ -1076,5 +1191,219 @@
             "console.log(result); // Saída: \"item1, item2, item3\""
         ],
         "description": "Join array elements with commas"
+    },
+    "Select2Js": {
+        "prefix": [
+            "js-select2",
+            "js-select2-prepend-selected"
+        ],
+        "body": [
+            "${1:<script>}",
+            "<div class=\"col-sm-9\">",
+            "  <?= $this->Form->input('user_id', array(",
+            "    'id' => 'user_id_lookup',",
+            "    'label' => false,",
+            "    'class' => 'form-control',",
+            "  )); ?>",
+            "</div>",
+            "<?php",
+            "$users = $this->Api->findToJson('list', 'User', array('id', 'name'), array('User.role_id' => 2), array('name' => 'asc'));",
+            "?>",
+            "",
+            "$('#user_id_lookup').prepend('<option value=\"\"></option>');",
+            "",
+            "$('#user_id_lookup').select2({",
+            "  width: 'calc(100% - 45px)',",
+            "  allowClear: true,",
+            "  language: {",
+            "    errorLoading: function () {",
+            "      var newOption = new Option('', '', false, false);",
+            "      $('#user_id_lookup').append(newOption).trigger('change');",
+            "    },",
+            "    noResults: function () {",
+            "      var newOption = new Option('', '', false, false);",
+            "      $('#user_id_lookup').append(newOption).trigger('change');",
+            "    }",
+            "  },",
+            "  escapeMarkup: function (markup) {",
+            "    return markup;",
+            "  },",
+            "  placeholder: '',",
+            "  data: query.users",
+            "});",
+            "",
+            "$('#user_id_lookup').on('change', function () {",
+            "  console.log('Val Op1', $(this).val());",
+            "",
+            "  var selectedData = $(this).select2('data');",
+            "  if (selectedData && selectedData.length > 0) {",
+            "    console.log('Label', selectedData[0].text);",
+            "    console.log('Val Op2', selectedData[0].id);",
+            "  }",
+            "});",
+            "",
+            "function selectedItem() {",
+            "  var selectedData = $(this).select2('data');",
+            "  if (selectedData && selectedData.length > 0) {",
+            "    console.log('Label', selectedData[0].text);",
+            "    console.log('Val Op2', selectedData[0].id);",
+            "  }",
+            "}",
+            "",
+            "$('#user_id_lookup').val(query.userId).trigger('change');"
+        ],
+        "description": "JavaScript function to initialize Select2"
+    },
+    "react-class": {
+        "prefix": "r-class",
+        "body": [
+            "function $0(props) {",
+            "\treturn (",
+            "\t\t<>",
+            "\t\t\t",
+            "\t\t</>",
+            "\t);",
+            "}",
+            "export default CLASS_NAME;"
+        ],
+        "description": "React class"
+    },
+    "react-dot": {
+        "prefix": ".",
+        "body": [
+            "<div className=\"$0\"></div>"
+        ],
+        "description": "React div"
+    },
+    "react-div": {
+        "prefix": "div",
+        "body": [
+            "<div>$0</div>"
+        ],
+        "description": "React div"
+    },
+    "react-h1": {
+        "prefix": "h1",
+        "body": [
+            "<h1>$0</h1>"
+        ],
+        "description": "React h1"
+    },
+    "react-h2": {
+        "prefix": "h2",
+        "body": [
+            "<h2>$0</h2>"
+        ],
+        "description": "React h2"
+    },
+    "react-p": {
+        "prefix": "p",
+        "body": [
+            "<p>$0</p>"
+        ],
+        "description": "React p"
+    },
+    "react-label": {
+        "prefix": "label",
+        "body": [
+            "<label>$0</label>"
+        ],
+        "description": "React label"
+    },
+    "react-button": {
+        "prefix": "button",
+        "body": [
+            "<button onClick=\"{}\">$0</button>"
+        ],
+        "description": "React Button"
+    },
+    "react-form": {
+        "prefix": "form",
+        "body": [
+            "<form onSubmit={$0}>",
+            "\t<div>",
+            "\t\t<input type=\"text\" placeholder=\"\" />",
+            "\t</div>",
+            "\t<div>",
+            "\t\t<input type=\"submit\" value=\"Enviar\" />",
+            "\t</div>",
+            "</form>"
+        ],
+        "description": "React Form"
+    },
+    "react-ul": {
+        "prefix": "ul",
+        "body": [
+            "<ul className={}>",
+            "\t<li></li>",
+            "\t<li></li>",
+            "</ul>"
+        ],
+        "description": "React Ul"
+    },
+    "react-li": {
+        "prefix": "li",
+        "body": [
+            "<li></li>"
+        ],
+        "description": "React li"
+    },
+    "react-import": {
+        "prefix": [
+            "import",
+            "rimport"
+        ],
+        "body": [
+            "import $0 from \"./components/\""
+        ],
+        "description": "React Import"
+    },
+    "react-img": {
+        "prefix": "img",
+        "body": [
+            "<img src=\"$0\" alt=\"\"/>"
+        ],
+        "description": "React label"
+    },
+    "Noje Join": {
+        "prefix": [
+            "njoin",
+            "jjoin",
+            "rjoin"
+        ],
+        "body": [
+            "const service = ['s1', 's2', 's3'];",
+            "const formattedString = service.map(item => `'\\${item}'`).join(', ');"
+        ],
+        "description": "Node join"
+    },
+    "Postgres Function": {
+        "prefix": [
+            "pquery-function",
+            "pquery",
+            "nquery",
+            "nfunction"
+        ],
+        "body": [
+            "lostContacts: async (req, res) => {",
+            "\ttry {",
+            "\t\tconst { services } = req.query;",
+            "\t\tif (services === undefined) {",
+            "\t\t\treturn res.json({ message: 'É necessário informar o serviço' });",
+            "\t\t}",
+            "",
+            "\t\tconst formattedServices = services.split(',').map((service) => `${service}`).join(',');",
+            "\t\tconst query = 'select * from metric_contacts_received_automatic($1, $2, $3)';",
+            "\t\tconst values = [getCurrentDay().start, getCurrentDay().end, formattedServices.split(',')];",
+            "",
+            "\t\tresult = await timeSeries.query(query, values);",
+            "\t\tres.status(201).json(result.rows);",
+            "",
+            "\t} catch (error) {",
+            "\t\tres.status(500).json({ error, message: 'Internal server error' });",
+            "\t}",
+            "}"
+        ],
+        "description": "Node join"
     }
 }

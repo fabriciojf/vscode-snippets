@@ -299,7 +299,8 @@
     "titleForLayout": {
         "prefix": "cake-title-for-layout",
         "body": [
-            "${1:<?}\\$this->set('title_for_layout', __(''));"
+            "${1:<?}\\$this->set('title_for_layout', __(''));",
+            "\\$this->set('left_menu_highlight', '');"
         ],
         "description": "Return Title for Layout"
     },
@@ -404,7 +405,10 @@
             "",
             "// see the folder app/View/Layouts",
             "// admin_generic, admin_generic_light, admin_generic_fluid, admin_generic_no_scroll",
-            "\\$this->layout = 'admin_generic';"
+            "\\$this->layout = 'admin_generic';",
+            "",
+            "// menu_highlight",
+            "\\$this->set('left_menu_highlight', '');"
         ],
         "description": "Cake Update Template"
     },
@@ -1371,5 +1375,26 @@
             "$('#loadicon').removeClass('d-inline').addClass('d-none');"
         ],
         "description": "HTML and JavaScript for showing/hiding a loading icon"
+    },
+    "CakeRestComponentGet": {
+        "prefix": [
+            "cake-get-rest"
+        ],
+        "body": [
+            "\\$url = \"http://dnk.fabriciojf.com:3345/domni/contact/agent/?cid={\\$q['cid']}&service={\\$q['service']}\";",
+            "\\$contacts = \\$this->Rest->get(\\$url); // returns array()"
+        ],
+        "description": "Cake Rest Component - Get"
+    },
+    "CakeRestComponentPost": {
+        "prefix": [
+            "cake-post-rest"
+        ],
+        "body": [
+            "\\$url = \"http://dnk.fabriciojf.com:3345/domni/contact/agent/?cid={\\$q['cid']}&service={\\$q['service']}\";",
+            "// post(\\$endpoint, \\$data)",
+            "\\$contacts = \\$this->Rest->get(\\$url,\\$arrayDados); // returns status"
+        ],
+        "description": "Cake Rest Component - Post"
     }
 }

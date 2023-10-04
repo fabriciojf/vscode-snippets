@@ -17,5 +17,18 @@
 			"[Link](http://www.google.com)"
 		],
 		"description": "Criando link no markdown"
+	},
+	"MDPre": {
+		"prefix": [
+			"pre",
+			"´",
+			"mk-pre"
+		],
+		"body": [
+			"```",
+			"$0",
+			"```"
+		],
+		"description": "Criando pre no markdown"
 	}
 }
