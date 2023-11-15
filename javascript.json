@@ -659,15 +659,15 @@
         "description": "Formats data and sends a JSON response"
     },
     "NodeJsonPropertiesFor": {
-        "prefix": "node-json-properties-for",
+        "prefix": [
+            "node-for-json-properties",
+            "node-for-properties",
+            "js-for-properties"
+        ],
         "body": [
-            "${1:<script>}",
-            "let items = {name: 'jhon', age: 12, email: 'jhon@lenon.com'}",
             "for (let key in items) {",
-            "\tif (items.hasOwnProperty(key)) {",
-            "\t\tconst value = items[key];",
-            "\t\tconsole.log(key, value);",
-            "\t}",
+            "\tconst value = items[key];",
+            "\tconsole.log(key, value);",
             "}"
         ],
         "description": "Iterates over object properties and logs key-value pairs"
@@ -1405,5 +1405,169 @@
             "}"
         ],
         "description": "Node join"
+    },
+    "MongoFields": {
+        "prefix": [
+            "mongo-fields"
+        ],
+        "body": [
+            "type: Schema.Types.Mixed",
+            "type: String",
+            "type: Number"
+        ],
+        "description": "Mongo Fields"
+    },
+    "MongoFieldMixed": {
+        "prefix": [
+            "mongo-field-mixed"
+        ],
+        "body": [
+            "type: Schema.Types.Mixed"
+        ],
+        "description": "Mongo Field Mixed"
+    },
+    "MongoFind": {
+        "prefix": [
+            "mongo-find",
+            "node-find-mongo"
+        ],
+        "body": [
+            "find: async (req, res) => {",
+            "    try {",
+            "        const { id } = req.params;",
+            "        if (!id) {",
+            "            return res.status(404).json({ message: 'ID Inválido' });",
+            "        }",
+            "",
+            "        const query = {",
+            "            id: id,",
+            "        };",
+            "",
+            "        const items = await Model.find(query).sort({ createdAt: -1 });",
+            "",
+            "        if (items.length === 0) {",
+            "            console.log('Item não encontrado', query);",
+            "            res.status(404).json({ message: 'Item não encontrado' });",
+            "            return;",
+            "        }",
+            "        res.status(200).json(items);",
+            "    } catch (error) {",
+            "        console.log(error);",
+            "        res.status(500).json({ message: 'Internal server error' });",
+            "    }",
+            "}"
+        ],
+        "description": "Ajax Selected Combo"
+    },
+
+    "MongoInsert": {
+        "prefix": [
+            "mongo-insert",
+            "node-insert-mongo"
+        ],
+        "body": [
+            "insert: async (req, res) => {",
+            "    try {",
+            "        const item = req.body;",
+            "",
+            "        const objectItem = {",
+            "            cid: item.cid,",
+            "            data: item",
+            "        }",
+            "",
+            "        const response = await Model.create(objectItem);",
+            "        res.status(201).json({ response, message: 'Registro criado com sucesso!' });",
+            "    } catch (error) {",
+            "        console.log(error);",
+            "        res.status(500).json({ message: 'Internal server error' });",
+            "    }",
+            "}"
+        ],
+        "description": "Ajax Selected Combo"
+    },
+    "MongoUpdate": {
+        "prefix": [
+            "mongo-update",
+            "node-update-mongo"
+        ],
+        "body": [
+            "update: async (req, res) => {",
+            "    try {",
+            "        const { id } = req.params;",
+            "        const data = req.body;",
+            "        if (!id) {",
+            "            return res.status(404).json({ message: 'ID Inválido' });",
+            "        }",
+            "",
+            "        const updatedItem = await Model.findOne({ id });",
+            "        if (!updatedItem) {",
+            "            res.status(404).json({ message: 'Registro não encontrado' });",
+            "            return;",
+            "        }",
+            "",
+            "        for (let key in data) {",
+            "            updatedItem.data[key] = data[key];",
+            "        }",
+            "",
+            "        await Model.findByIdAndUpdate(updatedItem._id, updatedItem);",
+            "",
+            "        res.status(200).json({ newItem, message: 'Registro atualizado com sucesso!' });",
+            "    } catch (error) {",
+            "        console.log(error);",
+            "        res.status(500).json({ message: 'Internal server error' });",
+            "    }",
+            "}"
+        ],
+        "description": "Ajax Selected Combo"
+    },
+    "MongoDelete": {
+        "prefix": [
+            "mongo-delete",
+            "node-delete-mongo"
+        ],
+        "body": [
+            "delete: async (req, res) => {",
+            "    try {",
+            "        const { cid } = req.params;",
+            "        if (!cid) { return res.status(404).json({ message: 'Cid Inválido' }); } ",
+            "",
+            "        const item = await Model.findOne({ cid });",
+            "",
+            "        if (!item) {",
+            "            return res.status(404).json({ message: 'Registro não encontrado' });",
+            "        }",
+            "",
+            "        const deletedItem = await Model.findByIdAndDelete(item.id);",
+            "        res.status(200).json({ deletedItem, message: 'Registro deletado com sucesso!' });",
+            "    } catch (error) {",
+            "        console.log(error);",
+            "        res.status(500).json({ message: 'Internal server error' });",
+            "    }",
+            "}"
+        ],
+        "description": "Ajax Selected Combo"
+    },
+    "MongoAppendLog": {
+        "prefix": [
+            "mongo-append-log",
+            "append-log"
+        ],
+        "body": [
+            "appendLog('', JSON.stringify(response));"
+        ],
+        "description": "Appendando logs no console"
+    },
+    "MongoAppendErr": {
+        "prefix": [
+            "mongo-append-err",
+            "append-err",
+            "error-log",
+            "mongo-error-log"
+        ],
+        "body": [
+            "appendError('', JSON.stringify(err));"
+        ],
+        "description": "Appendando logs no console"
     }
+
 }

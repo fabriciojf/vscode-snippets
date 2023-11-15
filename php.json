@@ -631,11 +631,11 @@
     },
     "logs-function": {
         "prefix": [
-            "cake-logs-in-file",
-            "cake-domni-log"
+            "cake-logs"
         ],
         "body": [
-            "${1:<?}\\$this->log('$0', 'domni');"
+            "\\$this->Logs->append('modulo', 'message or object');",
+            "\\$this->Logs->debug('modulo', \\$object);"
         ],
         "description": "Log messages in a function"
     },
@@ -1378,22 +1378,59 @@
     },
     "CakeRestComponentGet": {
         "prefix": [
-            "cake-get-rest"
+            "cake-get-rest",
+            "rest-get"
         ],
         "body": [
-            "\\$url = \"http://dnk.fabriciojf.com:3345/domni/contact/agent/?cid={\\$q['cid']}&service={\\$q['service']}\";",
-            "\\$contacts = \\$this->Rest->get(\\$url); // returns array()"
+            "\\$endpoint = sprintf(",
+            "    '%s/domni/endpoint/',",
+            "    Configure::read('Domni.persistence.domain')",
+            ");",
+            "\\$response = \\$this->Rest->get(\\$endpoint);"
         ],
         "description": "Cake Rest Component - Get"
     },
     "CakeRestComponentPost": {
         "prefix": [
-            "cake-post-rest"
+            "cake-post-rest",
+            "rest-post"
         ],
         "body": [
-            "\\$url = \"http://dnk.fabriciojf.com:3345/domni/contact/agent/?cid={\\$q['cid']}&service={\\$q['service']}\";",
-            "// post(\\$endpoint, \\$data)",
-            "\\$contacts = \\$this->Rest->get(\\$url,\\$arrayDados); // returns status"
+            "\\$endpoint = sprintf(",
+            "    '%s/domni/endpoint/',",
+            "    Configure::read('Domni.persistence.domain')",
+            ");",
+            "\\$response = \\$this->Rest->post(\\$endpoint, \\$data);"
+        ],
+        "description": "Cake Rest Component - Post"
+    },
+    "CakeRestComponentDelete": {
+        "prefix": [
+            "cake-delete-rest",
+            "rest-delete"
+        ],
+        "body": [
+            "\\$endpoint = sprintf(",
+            "    '%s/domni/endpoint/%s',",
+            "    Configure::read('Domni.persistence.domain'),",
+            "    \\$id",
+            ");",
+            "\\$response = \\$this->Rest->delete(\\$endpoint);"
+        ],
+        "description": "Cake Rest Component - Post"
+    },
+    "CakeRestComponentPut": {
+        "prefix": [
+            "cake-put-rest",
+            "rest-put"
+        ],
+        "body": [
+            "\\$endpoint = sprintf(",
+            "    '%s/domni/endpoint/%s',",
+            "    Configure::read('Domni.persistence.domain'),",
+            "    \\$id",
+            ");",
+            "\\$response = \\$this->Rest->put(\\$endpoint, \\$data);"
         ],
         "description": "Cake Rest Component - Post"
     }
