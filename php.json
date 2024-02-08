@@ -631,7 +631,18 @@
     },
     "logs-function": {
         "prefix": [
-            "cake-logs"
+            "cake-logs",
+            "logs-module"
+        ],
+        "body": [
+            "\\$this->Logs->append('modulo', 'message or object');"
+        ],
+        "description": "Log messages in a function"
+    },
+    "logs-debug-function": {
+        "prefix": [
+            "cake-log-debug",
+            "logs-module-debug"
         ],
         "body": [
             "\\$this->Logs->append('modulo', 'message or object');",
@@ -1136,7 +1147,7 @@
             "public function beforeFilter()",
             "{",
             "\tparent::beforeFilter();",
-            "\tif (strpos(\\$this->params->action, 'ajax')) {",
+            "\tif (\\$this->request->is('ajax')) {",
             "\t\t\\$this->Security->validatePost = false;",
             "\t\t\\$this->Security->csrfCheck = false;",
             "\t}",
@@ -1180,7 +1191,7 @@
             "// import do componente secutiry",
             "public \\$components = array('Security');",
             "// inside beforeFilter() {}",
-            "if (strpos(\\$this->params->action, 'ajax')) {",
+            "if (\\$this->request->is('ajax')) {",
             "\t\\$this->Security->validatePost = false;",
             "\t\\$this->Security->csrfCheck = false;",
             "}"
@@ -1370,9 +1381,9 @@
         ],
         "body": [
             "<i class=\"ion ion-load-d ion-spin float-left d-none f-25\" id=\"loadicon\"></i>",
-            "$('#loadicon').removeClass('d-none').addClass('d-inline');",
+            "\\$('#loadicon').removeClass('d-none').addClass('d-inline');",
             "// Your loading logic goes here",
-            "$('#loadicon').removeClass('d-inline').addClass('d-none');"
+            "\\$('#loadicon').removeClass('d-inline').addClass('d-none');"
         ],
         "description": "HTML and JavaScript for showing/hiding a loading icon"
     },
@@ -1384,7 +1395,7 @@
         "body": [
             "\\$endpoint = sprintf(",
             "    '%s/domni/endpoint/',",
-            "    Configure::read('Domni.persistence.domain')",
+            "    \\$this->Modules->read('portal', 'configurations.persistence.host')",
             ");",
             "\\$response = \\$this->Rest->get(\\$endpoint);"
         ],
@@ -1398,7 +1409,7 @@
         "body": [
             "\\$endpoint = sprintf(",
             "    '%s/domni/endpoint/',",
-            "    Configure::read('Domni.persistence.domain')",
+            "    \\$this->Modules->read('portal', 'configurations.persistence.host')",
             ");",
             "\\$response = \\$this->Rest->post(\\$endpoint, \\$data);"
         ],
@@ -1412,7 +1423,7 @@
         "body": [
             "\\$endpoint = sprintf(",
             "    '%s/domni/endpoint/%s',",
-            "    Configure::read('Domni.persistence.domain'),",
+            "    \\$this->Modules->read('portal', 'configurations.persistence.host'),",
             "    \\$id",
             ");",
             "\\$response = \\$this->Rest->delete(\\$endpoint);"
@@ -1427,11 +1438,28 @@
         "body": [
             "\\$endpoint = sprintf(",
             "    '%s/domni/endpoint/%s',",
-            "    Configure::read('Domni.persistence.domain'),",
+            "    \\$this->Modules->read('portal', 'configurations.persistence.host'),",
             "    \\$id",
             ");",
             "\\$response = \\$this->Rest->put(\\$endpoint, \\$data);"
         ],
         "description": "Cake Rest Component - Post"
+    },
+    "PHP - JSON Response": {
+        "prefix": [
+            "cake-json-response",
+            "cake-json-output"
+        ],
+        "body": [
+            "\t\\$data = array(",
+            "\t\t'nome' => 'John Doe',",
+            "\t);",
+            "",
+            "\t\\$this->response->type('json');",
+            "\t\\$this->response->body(json_encode(\\$data));",
+            "",
+            "\treturn \\$this->response;"
+        ],
+        "description": "PHP action that returns JSON response"
     }
 }

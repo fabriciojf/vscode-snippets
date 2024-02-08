@@ -722,5 +722,12 @@
 			"</div>"
 		],
 		"description": "HTML form group with label and element"
+	},
+	"Combo": {
+		"prefix": "combo-json",
+		"body": [
+			"<select id=\"\" class=\"form-control\"></select>"
+		],
+		"description": "Combo Json"
 	}
 }

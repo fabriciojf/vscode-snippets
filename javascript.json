@@ -1568,6 +1568,108 @@
             "appendError('', JSON.stringify(err));"
         ],
         "description": "Appendando logs no console"
+    },
+    "NodeElasticLogger": {
+        "prefix": [
+            "logger-elastic",
+            "log-elastic",
+            "node-logger-elastic"
+        ],
+        "body": [
+            "logInfo('Class.Action', {json: 'data'});"
+        ],
+        "description": "Adicionando logger ao elastic"
+    },
+    "UseState": {
+        "prefix": [
+            "r-state",
+            "r-useState"
+        ],
+        "body": [
+            "// import React, { useState } from 'react';",
+            "const [isConnected, setIsConnected] = useState(false);"
+        ],
+        "description": "Utilizando State"
+    },
+    "UseDomni": {
+        "prefix": [
+            "r-domni",
+            "r-useDomni"
+        ],
+        "body": [
+            "// import {useDomni} from '../contexts/DomniContext';",
+            "const { connect, create, disconnect, registerJoin, sendMessage } = useDomni();"
+        ],
+        "description": "Utilizando State"
+    },
+    "ViewPort": {
+        "prefix": [
+            "r-view-port",
+            "r-list-view-port"
+        ],
+        "body": [
+            "<Viewport>",
+            "\t<Grid container spacing={2} sx={{ px: 1 }}>",
+            "\t\t<Grid item xs={3}>",
+            "\t\t\t<Paper elevation={6} style={{ height: \"100%\" }}>",
+            "\t\t\t\t<List>",
+            "\t\t\t\t\t<ListItem button>",
+            "\t\t\t\t\t\t<ListItemIcon>",
+            "\t\t\t\t\t\t\t<MailOutlineIcon />",
+            "\t\t\t\t\t\t</ListItemIcon>",
+            "\t\t\t\t\t\t<ListItemText primary=\"Caixa de entrada\" />",
+            "\t\t\t\t\t</ListItem>",
+            "\t\t\t\t\t<ListItem button>",
+            "\t\t\t\t\t\t<ListItemIcon>",
+            "\t\t\t\t\t\t\t<SendIcon />",
+            "\t\t\t\t\t\t</ListItemIcon>",
+            "\t\t\t\t\t\t<ListItemText primary=\"Enviados\" />",
+            "\t\t\t\t\t</ListItem>",
+            "\t\t\t\t\t<ListItem button>",
+            "\t\t\t\t\t\t<ListItemIcon>",
+            "\t\t\t\t\t\t\t<DraftsIcon />",
+            "\t\t\t\t\t\t</ListItemIcon>",
+            "\t\t\t\t\t\t<ListItemText primary=\"Rascunhos\" />",
+            "\t\t\t\t\t</ListItem>",
+            "\t\t\t\t</List>",
+            "\t\t\t</Paper>",
+            "\t\t</Grid>",
+            "\t\t<Grid item container spacing={2} xs={9}>",
+            "\t\t\t{/* Add content here */}",
+            "\t\t</Grid>",
+            "\t</Grid>",
+            "</Viewport>"
+        ],
+        "description": "React component with Material-UI Grid and List"
+    },
+    "List": {
+        "prefix": [
+            "r-list"
+        ],
+        "body": [
+            "<Paper elevation={6} style={{ height: \"100%\" }}>",
+            "\t<List>",
+            "\t\t<ListItem button>",
+            "\t\t\t<ListItemIcon>",
+            "\t\t\t\t<MailOutlineIcon />",
+            "\t\t\t</ListItemIcon>",
+            "\t\t\t<ListItemText primary=\"Caixa de entrada\" />",
+            "\t\t</ListItem>",
+            "\t\t<ListItem button>",
+            "\t\t\t<ListItemIcon>",
+            "\t\t\t\t<SendIcon />",
+            "\t\t\t</ListItemIcon>",
+            "\t\t\t<ListItemText primary=\"Enviados\" />",
+            "\t\t</ListItem>",
+            "\t\t<ListItem button>",
+            "\t\t\t<ListItemIcon>",
+            "\t\t\t\t<DraftsIcon />",
+            "\t\t\t</ListItemIcon>",
+            "\t\t\t<ListItemText primary=\"Rascunhos\" />",
+            "\t\t</ListItem>",
+            "\t</List>",
+            "</Paper>"
+        ],
+        "description": "React component with Material-UI Grid and List"
     }
-
 }
