@@ -1,0 +1,107 @@
+{
+    "StyleImport": {
+        "prefix": [
+            "r-style",
+            "r-sass"
+        ],
+        "body": [
+            "import styles from '../styles/COMPONENT.module.sass';",
+            "// className={styles.headerLabel}"
+        ],
+        "description": "Importando Style dentro do React"
+    },
+    "PropTypesImport": {
+        "prefix": [
+            "r-proptypes"
+        ],
+        "body": [
+            "import PropTypes from 'prop-types';",
+            "// CLASSNAME.propTypes = {",
+            "//     contact: PropTypes.object",
+            "// };"
+        ],
+        "description": "Importando Style dentro do React"
+    },
+    "PathsContext": {
+        "prefix": [
+            "r-context-paths"
+        ],
+        "body": [
+            "import { usePaths } from '../contexts/PathsContext';",
+            "const { cadastrosHost, persistenceHost, webchatUrl, emailHost } = usePaths();"
+        ],
+        "description": "Paths Context"
+    },
+    "DomniContext": {
+        "prefix": [
+            "r-context-domni"
+        ],
+        "body": [
+            "import { useDomni } from '../contexts/DomniContext';",
+            "const {",
+            "\tcreate,",
+            "\tconnect,",
+            "\tdisconnect,",
+            "\tregisterJoin,",
+            "\tsendMessage,",
+            "\tsendCustomMessage,",
+            "\tnewContact,",
+            "\tnewMessage,",
+            "\tnewNote,",
+            "\tcontactClosed,",
+            "\tsetContactClosed } = useDomni();"
+        ],
+        "description": "Domni Context"
+    },
+    "ActionContext": {
+        "prefix": [
+            "r-context-action"
+        ],
+        "body": [
+            "import { useActionBoxes } from '../contexts/ActionContext';",
+            "const { showingDialog, showDialog,showingTabulation, showTabulation,showingEmojis, showEmojis, ... } = useActionBoxes();"
+        ],
+        "description": "Action Context"
+    },
+    "PermissionProfileContext": {
+        "prefix": [
+            "r-context-permission-profile"
+        ],
+        "body": [
+            "import { usePermissionsProfile } from '../contexts/PermissionsProfileContext';",
+            "const { configurations, modules, read, } = usePermissionsProfile();"
+        ],
+        "description": "Permission Profiles Context"
+    },
+    "InputChatContext": {
+        "prefix": [
+            "r-context-input-chat"
+        ],
+        "body": [
+            "import { useInputChat } from '../contexts/InputChatContext';",
+            "const { showingDialog, setShowingDialog } = useInputChat();"
+        ],
+        "description": "Input Chat Context"
+    },
+    "Moment": {
+        "prefix": [
+            "r-moment-import",
+            "r-date-timestamp-moment-import"
+        ],
+        "body": [
+            "import moment from 'moment';"
+        ],
+        "description": "Moment"
+    },
+    "Compare": {
+        "prefix": [
+            "r-compare-objects",
+            "r-compare-with-lodash"
+        ],
+        "body": [
+            "import _ from 'lodash';",
+            "if (!_.isEqual(prevNewMessage.current, newMessage) && newMessage) {...}"
+        ],
+        "description": "Moment"
+    }
+}
