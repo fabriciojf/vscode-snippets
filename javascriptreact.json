@@ -28,7 +28,7 @@
         ],
         "body": [
             "import { usePaths } from '../contexts/PathsContext';",
-            "const { cadastrosHost, persistenceHost, webchatUrl, emailHost } = usePaths();"
+            "const { persistenceHost, cadastrosHost, webchatUrl, emailHost, storageHost } = usePaths();"
         ],
         "description": "Paths Context"
     },
@@ -39,17 +39,39 @@
         "body": [
             "import { useDomni } from '../contexts/DomniContext';",
             "const {",
+            "\tcontactClosed,",
+            "\tkillContact,",
+            "\tsetContactClosed,",
+            "\tclosed,",
+            "\tsetClosed,",
+            "\tnewContact,",
+            "\tsetNewContact,",
+            "\tnewMessage,",
+            "\tsetNewMessage,",
+            "\tnewNote,",
+            "\tsetNewNote,",
             "\tcreate,",
             "\tconnect,",
             "\tdisconnect,",
             "\tregisterJoin,",
+            "\tinputText,",
+            "\tsetInputText,",
             "\tsendMessage,",
-            "\tsendCustomMessage,",
-            "\tnewContact,",
-            "\tnewMessage,",
-            "\tnewNote,",
-            "\tcontactClosed,",
-            "\tsetContactClosed } = useDomni();"
+            "\ttransferred,",
+            "\ttransferContact,",
+            "\tnewIncomingMessage,",
+            "\tinactiveAllContactsByAgentId,",
+            "\tinactiveContactByCid,",
+            "\t// Assistentes",
+            "\tstartAssistant,",
+            "\tstopAssistant,",
+            "\tactiveAssistants,",
+            "\tsendToCopilot,",
+            "\t// Notificação de nova mensagem",
+            "\tnotifyNewMessage,",
+            "\t// Apresenta o dialogBox",
+            "\tshowDialogBox, setShowDialogBox,",
+            "} = useDomni();"
         ],
         "description": "Domni Context"
     },
@@ -59,7 +81,16 @@
         ],
         "body": [
             "import { useActionBoxes } from '../contexts/ActionContext';",
-            "const { showingDialog, showDialog,showingTabulation, showTabulation,showingEmojis, showEmojis, ... } = useActionBoxes();"
+            "const {",
+            "\tshowingDialog, showDialog,",
+            "\tshowingTabulation, showTabulation,",
+            "\tshowingEmojis, showEmojis,",
+            "\tshowingTemplateMessages, showTemplateMessages,",
+            "\tshowingTransfer, showTransfer,",
+            "\tshowingHelp, showHelp,",
+            "\tshowingAttaches, showAttaches,",
+            "\tresetWindow",
+            "} = useActionBoxes();"
         ],
         "description": "Action Context"
     },
@@ -69,7 +100,7 @@
         ],
         "body": [
             "import { usePermissionsProfile } from '../contexts/PermissionsProfileContext';",
-            "const { configurations, modules, read, } = usePermissionsProfile();"
+            "const { configurations, modules, read } = usePermissionsProfile();"
         ],
         "description": "Permission Profiles Context"
     },
@@ -82,6 +113,16 @@
             "const { showingDialog, setShowingDialog } = useInputChat();"
         ],
         "description": "Input Chat Context"
+    },
+    "ContactContext": {
+        "prefix": [
+            "r-contact-context"
+        ],
+        "body": [
+            "import { useContact } from '../contexts/ContactContext';",
+            "const { contact, setContact, updateContact } = useContact();"
+        ],
+        "description": "Contact Context"
     },
     "Moment": {
         "prefix": [
@@ -103,5 +144,145 @@
             "if (!_.isEqual(prevNewMessage.current, newMessage) && newMessage) {...}"
         ],
         "description": "Moment"
+    },
+    "foreachMap": {
+        "prefix": [
+            "r-map",
+            "r-foreach"
+        ],
+        "body": [
+            "dialog.forEach((wdialog, index) => {}",
+            "dialog.map((wdialog, index) => {}"
+        ],
+        "description": "Moment"
+    },
+    "importViewport": {
+        "prefix": [
+            "r-viewport-import"
+        ],
+        "body": [
+            "import Viewport from 'layout/Viewport';"
+        ],
+        "description": "Import Viewport"
+    },
+    "useCallback": {
+        "prefix": [
+            "r-usecallback"
+        ],
+        "body": [
+            "const fethData = useCallback(() => {",
+            "   ...",
+            "}, []);"
+        ],
+        "description": "useCallback"
+    },
+    "buttonMui": {
+        "prefix": [
+            "r-button-mui",
+            "mui-button"
+        ],
+        "body": [
+            "<Button",
+            "    variant=\"contained text outlined filled elevated\"",
+            "    disabled",
+            "    href=\"#text-buttons\"",
+            "    disableElevation",
+            "    color=\"primary secondary success error\"",
+            "    size=\"small medium large\"",
+            "    startIcon={<DeleteIcon />}",
+            "    endIcon={<SendIcon />}",
+            "    ",
+            ">{label}</Button>",
+            "<IconButton",
+            "    aria-label=\"delete\"",
+            "    color=\"primary secondary success error\"",
+            "    size=\"small medium large\"",
+            "    disabled ",
+            "   <DeleteIcon />",
+            "</IconButton>"
+        ],
+        "description": "useCallback"
+    },
+    "buttonGroupMui": {
+        "prefix": [
+            "r-buttongroup-mui",
+            "mui-buttongroup"
+        ],
+        "body": [
+            "<ButtonGroup",
+            "    orientation=\"horizontal vertical\"",
+            "    variant=\"contained text outlined filled elevated\"",
+            "    size=\"small medium large\"",
+            ">",
+            " {buttons}",
+            "</ButtonGroup>"
+        ],
+        "description": "reactbuttons"
+    },
+    "axios": {
+        "prefix": [
+            "r-axios"
+        ],
+        "body": [
+            "// import axios from 'axios';",
+            "const axiosInstance = axios.create({",
+            "\tmaxRedirects: 0,",
+            "});",
+            "axiosInstance.put(`\\${persistenceHost}/clients/\\${id}`, {})",
+            "\t.then(response => {",
+            "\t\tconsole.log('[AddClientPopup] ====>:', response.data);",
+            "\t})",
+            "\t.catch(error => {",
+            "\t\tconsole.error('Erro ao buscar dados da API:', error);",
+            "\t});"
+        ],
+        "description": "axios"
+    },
+    "paper": {
+        "prefix": [
+            "r-paper"
+        ],
+        "body": [
+            "<Paper elevation={6} sx={{ padding: '15px' }}>"
+        ],
+        "description": "paper"
+    },
+    "icons": {
+        "prefix": [
+            "r-icon"
+        ],
+        "body": [
+            "<SelectedIcon fontSize={24} sx={{ mr: 1 }} />"
+        ],
+        "description": "Icons"
+    },
+    "iconsImport": {
+        "prefix": [
+            "r-icon-import"
+        ],
+        "body": [
+            "import SubtitlesOutlinedIcon from '@mui/icons-material/SubtitlesOutlined';"
+        ],
+        "description": "Icons Import"
+    },
+    "cloneObject": {
+        "prefix": [
+            "r-clone-object"
+        ],
+        "body": [
+            "const [issue, setIssue] = useState({});",
+            "var newIssue = {...issue};",
+            "newIssue['123'] = '123'"
+        ],
+        "description": "Clone Object"
+    },
+    "displayFlex": {
+        "prefix": [
+            "r-display-flex"
+        ],
+        "body": [
+            "<Box sx={{ width: '100%', display: 'flex', justifyContent: 'start/center/end/space-between/space-around/', alignItems: 'center' }} />"
+        ],
+        "description": "Clone Object"
     }
 }
