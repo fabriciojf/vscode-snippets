@@ -32,6 +32,16 @@
         ],
         "description": "Paths Context"
     },
+    "SnackbarContext": {
+        "prefix": [
+            "r-context-snackbar"
+        ],
+        "body": [
+            "import { useSnackbar } from 'mui-snackbar-utils';",
+            "const { setSnackbar } = useSnackbar();"
+        ],
+        "description": "Snackbar Dani Context"
+    },
     "DomniContext": {
         "prefix": [
             "r-context-domni"
@@ -99,8 +109,16 @@
             "r-context-permission-profile"
         ],
         "body": [
-            "import { usePermissionsProfile } from '../contexts/PermissionsProfileContext';",
-            "const { configurations, modules, read } = usePermissionsProfile();"
+            "import { usePermissions } from '../contexts/PermissionsProfileContext';",
+            "/**",
+            " * activeUser = {",
+            " *    name: 'Fabricio',",
+            " *    email: 'fabriciojf@gmail.com',",
+            " *    id: 'fabricio-user',",
+            " *    success: true",
+            " * }",
+            " */",
+            "const { configurations, modules, read, activeUser } = usePermissions();"
         ],
         "description": "Permission Profiles Context"
     },
@@ -116,13 +134,34 @@
     },
     "ContactContext": {
         "prefix": [
-            "r-contact-context"
+            "r-context-contact"
         ],
         "body": [
             "import { useContact } from '../contexts/ContactContext';",
             "const { contact, setContact, updateContact } = useContact();"
         ],
         "description": "Contact Context"
+    },
+    "AgentEventsContext": {
+        "prefix": [
+            "r-context-agent-event"
+        ],
+        "body": [
+            "import { useAgentEvents } from '../contexts/AgentEventsContext';",
+            "const { changeAction, Status } = useAgentEvents();"
+        ],
+        "description": "Agent Event Context"
+    },
+    "UseLocation": {
+        "prefix": [
+            "r-use-location",
+            "r-navigate-to-route"
+        ],
+        "body": [
+            "import { useLocation } from \"omni-router\";",
+            "const [, navigateToRoute] = useLocation();"
+        ],
+        "description": "Agent Event Context"
     },
     "Moment": {
         "prefix": [
@@ -224,11 +263,8 @@
             "r-axios"
         ],
         "body": [
-            "// import axios from 'axios';",
-            "const axiosInstance = axios.create({",
-            "\tmaxRedirects: 0,",
-            "});",
-            "axiosInstance.put(`\\${persistenceHost}/clients/\\${id}`, {})",
+            "// import axios from './AxiosInstance';",
+            "axios.put(`\\${persistenceHost}/clients/\\${id}`, {})",
             "\t.then(response => {",
             "\t\tconsole.log('[AddClientPopup] ====>:', response.data);",
             "\t})",
@@ -284,5 +320,67 @@
             "<Box sx={{ width: '100%', display: 'flex', justifyContent: 'start/center/end/space-between/space-around/', alignItems: 'center' }} />"
         ],
         "description": "Clone Object"
+    },
+    "autocomplete": {
+        "prefix": [
+            "r-autocomplete"
+        ],
+        "body": [
+            "<Autocomplete",
+            "\tid=\"ID\"",
+            "\toptions={OPTIONS}",
+            "\tvalue={OPTION}",
+            "\tgetOptionLabel={(option) => option}",
+            "\tisOptionEqualToValue={(option, value) => option === value}",
+            "\tmultiple",
+            "\tdisableClearable={false}",
+            "\tdefaultValue={[]}",
+            "\tonChange={(event, newValue) => {",
+            "\t\tsetOPTION(newValue);",
+            "\t}}",
+            "\trenderInput={(params) => (",
+            "\t\t<TextField",
+            "\t\t\t{...params}",
+            "\t\t\tvariant=\"standard\"",
+            "\t\t\tlabel=\"LABEL\"",
+            "\t\t/>",
+            "\t)}",
+            "/>"
+        ]
+    },
+    "useEffect": {
+        "prefix": [
+            "r-useeffect"
+        ],
+        "body": [
+            "useEffect(() => {",
+            "    ${0}",
+            "}, []);"
+        ],
+        "description": "UseEffect"
+    },
+    "textField": {
+        "prefix": [
+            "r-text-field"
+        ],
+        "body": [
+            "const textFieldHandler = (event) => {",
+            "   setTextMessage(event.target.value);",
+            "}",
+            "",
+            "<TextField",
+            "  fullWidth",
+            "  multiline",
+            "  rows={2}",
+            "  margin=\"normal\"",
+            "  label={`Digite sua mensagem ao Assistente`}",
+            "  onChange={textFieldHandler}",
+            "  value={textMessage}",
+            "  variant=\"outlined\"",
+            "  size=\"small\"",
+            "  disabled={!contact.active}",
+            "/>"
+        ],
+        "description": "Text Field"
     }
 }
