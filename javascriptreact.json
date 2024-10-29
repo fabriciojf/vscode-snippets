@@ -22,19 +22,45 @@
         ],
         "description": "Importando Style dentro do React"
     },
+    "arrayToIdLabel": {
+        "prefix": [
+            "r-array-to-id-label"
+        ],
+        "body": [
+            "const options=['option1', 'option2']",
+            "setNewOptions(Array.from(options).map(item => ({",
+            "   id: item,",
+            "   label: item",
+            "})));"
+        ],
+        "description": "Importando Style dentro do React"
+    },
     "PathsContext": {
         "prefix": [
             "r-context-paths"
         ],
         "body": [
-            "import { usePaths } from '../contexts/PathsContext';",
+            "import { usePaths } from '../../contexts/PathsContext';",
+            "const { persistenceHost, cadastrosHost, webchatUrl, emailHost, storageHost } = usePaths();"
+        ],
+        "description": "Paths Context"
+    },
+    "Includes": {
+        "prefix": [
+            "r-contains",
+            "r-includes"
+        ],
+        "body": [
+            "import { usePaths } from '../../contexts/PathsContext';",
             "const { persistenceHost, cadastrosHost, webchatUrl, emailHost, storageHost } = usePaths();"
         ],
         "description": "Paths Context"
     },
     "SnackbarContext": {
         "prefix": [
-            "r-context-snackbar"
+            "r-context-snackbar",
+            "r-notify-context-snackbar",
+            "r-alert-context-snackbar"
         ],
         "body": [
             "import { useSnackbar } from 'mui-snackbar-utils';",
@@ -47,7 +73,7 @@
             "r-context-domni"
         ],
         "body": [
-            "import { useDomni } from '../contexts/DomniContext';",
+            "import { useDomni } from '../../contexts/DomniContext';",
             "const {",
             "\tcontactClosed,",
             "\tkillContact,",
@@ -90,7 +116,7 @@
             "r-context-action"
         ],
         "body": [
-            "import { useActionBoxes } from '../contexts/ActionContext';",
+            "import { useActionBoxes } from '../../contexts/ActionContext';",
             "const {",
             "\tshowingDialog, showDialog,",
             "\tshowingTabulation, showTabulation,",
@@ -109,7 +135,7 @@
             "r-context-permission-profile"
         ],
         "body": [
-            "import { usePermissions } from '../contexts/PermissionsProfileContext';",
+            "import { usePermissions } from '../../contexts/PermissionsProfileContext';",
             "/**",
             " * activeUser = {",
             " *    name: 'Fabricio',",
@@ -127,18 +153,34 @@
             "r-context-input-chat"
         ],
         "body": [
-            "import { useInputChat } from '../contexts/InputChatContext';",
+            "import { useInputChat } from '../../contexts/InputChatContext';",
             "const { showingDialog, setShowingDialog } = useInputChat();"
         ],
         "description": "Input Chat Context"
+    },
+    "ClientContext": {
+        "prefix": [
+            "r-context-client"
+        ],
+        "body": [
+            "import { useClient } from '../../contexts/ClientContext';",
+            "const { client, getClient } = useClient();"
+        ],
+        "description": "Client Context"
     },
     "ContactContext": {
         "prefix": [
             "r-context-contact"
         ],
         "body": [
-            "import { useContact } from '../contexts/ContactContext';",
-            "const { contact, setContact, updateContact } = useContact();"
+            "import { useContact } from '../../contexts/ContactContext';",
+            "const {",
+            "\tcontact, setContact, updateContact, getContact,",
+            "\topenContacts, getOpenContacts,",
+            "\tincomingDialog, setIncomingDialog,",
+            "\temail, setEmail, refreshEmail, getEmail,",
+            "\tsetClient,",
+            "} = useContact();"
         ],
         "description": "Contact Context"
     },
@@ -147,7 +189,7 @@
             "r-context-agent-event"
         ],
         "body": [
-            "import { useAgentEvents } from '../contexts/AgentEventsContext';",
+            "import { useAgentEvents } from '../../contexts/AgentEventsContext';",
             "const { changeAction, Status } = useAgentEvents();"
         ],
         "description": "Agent Event Context"
@@ -169,7 +211,8 @@
             "r-date-timestamp-moment-import"
         ],
         "body": [
-            "import moment from 'moment';"
+            "import moment from 'moment';",
+            "const formattedDate = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');"
         ],
         "description": "Moment"
     },
@@ -263,14 +306,16 @@
             "r-axios"
         ],
         "body": [
-            "// import axios from './AxiosInstance';",
             "axios.put(`\\${persistenceHost}/clients/\\${id}`, {})",
-            "\t.then(response => {",
-            "\t\tconsole.log('[AddClientPopup] ====>:', response.data);",
-            "\t})",
-            "\t.catch(error => {",
-            "\t\tconsole.error('Erro ao buscar dados da API:', error);",
-            "\t});"
+            "\t.then(response => { ... })",
+            "\t.catch(error => { ... });\n",
+            "const response = await axios.post(url, jsonObject, {",
+            "\theaders: {",
+            "\t\t'Content-Type': 'application/json',",
+            "\t\t'x-access-token': ${token}",
+            "\t},",
+            "\ttimeout: 60000",
+            "});"
         ],
         "description": "axios"
     },
@@ -331,6 +376,14 @@
             "\toptions={OPTIONS}",
             "\tvalue={OPTION}",
             "\tgetOptionLabel={(option) => option}",
+            "\tgetOptionLabel={(option) => {",
+            "\t\tif (Array.isArray(option)) {",
+            "\t\t\treturn option[0]?.name || '';",
+            "\t\t} else {",
+            "\t\t\treturn option?.name || '';",
+            "\t\t}",
+            "\t}}",
+            "\t//isOptionEqualToValue={(option, value) => option.value === value.value}",
             "\tisOptionEqualToValue={(option, value) => option === value}",
             "\tmultiple",
             "\tdisableClearable={false}",
@@ -374,7 +427,7 @@
             "  rows={2}",
             "  margin=\"normal\"",
             "  label={`Digite sua mensagem ao Assistente`}",
-            "  onChange={textFieldHandler}",
+            "  onChange={(e) => setValue(e.target.value)}",
             "  value={textMessage}",
             "  variant=\"outlined\"",
             "  size=\"small\"",
@@ -382,5 +435,324 @@
             "/>"
         ],
         "description": "Text Field"
+    },
+    "promisseAll": {
+        "prefix": [
+            "r-promisse-all"
+        ],
+        "body": [
+            "const [",
+            "    automatedServices,",
+            "    clients,",
+            "] = await Promise.all([",
+            "    getContents('automated-services'),",
+            "    axios.get(`\\${persistenceHost}/clients/\\${id}`)",
+            "]);",
+            "",
+            "await Promise.all([",
+            "    getContents('automated-services'),",
+            "    axios.get(`\\${persistenceHost}/clients/\\${id}`)",
+            "])",
+            ".then(([response1, response2]) => {",
+            "    console.log('response1:', response1.data);",
+            "    console.log('response2:', response2.data);",
+            "}).catch(error => {",
+            "    console.error('Erro ao buscar dados da API:', error);",
+            "});"
+        ],
+        "description": "Promisse All"
+    },
+    "MongoRegex": {
+        "prefix": [
+            "r-mongo-regex",
+            "r-mongo-find"
+        ],
+        "body": [
+            "const searchTerm = 'fabricio';",
+            "const regex = new RegExp(`.*${searchTerm}.*`, 'i');",
+            "const match = {",
+            "\t$expr: {",
+            "\t\t$and: [",
+            "\t\t\t{ $regexMatch: { input: $tags.who', regex: /fabricio/i } }",
+            "\t\t\t{ $regexMatch: { input: $tags.who', regex: regex } }",
+            "\t\t\t{ $eq: [ { $toLower: '$tags.who' }, 'fabricio' ] },",
+            "\t\t\t{ $eq: ['$tags.who', 'Fabricio'] }",
+            "\t\t]",
+            "\t}",
+            "};"
+        ],
+        "description": "Importando Style dentro do React"
+    },
+    "ForObject": {
+        "prefix": [
+            "r-for-object-attributes",
+            "r-foreach-object-attributes",
+            "r-loop-object-attributes"
+        ],
+        "body": [
+            "const objeto = {",
+            "   'action': 'stop',",
+            "   'media': 'voice',",
+            "};",
+            "for (let chave in objeto) {",
+            "   console.log(chave, ':', objeto[chave]);",
+            "}"
+        ],
+        "description": "Client Context"
+    },
+    "RandomCode": {
+        "prefix": [
+            "r-random-code"
+        ],
+        "body": [
+            "function randomCode() {",
+            "\tconst caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';",
+            "\tlet codigo = '';",
+            "\tfor (let i = 0; i < 8; i++) { // Tamanho do código: 8 caracteres",
+            "\t\tcodigo += caracteres.charAt(Math.floor(Math.random() * caracteres.length));",
+            "\t}",
+            "\treturn codigo;",
+            "}"
+        ],
+        "description": "Random Code"
+    },
+    "TextField": {
+        "prefix": [
+            "r-input-text",
+            "r-text-field"
+        ],
+        "body": [
+            "<TextField",
+            "\tid=\"name\"",
+            "\tlabel=\"Nome\"",
+            "\tvariant=\"standard\"",
+            "\tfullWidth",
+            "\tonChange={(e) => setName(e.target.value)}",
+            "/>"
+        ],
+        "description": "Text Field"
+    },
+    "Tooltip": {
+        "prefix": [
+            "r-tooltip",
+            "r-tip-alt",
+            "r-dica"
+        ],
+        "body": [
+            "<Tooltip title=\"descricao\">",
+            "\t<Typography variant='h4' sx={{ mb: 1 }}>DNK Video Chamadas</Typography>",
+            "<Tooltip/>"
+        ],
+        "description": "tooltip"
+    },
+    "dataGrid": {
+        "prefix": [
+            "r-datagrid",
+            "r-grid"
+        ],
+        "body": [
+            "const [rows, setRows] = useState([]);",
+            "const [page, setPage] = useState(1);",
+            "const [pageSize, setPageSize] = useState(5);",
+            "const [totalRows, setTotalRows] = useState(0);",
+            "const [loading, setLoading] = useState(false);",
+            "const paginationModel = {",
+            "\tpage,",
+            "\tpageSize,",
+            "\tpageCount: Math.ceil(totalRows / pageSize),",
+            "\ttotalCount: totalRows,",
+            "};",
+            "const columns = [",
+            "\t{",
+            "\t\tfield: 'name', headerName: 'Nome', width: 250,",
+            "\t\trenderCell: (params) => (",
+            "\t\t\t<div>",
+            "\t\t\t\t<Button",
+            "\t\t\t\t\tstartIcon={<EditIcon />}",
+            "\t\t\t\t\tonClick={() => handleEditClick(params.row.id)}",
+            "\t\t\t\t>",
+            "\t\t\t\t{params.row.name}",
+            "\t\t\t\t</Button>",
+            "\t\t\t</div>",
+            "\t\t),",
+            "\t},",
+            "\t{",
+            "\t\tfield: 'media', headerName: 'Midia', width: 150, renderCell: (params) => {",
+            "\t\t\treturn <Typography variant='body2'>{params?.row.data?.media}</Typography>;",
+            "\t\t}",
+            "\t}",
+            "\t{ field: 'cid', headerName: 'CID', width: 150 },",
+            "\t{",
+            "\t\t// import dayjs from 'dayjs';",
+            "\t\tfield: 'createdAt', headerName: 'Criado em', width: 180, renderCell: (params) => {",
+            "\t\t\tconst date = new Date(params.value);",
+            "\t\t\treturn `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;",
+            "\t\t}",
+            "\t},",
+            "];",
+            "",
+            "<DataGrid",
+            "\tsx={{ marginTop: '15px' }}",
+            "\trows={rows}",
+            "\tcolumns={columns}",
+            "\trowCount={totalRows}",
+            "\tpagination",
+            "\tpaginationMode='server'",
+            "\tpaginationModel={paginationModel}",
+            "\tonPaginationModelChange={({ page, pageSize }) => {",
+            "\t\tsetPage(page);",
+            "\t\tsetPageSize(pageSize);",
+            "\t\tfetchRowsFromDatabase(page);",
+            "\t}}",
+            "\tloading={loading}",
+            "\tpageSizeOptions={[5, 10, 50]}",
+            "\tgetRowId={(row) => row._id}",
+            "\tautoSizeColumnsMode='fill'",
+            "\tdisableColumnResize",
+            "/>"
+        ],
+        "description": "tooltip"
+    },
+    "MergeObject": {
+        "prefix": [
+            "r-merge-object",
+            "r-merge-array",
+            "r-add-object",
+            "r-add-array"
+        ],
+        "body": [
+            "// object",
+            "var data = { messages: {} };",
+            "items.forEach(element => {",
+            "\tdata.messages = {...data.messages, [element.id]: element.messages};",
+            "});",
+            "// array",
+            "var data = { messages: [] };",
+            "items.forEach(element => {",
+            "\tdata.messages = [...data.messages, {[element.id]: element.messages}];",
+            "});",
+        ],
+        "description": "Merge de Objeto e Array"
+    },
+    "Tooltip": {
+        "prefix": [
+            "r-object-custom-key",
+            "r-attribute-custom-key",
+            "r-atributo-custom-key"
+        ],
+        "body": [
+            "// Custom attribute",
+            "data = {[attribute.name]: attribute.value}",
+        ],
+        "description": "Atributo Customizado"
+    },
+    "useePermissions": {
+        "prefix": [
+            "r-use-permissions",
+            "r-permissions"
+        ],
+        "body": [
+            "import { usePermissions } from \"permissions-provider-lib\";",
+            "const resources = {",
+            "\tconfigurations: {},",
+            "\tuserGroups: {},",
+            "\tserviceFilters: {},",
+            "\tskills: [],",
+            "\tdashboards: {},",
+            "\tcampaigns: {},",
+            "\tmodules: [],",
+            "\turas: [],",
+            "\tservices: {",
+            "\t\tavailable: [],",
+            "\t\tmedias: [],",
+            "\t\tticketCategories: [],",
+            "\t\tticketPriorities: [],",
+            "\t\tticketStatus: [],",
+            "\t},",
+            "};",
+            "const {",
+            "\tactiveUser,",
+            "\tuserConfigurations,",
+            "\tuserServiceList,",
+            "\tpublicDomainData,",
+            "\tserviceStringList,",
+            "\tuserGroupStringList,",
+            "\tcampaignStringList",
+            "} = usePermissions();"
+        ],
+        "description": "Use Permissions"
+    },
+    "ServiceSelect": {
+        "prefix": [
+            "r-service-select",
+        ],
+        "body": [
+            "// import { ServiceSelect } from 'permissions-components-lib';",
+            "// const isDebug = import.meta.env.VITE_DEBUG === 'true'; // .env: VITE_DEBUG=true",
+            "// const [service, setService] = useState([]); // deve ser []",
+            "// const service: service[1] || userConfigurations?.stringList?.serviceFilters || '';",
+            "<ServiceSelect",
+            "\tvalue={service}",
+            "\tonChange={setService}",
+            "\tuserConfigurations={userConfigurations}",
+            "\tdebug={isDebug}",
+            "\toptionsKey={['filas']}",
+            "/>"
+        ],
+        "description": "Permissions Component Lib"
+    },
+    "UserGroupSelect": {
+        "prefix": [
+            "r-user-group-select",
+        ],
+        "body": [
+            "// import { UserGroupSelect } from 'permissions-components-lib';",
+            "// const [agent, setAgent] = useState([]); // deve ser []",
+            "// const agents: userGroup[1] || userConfigurations?.stringList?.userGroups || ''",
+            "<UserGroupSelect",
+            "\tvalue={agent}",
+            "\tonChange={setAgent}",
+            "\tuserConfigurations={userConfigurations}",
+            "/>"
+        ],
+        "description": "Permissions Component Lib"
+    },
+    "CallStatus": {
+        "prefix": [
+            "r-call-status",
+            "r-media",
+            "r-channel",
+        ],
+        "body": [
+            "// import { ChannelSelect, MediaSelect, CallStatusSelect } from 'permissions-components-lib';",
+            "// const [status, setStatus] = useState({}); // deve ser {}",
+            "// const media: media?.id || '-';",
+            "// ...",
+            "// <ChannelSelect /> <MediaSelect />",
+            "<CallStatusSelect ",
+            "\tvalue={status}",
+            "\tonChange={setStatus}",
+            "\tpublicDomainData={publicDomainData}",
+            "/>"
+        ],
+        "description": "Permissions Component Lib"
+    },
+    "TextInput": {
+        "prefix": [
+            "r-text-input"
+        ],
+        "body": [
+            "// import { TextInput } from 'permissions-components-lib';",
+            "// const [cid, setCid] = useState(''); // deve ser '' ",
+            "// const cid: cid || '';",
+            "// ...",
+            "<TextInput ",
+            "\tid=\"cid\"",
+            "\tlabel=\"CID\"",
+            "\tonChange={setCid}",
+            "\tvalue={cid}",
+            "/>"
+        ],
+        "description": "Permissions Component Lib"
     }
 }

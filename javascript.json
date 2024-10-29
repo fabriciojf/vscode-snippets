@@ -351,6 +351,18 @@
         ],
         "description": "Node Port Pattern"
     },
+    "DotEnv": {
+        "prefix": [
+            "r-dotenv",
+            "r-process-env",
+            "node-dotenv",
+            "node-process-env"
+        ],
+        "body": [
+            "const dbUrl = process.env.MONGODB_CONNECTION_STRING;"
+        ],
+        "description": "Node Dov Env"
+    },
     "NodeModelMongoose": {
         "prefix": [
             "model-mongoose",
@@ -1681,5 +1693,25 @@
             "import styles from '../styles/Panel.module.sass';"
         ],
         "description": "Importando Style dentro do React"
+    },
+    "promisseAll": {
+        "prefix": [
+            "r-promisse-all"
+        ],
+        "body": [
+            "const [",
+            "    automatedServices,",
+            "    clients,",
+            "] = Promise.all([",
+            "    getContents('automated-services'),",
+            "    axios.get(`\\${persistenceHost}/clients/\\${id}`)",
+            "]).then(([response1, response2]) => {",
+            "    console.log('response1:', response1.data);",
+            "    console.log('response2:', response2.data);",
+            "}).catch(error => {",
+            "    console.error('Erro ao buscar dados da API:', error);",
+            "});"
+        ],
+        "description": "Promisse All"
     }
 }
