@@ -180,6 +180,7 @@
             "\tincomingDialog, setIncomingDialog,",
             "\temail, setEmail, refreshEmail, getEmail,",
             "\tsetClient,",
+            "\teventRefresh, dispatchEventRefresh,",
             "} = useContact();"
         ],
         "description": "Contact Context"
@@ -525,8 +526,9 @@
             "<TextField",
             "\tid=\"name\"",
             "\tlabel=\"Nome\"",
-            "\tvariant=\"standard\"",
+            "\tvariant=\"standard\" // standard, outlined, filled",
             "\tfullWidth",
+            "\tsize=\"small\" // small, medium, large",
             "\tonChange={(e) => setName(e.target.value)}",
             "/>"
         ],
@@ -646,22 +648,45 @@
         ],
         "description": "Atributo Customizado"
     },
-    "useePermissions": {
+    "usePermissions": {
         "prefix": [
-            "r-use-permissions",
-            "r-permissions"
+            "r-use-permissions-provider",
+            "r-permissions-provider"
         ],
         "body": [
             "import { usePermissions } from \"permissions-provider-lib\";",
+            "const {",
+            "\tactiveUser,",
+            "\tuserConfigurations,",
+            "\tpublicDomainData,",
+            "} = usePermissions();"
+        ],
+        "description": "Use Permissions"
+    },
+    "usePermissionsObjects": {
+        "prefix": [
+            "r-use-permissions-data",
+            "r-permissions-data"
+        ],
+        "body": [
             "const resources = {",
             "\tconfigurations: {},",
-            "\tuserGroups: {},",
-            "\tserviceFilters: {},",
             "\tskills: [],",
             "\tdashboards: {},",
             "\tcampaigns: {},",
-            "\tmodules: [],",
-            "\turas: [],",
+            "\tmodules: {},",
+            "\tproducts: {},",
+            "\tserviceFilters: {},",
+            "\turas: {},",
+            "\tuserGroups: {},",
+            "\tstringList: {",
+            "\t\tcampaigns: '',",
+            "\t\tmodules: '',",
+            "\t\tproducts: '',",
+            "\t\tserviceFilters: '',",
+            "\t\turas: '',",
+            "\t\tuserGroups: '',",
+            "\t},",
             "\tservices: {",
             "\t\tavailable: [],",
             "\t\tmedias: [],",
@@ -670,17 +695,33 @@
             "\t\tticketStatus: [],",
             "\t},",
             "};",
-            "const {",
-            "\tactiveUser,",
-            "\tuserConfigurations,",
-            "\tuserServiceList,",
-            "\tpublicDomainData,",
-            "\tserviceStringList,",
-            "\tuserGroupStringList,",
-            "\tcampaignStringList",
-            "} = usePermissions();"
         ],
-        "description": "Use Permissions"
+        "description": "Use Permissions Data"
+    },
+    "usePermissionsComponents": {
+        "prefix": [
+            "r-use-permissions-components",
+            "r-permissions-components"
+        ],
+        "body": [
+            "import {",
+            "\tCallStatusSelect,",
+            "\tCampaignCategorySelect,",
+            "\tCampaignSelect,",
+            "\tChannelSelect,",
+            "\tCustomSelect,",
+            "\tDateFilter,",
+            "\tDateSelect,",
+            "\tDateTimeSelect,",
+            "\tMediaSelect,",
+            "\tNumberInput,",
+            "\tServiceSelect,",
+            "\tTextInput,",
+            "\tTimeSelect,",
+            "\tUserGroupSelect,",
+            "} from 'permissions-components-lib';",
+        ],
+        "description": "Use Permissions Components"
     },
     "ServiceSelect": {
         "prefix": [
@@ -707,11 +748,11 @@
         ],
         "body": [
             "// import { UserGroupSelect } from 'permissions-components-lib';",
-            "// const [agent, setAgent] = useState([]); // deve ser []",
+            "// const [userGroup, setUserGroup] = useState([]); // deve ser []",
             "// const agents: userGroup[1] || userConfigurations?.stringList?.userGroups || ''",
             "<UserGroupSelect",
             "\tvalue={agent}",
-            "\tonChange={setAgent}",
+            "\tonChange={setUserGroup}",
             "\tuserConfigurations={userConfigurations}",
             "/>"
         ],
@@ -754,5 +795,198 @@
             "/>"
         ],
         "description": "Permissions Component Lib"
+    },
+    "DotEnv": {
+        "prefix": [
+            "r-dov-env",
+            "r-.-env"
+        ],
+        "body": [
+            ".env: VITE_DEBUG=true",
+            "// const isDebug = import.meta.env.VITE_DEBUG === 'true';"
+        ],
+        "description": "DotEnv"
+    },
+    "isDebug": {
+        "prefix": [
+            "r-is-debug"
+        ],
+        "body": [
+            "// vite.config.js",
+            "define: {",
+            "\t__IS_DEBUG__: JSON.stringify(true),",
+            "},",
+            "const isDebug = __IS_DEBUG__;"
+        ],
+        "description": "isDebug"
+    },
+    "viewPort": {
+        "prefix": [
+            "r-viewport"
+        ],
+        "body": [
+            "// import { Viewport } from \"omni-layout\";",
+            "// import { Route, Router, Switch } from \"omni-router\";",
+            "// import { MyThemeProvider } from '../../Preview';",
+            "<MyThemeProvider>",
+            "\t<Router base=\"/report-tabulation\">",
+            "\t\t<Viewport",
+            "\t\t\tsx={{",
+            "\t\t\t\theight: '100vh',",
+            "\t\t\t\toverflow: 'auto',",
+            "\t\t\t\tmarginTop: '0 !important',  // usado nos relatorios para posicionar mais acima",
+            "\t\t\t\tpaddingTop: '0 !important', // usado nos relatorios para posicionar mais acima",
+            "\t\t\t}} >",
+            "\t\t\t<Switch>",
+            "\t\t\t\t<Route path=\"/:any*\">",
+            "\t\t\t\t\t<TabulationReport />",
+            "\t\t\t\t</Route>",
+            "\t\t\t</Switch>",
+            "\t\t</Viewport>",
+            "\t</Router>",
+            "</MyThemeProvider >",
+        ],
+        "description": "ViewReport"
+    },
+    "headerlayout": {
+        "prefix": [
+            "r-header-layout"
+        ],
+        "body": [
+            "<HeaderLayout>",
+            "\t<Breadcrumbs sx={{ flexGrow: 1 }} />",
+            "\t<ThemeToggle />",
+            "\t<IconButton color=\"inherit\" onClick={handleSnackbar",
+            "\t}>",
+            "\t\t<HelpIcon />",
+            "\t</IconButton>",
+            "</HeaderLayout>",
+        ],
+        "description": "Header Layout"
+    },
+    "griLayout": {
+        "prefix": [
+            "r-grid-layout"
+        ],
+        "body": [
+            "<Grid container spacing={2}>",
+            "\t<Grid item xs={4} lg={2}></Grid>",
+            "\t<Grid item xs={4} lg={2}></Grid>",
+            "</Grid>"
+        ],
+        "description": "Grid Layout"
+    },
+    "groupSelect": {
+        "prefix": [
+            "r-group-select"
+        ],
+        "body": [
+            "<Grid container spacing={2} sx={{ justifyContent: \"start\", alignItems: \"top\", padding: \"20px\" }}>",
+            "\t<Grid item xs={4} lg={3}>",
+            "\t\t<GroupSelect",
+            "\t\t\tvalue={modules}",
+            "\t\t\tonChange={setModules}",
+            "\t\t\tlabel='ModuleList'",
+            "\t\t\tlistOptions={userConfigurations?.modules}",
+            "\t\t/>",
+            "\t</Grid>",
+            "</Grid>",
+        ],
+        "description": "Group Select"
+    },
+    "reportFiltersBox": {
+        "prefix": [
+            "r-report-filters-box"
+        ],
+        "body": [
+            "<ReportFilterBox",
+            "\ttitle={\"Filtros\"}",
+            "\tsx={{",
+            "\t\tmarginBottom: \"10px\",",
+            "\t\tborder: \"1px solid #ddd\",",
+            "\t\tborderBottom: \"0px\",",
+            "\t}}",
+            "\texpandCollapse={expandCollapse}",
+            "\tsetExpandCollapse={setExpandCollapse}",
+            ">",
+            "\t<Grid container spacing={2} sx={{ justifyContent: \"start\", alignItems: \"top\", padding: \"20px\" }}>",
+            "\t\t<Grid item xs={4} lg={3}>",
+            "\t\t</Grid>",
+            "\t</Grid>",
+            "</ReportFilterBox>"
+        ],
+        "description": "Report Filter Box"
+    },
+    "logComData": {
+        "prefix": [
+            "r-log-com-data",
+            "r-log-com-hora"
+        ],
+        "body": [
+            "console.log(`${new Date().toLocaleTimeString()} Beat Enviado com Sucesso`);",
+            "console.log(`${new Date().toLocaleDateString()} Beat Enviado com Sucesso`);",
+        ],
+        "description": "Grid Layout"
+    },
+    "queryConcat": {
+        "prefix": [
+            "r-query-concat",
+            "r-query-empty-field"
+        ],
+        "body": [
+            "const query = {",
+            "\tcreatedAt: {",
+            "\t\t\\$gte: new Date(from),",
+            "\t\t\\$lte: new Date(to)",
+            "\t},",
+            "\t...(module && { module: { \\$in: module.split(',').map(item => item.trim()) } }),",
+            "\t...(user && { user: { \\$in: user.split(',').map(item => item.trim()) } })",
+            "};",
+        ],
+        "description": "Query Contact"
+    },
+    "PortalTheme": {
+        "prefix": [
+            "r-use-theme",
+            "r-portal-theme"
+        ],
+        "body": [
+            "// Inicio Portal Theme",
+            "// Manipulando o thema de acordo com o selecionado no portal",
+            "import { ThemeProvider } from 'omni-layout';",
+            "import { useTheme } from \"@mui/material\";",
+            "export function PortalThemeProvider({children}) {",
+            "\tconst mainTheme = useTheme();",
+            "\treturn (",
+            "\t\t<ThemeProvider theme={mainTheme}>{children}</ThemeProvider>",
+            "\t)",
+            "}",
+            "// Fim Portal Theme",
+            "<PortalThemeProvider>...</PortalThemeProvider>"
+        ],
+        "description": "Portal Theme"
+    },
+    "HookTemplate": {
+        "prefix": [
+            "r-hook-template",
+        ],
+        "body": [
+            "function useLog() {\n";
+            "\tconst log = (message) => {";
+            "\t\tconsole.log(message);";
+            "\t};\n";
+            "\tconst error = (message) => {";
+            "\t\tconsole.error(message);";
+            "\t}\n";
+            "\treturn { log, error };";
+            "}\n";
+            "export default useLog;\n";
+            "// Use:";
+            "// import useCounter from \"./useLog\";";
+            "// ...";
+            "// const { log, error } = useLog();";
+        ],
+        "description": "Portal Theme"
     }
+
 }

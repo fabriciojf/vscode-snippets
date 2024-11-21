@@ -1713,5 +1713,22 @@
             "});"
         ],
         "description": "Promisse All"
+    },
+    "queryConcat": {
+        "prefix": [
+            "r-query-concat",
+            "r-query-empty-field"
+        ],
+        "body": [
+            "const query = {",
+            "\tcreatedAt: {",
+            "\t\t\\$gte: new Date(from),",
+            "\t\t\\$lte: new Date(to)",
+            "\t},",
+            "\t...(module && { module: { \\$in: module.split(',').map(item => item.trim()) } }),",
+            "\t...(user && { user: { \\$in: user.split(',').map(item => item.trim()) } })",
+            "};",
+        ],
+        "description": "Query Contact"
     }
 }
