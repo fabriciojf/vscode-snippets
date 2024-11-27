@@ -359,6 +359,7 @@
             "node-process-env"
         ],
         "body": [
+            "require('dotenv').config();",
             "const dbUrl = process.env.MONGODB_CONNECTION_STRING;"
         ],
         "description": "Node Dov Env"

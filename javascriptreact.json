@@ -742,6 +742,43 @@
         ],
         "description": "Permissions Component Lib"
     },
+    "BucketSelect": {
+        "prefix": [
+            "r-bucket-select"
+        ],
+        "body": [
+            "// import { BucketSelect } from 'permissions-components-lib';",
+            "const [bucket, setBucket] = useState({});",
+            "// bucket = {",
+            "//   startDate, // data inicial selecionada no filtro",
+            "//   endDate,   // data final selecionada no filrtro",
+            "//   timeUnit,  // unidade de tempo selecionada (dia, mês, ano), utilizado para definir o tipo de gráfico",
+            "//   interval,  // intervalo de tempo selecionado (15, 30, 60 minutos)",
+            "// }",
+            "<BucketSelect onChange={setBucket} />"
+        ],
+        "description": "Permissions Component Lib Bucket Select"
+    },
+
+    "FiltersContainer": {
+        "prefix": [
+            "r-filters-container",
+            "r-filters-box"
+        ],
+        "body": [
+            "// import { FiltersContainer } from 'permissions-components-lib';",
+            "const [expandCollapse, setExpandCollapse] = useState(true);",
+            "<FiltersContainer",
+            "\ttitle={`Relatório Tempo Médio`}",
+            "\texpandCollapse={expandCollapse}",
+            "\tsetExpandCollapse={setExpandCollapse}",
+            "\tclickHandler={YOUR_ACTION} // click filter button",
+            ">",
+            "\t// ... childs",
+            "</FiltersContainer>"
+        ],
+        "description": "Permissions Component Filters Container"
+    },
     "UserGroupSelect": {
         "prefix": [
             "r-user-group-select",
@@ -802,8 +839,20 @@
             "r-.-env"
         ],
         "body": [
-            ".env: VITE_DEBUG=true",
-            "// const isDebug = import.meta.env.VITE_DEBUG === 'true';"
+            "// Arquivo .env:",
+            "VITE_DEBUG=true",
+            "// const isDebug = import.meta.env.VITE_DEBUG === 'true';",
+            "OU vite.config.js:",
+            "export default defineConfig({",
+            "\t...",
+            "\tdefine: {",
+            "\t\t'process.env': {",
+            "\t\t\tAPP_VERSION: JSON.stringify('1.1.0'),",
+            "\t\t\tVITE_DEBUG: true,",
+            "\t\t},",
+            "\t},",
+            "\t...",
+            "// const isDebug = process.env.VITE_DEBUG === 'true';",
         ],
         "description": "DotEnv"
     },
@@ -881,6 +930,12 @@
             "r-group-select"
         ],
         "body": [
+            "const [uraList, setUraList] = useState([]);",
+            "const [moduleList, setModuleList] = useState([]);",
+            "const result = {",
+            "  uras: uras[1] || userConfigurations?.stringList?.uras || '', // dados separados por virgulas (u1,u2,u3)",
+            "  modules: modules[1] || userConfigurations?.stringList?.modules || '', // dados separados por virgulas (m1,m2,m3)",
+            "}",
             "<Grid container spacing={2} sx={{ justifyContent: \"start\", alignItems: \"top\", padding: \"20px\" }}>",
             "\t<Grid item xs={4} lg={3}>",
             "\t\t<GroupSelect",
@@ -971,22 +1026,55 @@
             "r-hook-template",
         ],
         "body": [
-            "function useLog() {\n";
-            "\tconst log = (message) => {";
-            "\t\tconsole.log(message);";
-            "\t};\n";
-            "\tconst error = (message) => {";
-            "\t\tconsole.error(message);";
-            "\t}\n";
-            "\treturn { log, error };";
-            "}\n";
-            "export default useLog;\n";
-            "// Use:";
-            "// import useCounter from \"./useLog\";";
-            "// ...";
-            "// const { log, error } = useLog();";
+            "/**",
+            " * Use:",
+            " * import useCounter from \"./useLog\";",
+            " * ...",
+            " * const { showLog, showError } = useLog();",
+            " */",
+            "function useLog() {\n",
+            "\tconst showLog = (message) => {",
+            "\t\tconsole.log(message);",
+            "\t};\n",
+            "\tconst showError = (message) => {",
+            "\t\tconsole.error(message);",
+            "\t}\n",
+            "\treturn { showLog, showError };",
+            "}\n",
+            "export default useLog;\n"
         ],
         "description": "Portal Theme"
     }
-
+    ,
+    "ContextTemplate": {
+        "prefix": [
+            "r-context-provider-template",
+        ],
+        "body": [
+            "/**",
+            " * Use:",
+            " * ...",
+            " * import { useClient } from '../../contexts/ClientContext';",
+            " * const { findClient } = useClient();",
+            " */",
+            "import { createContext, useContext } from 'react';\n",
+            "const ClientContext = createContext();\n",
+            "export function useClient() {",
+            "\treturn useContext(ClientContext);",
+            "}\n",
+            "export const ClientProvider = ({ children }) => {",
+            "\tconst findClient = async (clientId) => {",
+            "\t\treturn 'Client';",
+            "\t};\n",
+            "\treturn (",
+            "\t\t<ClientContext.Provider value={{",
+            "\t\t\tfindClient",
+            "\t\t}}>",
+            "\t\t\t{children}",
+            "\t\t</ClientContext.Provider>",
+            "\t);",
+            "}"
+        ],
+        "description": "Portal Theme"
+    }
 }
